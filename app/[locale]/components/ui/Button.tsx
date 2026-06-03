@@ -40,7 +40,7 @@ export function Button({
 
   if (asLink && href) {
     return (
-      <Link href={href} className={combinedClassName}>
+      <Link href={href as any} className={combinedClassName}>
         {children}
         {icon && <ChevronRight className="w-4 h-4" />}
       </Link>

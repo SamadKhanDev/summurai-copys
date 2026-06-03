@@ -18,7 +18,7 @@ export function Breadcrumb({ items, className = "" }: BreadcrumbProps) {
             {index > 0 && <ChevronRight className="w-3 h-3" />}
             {item.href ? (
               <Link
-                href={item.href}
+                href={item.href as any}
                 className="hover:text-text-main transition-colors"
               >
                 {item.label}
