@@ -82,7 +82,7 @@ export default function HeroSection() {
             className="font-['Space_Grotesk',sans-serif] font-extrabold leading-tight tracking-[-0.03em] mb-6 max-w-4xl text-white opacity-0 translate-y-7 transition-all duration-700 delay-100 text-[85px] md:text-6xl lg:text-7xl"
           >
             {t("hero.title")}
-            <span className="text-[#E11D48] font-light font-italic">{t("hero.titleAccent")}</span>
+            <span className="text-text-main font-light italic">{t("hero.titleAccent")}</span>
           </h1>
 
           {/* Description */}
