@@ -34,6 +34,7 @@ import {
   Building,
 } from "lucide-react";
 import HeroSection from "./components/HeroSection";
+import { Server } from "lucide-react";
 
 export default function HomePage() {
   const t = useTranslations("home");
@@ -93,93 +94,84 @@ export default function HomePage() {
 
       {/* Core Services Overview */}
       <Section>
-        <SectionLabel>{t("services.label")}</SectionLabel>
-        <SectionTitle>
-          {t("services.title")}
-          <span className="text-text-main">{t("services.titleAccent")}</span>
-        </SectionTitle>
-        <SectionDescription>{t("services.description")}</SectionDescription>
+  <SectionLabel>{t("services.label")}</SectionLabel>
+  <SectionTitle>
+    {t("services.title")}
+    <span className="text-text-main">{t("services.titleAccent")}</span>
+  </SectionTitle>
+  <SectionDescription>{t("services.description")}</SectionDescription>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
-          <Card hover>
-            <CardIcon>
-              <Shield className="w-9 h-9 text-text-main" />
-            </CardIcon>
-            <CardTitle>{t("services.items.cyber.title")}</CardTitle>
-            <CardDescription>
-              {t("services.items.cyber.description")}
-            </CardDescription>
-            <CardLink href="/services/cybersecurity">
-              {t("services.items.cyber.link")}
-            </CardLink>
-          </Card>
+  <div className="mt-12 space-y-6">
+    {/* Row 1 — 4 cards */}
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <Card hover>
+        <CardIcon>
+          <Shield className="w-9 h-9 text-text-main" />
+        </CardIcon>
+        <CardTitle>{t("services.items.cyber.title")}</CardTitle>
+        <CardDescription>{t("services.items.cyber.description")}</CardDescription>
+        <CardLink href="/services/cybersecurity">{t("services.items.cyber.link")}</CardLink>
+      </Card>
 
-          <Card hover>
-            <CardIcon>
-              <Cloud className="w-9 h-9 text-text-main" />
-            </CardIcon>
-            <CardTitle>{t("services.items.cloud.title")}</CardTitle>
-            <CardDescription>
-              {t("services.items.cloud.description")}
-            </CardDescription>
-            <CardLink href="/services/cloud">
-              {t("services.items.cloud.link")}
-            </CardLink>
-          </Card>
+      <Card hover>
+        <CardIcon>
+          <Cloud className="w-9 h-9 text-text-main" />
+        </CardIcon>
+        <CardTitle>{t("services.items.cloud.title")}</CardTitle>
+        <CardDescription>{t("services.items.cloud.description")}</CardDescription>
+        <CardLink href="/services/cloud">{t("services.items.cloud.link")}</CardLink>
+      </Card>
 
-          <Card hover>
-            <CardIcon>
-              <Scale className="w-9 h-9 text-text-main" />
-            </CardIcon>
-            <CardTitle>{t("services.items.grc.title")}</CardTitle>
-            <CardDescription>
-              {t("services.items.grc.description")}
-            </CardDescription>
-            <CardLink href="/services/grc">
-              {t("services.items.grc.link")}
-            </CardLink>
-          </Card>
+      <Card hover>
+        <CardIcon>
+          <Scale className="w-9 h-9 text-text-main" />
+        </CardIcon>
+        <CardTitle>{t("services.items.grc.title")}</CardTitle>
+        <CardDescription>{t("services.items.grc.description")}</CardDescription>
+        <CardLink href="/services/grc">{t("services.items.grc.link")}</CardLink>
+      </Card>
 
-          <Card hover>
-            <CardIcon>
-              <Bot className="w-9 h-9 text-text-main" />
-            </CardIcon>
-            <CardTitle>{t("services.items.ai.title")}</CardTitle>
-            <CardDescription>
-              {t("services.items.ai.description")}
-            </CardDescription>
-            <CardLink href="/services/ai">
-              {t("services.items.ai.link")}
-            </CardLink>
-          </Card>
+      <Card hover>
+        <CardIcon>
+          <Settings className="w-9 h-9 text-text-main" />
+        </CardIcon>
+        <CardTitle>{t("services.items.dt.title")}</CardTitle>
+        <CardDescription>{t("services.items.dt.description")}</CardDescription>
+        <CardLink href="/services/digital-transformation">{t("services.items.dt.link")}</CardLink>
+      </Card>
+    </div>
 
-          <Card hover>
-            <CardIcon>
-              <RefreshCw className="w-9 h-9 text-text-main" />
-            </CardIcon>
-            <CardTitle>{t("services.items.bcm.title")}</CardTitle>
-            <CardDescription>
-              {t("services.items.bcm.description")}
-            </CardDescription>
-            <CardLink href="/services/business-continuity">
-              {t("services.items.bcm.link")}
-            </CardLink>
-          </Card>
+    {/* Row 2 — 3 cards centered */}
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:w-3/4 lg:mx-auto">
+      <Card hover>
+        <CardIcon>
+          <RefreshCw className="w-9 h-9 text-text-main" />
+        </CardIcon>
+        <CardTitle>{t("services.items.bcm.title")}</CardTitle>
+        <CardDescription>{t("services.items.bcm.description")}</CardDescription>
+        <CardLink href="/services/business-continuity">{t("services.items.bcm.link")}</CardLink>
+      </Card>
 
-          <Card hover>
-            <CardIcon>
-              <Settings className="w-9 h-9 text-text-main" />
-            </CardIcon>
-            <CardTitle>{t("services.items.dt.title")}</CardTitle>
-            <CardDescription>
-              {t("services.items.dt.description")}
-            </CardDescription>
-            <CardLink href="/services/digital-transformation">
-              {t("services.items.dt.link")}
-            </CardLink>
-          </Card>
-        </div>
-      </Section>
+      <Card hover>
+        <CardIcon>
+          <Bot className="w-9 h-9 text-text-main" />
+        </CardIcon>
+        <CardTitle>{t("services.items.ai.title")}</CardTitle>
+        <CardDescription>{t("services.items.ai.description")}</CardDescription>
+        <CardLink href="/services/ai">{t("services.items.ai.link")}</CardLink>
+      </Card>
+
+      <Card hover>
+        <CardIcon>
+          <Server className="w-9 h-9 text-text-main" />
+        </CardIcon>
+        <CardTitle>{t("services.items.infrastructure.title")}</CardTitle>
+        <CardDescription>{t("services.items.infrastructure.description")}</CardDescription>
+        <CardLink href="/services/infrastructure">{t("services.items.infrastructure.link")}</CardLink>
+      </Card>
+    </div>
+  </div>
+</Section>
 
       {/* Divider */}
       <div className="h-px bg-card-border mx-8" />

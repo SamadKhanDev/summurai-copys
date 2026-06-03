@@ -62,6 +62,11 @@ const home = {
         description: "Enterprise modernization, RPA, custom development, and Power BI dashboards & data warehousing.",
         link: "Learn More →",
       },
+      infrastructure: {
+  title: "Cloud & Infrastructure",
+  description: "Unified multi-cloud management, CSPM, OT/ICS & SCADA monitoring with automated scaling across Azure, AWS, SITE Cloud, and Oracle OCI.",
+  link: "Learn More →",
+},
     },
   },
   compliance: {
