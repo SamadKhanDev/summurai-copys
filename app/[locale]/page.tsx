@@ -40,6 +40,7 @@ import PAMPage from "./components/PAMPage";
 import ChatWizardModal from "./components/ChatWizardModal";
 import { useState } from "react";
 import TestimonialSection from "./components/Testimonialsection";
+import WhySamurai from "./components/Whysamurai";
 
 export default function HomePage() {
   const t = useTranslations("home");
@@ -222,7 +223,7 @@ export default function HomePage() {
 
 
       {/* Why Samurai */}
-      <Section background="secondary">
+      {/* <Section background="secondary">
         <SectionLabel>{t("whySamurai.label")}</SectionLabel>
         <SectionTitle>
           {t("whySamurai.title")}
@@ -262,7 +263,8 @@ export default function HomePage() {
             </CardDescription>
           </Card>
         </div>
-      </Section>
+      </Section> */}
+      <WhySamurai/>
 
       {/* Industries Served */}
       <Section>

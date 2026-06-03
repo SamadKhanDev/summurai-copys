@@ -3,11 +3,12 @@
 import { useRef, useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { Trophy, Link2, ShieldCheck, MapPin } from "lucide-react";
+import { SectionLabel } from "./ui";
 
 const ITEMS = [
   { key: "expertise", icon: Trophy },
-  { key: "delivery",  icon: Link2 },
-  { key: "security",  icon: ShieldCheck },
+  { key: "delivery", icon: Link2 },
+  { key: "security", icon: ShieldCheck },
   { key: "compliance", icon: MapPin },
 ] as const;
 
@@ -70,20 +71,8 @@ export default function WhySamurai() {
       <div className="relative z-10 max-w-7xl mx-auto">
 
         {/* Label */}
-        <div
-          ref={addRef(0)}
-          className="inline-flex items-center gap-3 px-5 py-2 rounded-full border border-white/[0.08] bg-white/[0.03] mb-8 text-[0.6rem] font-bold tracking-[0.28em] uppercase font-space-grotesk opacity-0 translate-y-7 transition-all duration-700"
-          style={{ color: "#94A3B8" }}
-        >
-          <span
-            className="w-1.5 h-1.5 rounded-full bg-[#E11D48] shrink-0"
-            style={{
-              boxShadow: "0 0 10px rgba(225,29,72,1)",
-              animation: "pulse 2s cubic-bezier(0.4,0,0.6,1) infinite",
-            }}
-          />
-          {t("label")}
-        </div>
+        <SectionLabel className="mb-4">{t("label")}</SectionLabel>
+
 
         {/* Title */}
         <h2
