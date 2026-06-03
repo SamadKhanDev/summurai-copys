@@ -69,7 +69,7 @@ export default function TestimonialSection() {
       <div className="relative z-10 max-w-4xl mx-auto flex flex-col items-center text-center">
 
         {/* Label */}
-        <SectionLabel>{t("industries.label")}</SectionLabel>
+        <SectionLabel>{t("label")}</SectionLabel>
 
 
         {/* Quote card */}
