@@ -1,5 +1,6 @@
 import React from "react";
 import { ChevronRight } from "lucide-react";
+import { Link } from "@/i18n/navigation";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "fill" | "outline";
@@ -39,10 +40,10 @@ export function Button({
 
   if (asLink && href) {
     return (
-      <a href={href} className={combinedClassName}>
+      <Link href={href} className={combinedClassName}>
         {children}
         {icon && <ChevronRight className="w-4 h-4" />}
-      </a>
+      </Link>
     );
   }
 

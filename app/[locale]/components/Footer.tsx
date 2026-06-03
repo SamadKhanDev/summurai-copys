@@ -2,6 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import { Mail, Phone, Globe } from "lucide-react";
+import { Link } from "@/i18n/navigation";
 
 export default function Footer() {
   const t = useTranslations("footer");
@@ -46,42 +47,42 @@ export default function Footer() {
               {t("services.title")}
             </h4>
             <div className="space-y-2">
-              <a
+              <Link
                 href="/services/cybersecurity"
                 className="block text-sm text-text-secondary hover:text-text-main transition-colors"
               >
                 {t("services.cyber")}
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/services/cloud"
                 className="block text-sm text-text-secondary hover:text-text-main transition-colors"
               >
                 {t("services.cloud")}
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/services/grc"
                 className="block text-sm text-text-secondary hover:text-text-main transition-colors"
               >
                 {t("services.grc")}
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/services/ai"
                 className="block text-sm text-text-secondary hover:text-text-main transition-colors"
               >
                 {t("services.ai")}
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/services/business-continuity"
                 className="block text-sm text-text-secondary hover:text-text-main transition-colors"
               >
                 {t("services.bcm")}
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/services/digital-transformation"
                 className="block text-sm text-text-secondary hover:text-text-main transition-colors"
               >
                 {t("services.dt")}
-              </a>
+              </Link>
             </div>
           </div>
 
@@ -91,36 +92,36 @@ export default function Footer() {
               {t("company.title")}
             </h4>
             <div className="space-y-2">
-              <a
+              <Link
                 href="/about"
                 className="block text-sm text-text-secondary hover:text-text-main transition-colors"
               >
                 {t("company.about")}
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/careers"
                 className="block text-sm text-text-secondary hover:text-text-main transition-colors"
               >
                 {t("company.careers")}
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/partners"
                 className="block text-sm text-text-secondary hover:text-text-main transition-colors"
               >
                 {t("company.partners")}
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/case-studies"
                 className="block text-sm text-text-secondary hover:text-text-main transition-colors"
               >
                 {t("company.caseStudies")}
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/insights"
                 className="block text-sm text-text-secondary hover:text-text-main transition-colors"
               >
                 {t("company.insights")}
-              </a>
+              </Link>
             </div>
           </div>
 
@@ -130,30 +131,30 @@ export default function Footer() {
               {t("legal.title")}
             </h4>
             <div className="space-y-2">
-              <a
+              <Link
                 href="/privacy"
                 className="block text-sm text-text-secondary hover:text-text-main transition-colors"
               >
                 {t("legal.privacy")}
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/terms"
                 className="block text-sm text-text-secondary hover:text-text-main transition-colors"
               >
                 {t("legal.terms")}
-              </a>
-              <a
-                href="/privacy#cookies"
+              </Link>
+              <Link
+                href={"/privacy#cookies" as any}
                 className="block text-sm text-text-secondary hover:text-text-main transition-colors"
               >
                 {t("legal.cookies")}
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/contact"
                 className="block text-sm text-text-secondary hover:text-text-main transition-colors"
               >
                 Contact
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -162,18 +163,18 @@ export default function Footer() {
         <div className="border-t border-card-border pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-xs text-text-secondary">{t("bottom.copyright")}</p>
           <div className="flex items-center gap-6">
-            <a
+            <Link
               href="/privacy"
               className="text-xs text-text-secondary hover:text-text-main transition-colors"
             >
               {t("bottom.privacy")}
-            </a>
-            <a
+            </Link>
+            <Link
               href="/terms"
               className="text-xs text-text-secondary hover:text-text-main transition-colors"
             >
               {t("bottom.terms")}
-            </a>
+            </Link>
             <a
               href="https://linkedin.com"
               target="_blank"

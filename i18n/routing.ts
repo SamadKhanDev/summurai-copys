@@ -6,6 +6,23 @@ export const routing = defineRouting({
   pathnames: {
     "/": "/",
     "/dashboard": "/dashboard",
+    "/services": "/services",
+    "/services/cybersecurity": "/services/cybersecurity",
+    "/services/cloud": "/services/cloud",
+    "/services/grc": "/services/grc",
+    "/services/digital-transformation": "/services/digital-transformation",
+    "/services/business-continuity": "/services/business-continuity",
+    "/services/ai": "/services/ai",
+    "/solutions": "/solutions",
+    "/solutions/pam": "/solutions/pam",
+    "/solutions/grc": "/solutions/grc",
+    "/solutions/iam": "/solutions/iam",
+    "/industries": "/industries",
+    "/partners": "/partners",
+    "/insights": "/insights",
+    "/careers": "/careers",
+    "/case-studies": "/case-studies",
+    "/assessment": "/assessment",
 
     "/auth/login": {
       en: "/auth/login",

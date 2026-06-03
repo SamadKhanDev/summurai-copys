@@ -1,8 +1,10 @@
 "use client";
 
+import { useState } from "react";
 import { useTranslations } from "next-intl";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
+import ChatWizardModal from "../../components/ChatWizardModal";
 import {
   Breadcrumb,
   Section,
@@ -18,6 +20,7 @@ import { Brain, BarChart3, MessageSquare, Eye, Zap, Server } from "lucide-react"
 
 export default function AIPage() {
   const t = useTranslations("services.ai");
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const items = [
     { icon: Brain, key: "strategy" },
@@ -61,13 +64,21 @@ export default function AIPage() {
           </div>
 
           <div className="mt-12 text-center">
-            <Button variant="fill" size="lg" asLink href="/contact">
+            {/* Click karne par modal open hoga with default reference context */}
+            <Button variant="fill" size="lg" onClick={() => setIsModalOpen(true)}>
               {t("cta")}
             </Button>
           </div>
         </Section>
       </div>
       <Footer />
+
+      {/* Chatbot Modal Setup */}
+      <ChatWizardModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        defaultService="AI & Automation" // Passing current context reference directly
+      />
     </>
   );
 }

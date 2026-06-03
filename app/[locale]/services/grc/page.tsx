@@ -1,8 +1,10 @@
 "use client";
 
+import { useState } from "react";
 import { useTranslations } from "next-intl";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
+import ChatWizardModal from "../../components/ChatWizardModal";
 import {
   Breadcrumb,
   Section,
@@ -19,6 +21,7 @@ import { FileCheck, FileText, UserCheck, Search } from "lucide-react";
 
 export default function GRCPage() {
   const t = useTranslations("services.grc");
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const items = [
     { icon: FileCheck, key: "regulatory" },
@@ -67,13 +70,20 @@ export default function GRCPage() {
           </div>
 
           <div className="mt-12 text-center">
-            <Button variant="fill" size="lg" asLink href="/assessment">
+            <Button variant="fill" size="lg" onClick={() => setIsModalOpen(true)}>
               {t("cta")}
             </Button>
           </div>
         </Section>
       </div>
       <Footer />
+
+      {/* Chatbot Modal Setup */}
+      <ChatWizardModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        defaultService="GRC & Compliance"
+      />
     </>
   );
 }
