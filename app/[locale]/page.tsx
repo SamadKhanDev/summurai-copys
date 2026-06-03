@@ -66,7 +66,7 @@ export default function HomePage() {
           </div>
         </div>
       </div> */}
-      <HeroSection/>
+      <HeroSection onBookBriefingClick={() => window.dispatchEvent(new Event("open-contact-modal"))} />
 
       {/* Stats Bar */}
       <StatsBar
@@ -420,7 +420,7 @@ export default function HomePage() {
         <p className="text-text-secondary mt-4 mb-10 text-base max-w-2xl mx-auto">
           {t("finalCta.description")}
         </p>
-        <Button variant="fill" size="lg" asLink href="/contact">
+        <Button variant="fill" size="lg" onClick={() => window.dispatchEvent(new Event("open-contact-modal"))}>
           {t("finalCta.cta")}
         </Button>
       </Section>

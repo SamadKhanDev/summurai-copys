@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 import { useTranslations } from "next-intl";
 import { Button } from "./ui";
 
-export default function HeroSection() {
+export default function HeroSection({ onBookBriefingClick }: { onBookBriefingClick?: () => void }) {
   const t = useTranslations("home");
   const revealRefs = useRef<(HTMLElement | null)[]>([]);
 
@@ -98,7 +98,11 @@ export default function HeroSection() {
             ref={addRevealRef(3)}
             className="flex gap-4 flex-wrap opacity-0 translate-y-7 transition-all duration-700 delay-300"
           >
-            <Button variant="fill" size="lg" asLink href="/contact">
+            <Button
+              variant="fill"
+              size="lg"
+              {...(onBookBriefingClick ? { onClick: onBookBriefingClick } : { asLink: true, href: "/contact" })}
+            >
               {t("hero.ctaPrimary")}
             </Button>
             <Button variant="outline" size="lg" asLink href="/services">

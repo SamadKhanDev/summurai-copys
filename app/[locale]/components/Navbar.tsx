@@ -19,7 +19,14 @@ export default function Navbar() {
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+
+    const handleOpenModal = () => setIsModalOpen(true);
+    window.addEventListener("open-contact-modal", handleOpenModal);
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("open-contact-modal", handleOpenModal);
+    };
   }, []);
 
   const toggleLanguage = () => {
@@ -220,6 +227,7 @@ export default function Navbar() {
       <ChatWizardModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
+        mode="contact"
       />
     </>
   );
