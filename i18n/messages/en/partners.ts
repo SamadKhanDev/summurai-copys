@@ -1,0 +1,42 @@
+const partners = {
+  breadcrumb: "Partners",
+  label: "Technology Alliance Partners",
+  title: "Best-in-Class ",
+  titleAccent: "Technology Alliances.",
+  description: "We partner with the world's leading technology vendors to deliver comprehensive, best-of-breed solutions that address every dimension of your enterprise IT and security needs.",
+  list: [
+    { name: "Cisco", description: "Networking, security, and collaboration infrastructure" },
+    { name: "Microsoft", description: "Cloud, productivity, and identity solutions" },
+    { name: "IBM", description: "Enterprise security and analytics platforms" },
+    { name: "Fortinet", description: "Next-generation firewall and security fabric" },
+    { name: "VMware", description: "Virtualization and multi-cloud management" },
+    { name: "Dell", description: "Enterprise hardware and infrastructure" },
+    { name: "Broadcom", description: "Enterprise software and security solutions" },
+    { name: "Forcepoint", description: "Data-centric security and DLP" },
+    { name: "Wallix", description: "Privileged Access Management" },
+    { name: "One Identity", description: "Identity governance and administration" },
+    { name: "Symantec", description: "Endpoint and information security" },
+    { name: "HPE", description: "Servers, storage, and cloud infrastructure" },
+    { name: "Recorded Future", description: "Threat intelligence platform" },
+    { name: "McAfee", description: "Endpoint and cloud security" },
+    { name: "Tenable", description: "Vulnerability management and exposure" },
+    { name: "SolarWinds", description: "IT monitoring and management" },
+    { name: "Sophos", description: "Next-gen endpoint and network security" },
+    { name: "Thales", description: "Data protection and encryption" },
+    { name: "NetApp", description: "Hybrid cloud data management" },
+    { name: "Dynatrace", description: "Observability and AIOps platform" },
+    { name: "Trend Micro", description: "Cloud and hybrid security" },
+    { name: "Red Hat", description: "Open-source enterprise solutions" },
+    { name: "Redgate", description: "Database DevOps tools" },
+    { name: "NetIQ", description: "Identity and access management" },
+    { name: "Evolveum", description: "Identity governance platform" },
+  ],
+  callout: {
+    title: "Why Partner with Samurai?",
+    description: "15+ years of implementation expertise, 2,800+ organizations served, and deep regional knowledge make Samurai the partner of choice for enterprise technology deployment across Saudi Arabia and the Gulf.",
+    cta: "Become a Partner →",
+  },
+} as const;
+
+export default partners;
+export type PartnersMessages = typeof partners;
