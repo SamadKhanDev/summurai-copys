@@ -43,7 +43,7 @@ export default function IndustriesPage() {
           {/* Page Top Heading with Two Font Families and Colors */}
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-white leading-tight tracking-tight mb-6">
             {t("title")}
-            <span className="text-text-main font-dm-sans italic">{t("titleAccent")}</span>
+            <span className="text-text-main font-light italic">{t("titleAccent")}</span>
           </h1>
 
           {/* Section Description with Premium Font Size */}

@@ -102,8 +102,15 @@ h2 .text-accent,
 h3 .text-accent,
 h4 .text-accent,
 h5 .text-accent,
-h6 .text-accent {
-  font-style: italic;
+h6 .text-accent,
+h1 .text-\[\#E11D48\],
+h2 .text-\[\#E11D48\],
+h3 .text-\[\#E11D48\],
+h4 .text-\[\#E11D48\],
+h5 .text-\[\#E11D48\],
+h6 .text-\[\#E11D48\] {
+  font-family: var(--font-space-grotesk), var(--font-sans) !important;
+  font-style: italic !important;
   font-weight: 300 !important;
 }
 
