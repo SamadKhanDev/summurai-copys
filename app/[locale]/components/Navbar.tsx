@@ -211,7 +211,7 @@ export default function Navbar() {
               return (
                 <Link
                   key={link.href}
-                  href={link.href}
+                  href={link.href as any}
                   onClick={() => setMobileMenuOpen(false)}
                   className="px-3 py-2.5 text-sm text-text-secondary hover:text-text-main hover:bg-white/5 rounded-md transition-colors"
                 >

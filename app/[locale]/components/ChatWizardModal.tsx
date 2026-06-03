@@ -201,7 +201,7 @@ export default function ChatWizardModal({ isOpen, onClose, defaultService }: Cha
 
         try {
             // Clean dynamic payload routing architecture execution block
-            const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "/new";
+            const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
             await axios.post(`${basePath}/api/zoho`, {
                 name: chatFields.name,
                 email: chatFields.email,
