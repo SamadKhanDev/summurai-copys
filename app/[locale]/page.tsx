@@ -37,10 +37,14 @@ import HeroSection from "./components/HeroSection";
 import { Server } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import PAMPage from "./components/PAMPage";
+import ChatWizardModal from "./components/ChatWizardModal";
+import { useState } from "react";
+import TestimonialSection from "./components/Testimonialsection";
 
 export default function HomePage() {
   const t = useTranslations("home");
   const tCommon = useTranslations("common");
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <>
@@ -69,7 +73,7 @@ export default function HomePage() {
           </div>
         </div>
       </div> */}
-      <HeroSection/>
+      <HeroSection />
 
       {/* Stats Bar */}
       <StatsBar
@@ -96,84 +100,84 @@ export default function HomePage() {
 
       {/* Core Services Overview */}
       <Section>
-  <SectionLabel>{t("services.label")}</SectionLabel>
-  <SectionTitle>
-    {t("services.title")}
-    <span className="text-text-main">{t("services.titleAccent")}</span>
-  </SectionTitle>
-  <SectionDescription>{t("services.description")}</SectionDescription>
+        <SectionLabel>{t("services.label")}</SectionLabel>
+        <SectionTitle>
+          {t("services.title")}
+          <span className="text-text-main">{t("services.titleAccent")}</span>
+        </SectionTitle>
+        <SectionDescription>{t("services.description")}</SectionDescription>
 
-  <div className="mt-12 space-y-6">
-    {/* Row 1 — 4 cards */}
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-      <Card hover>
-        <CardIcon>
-          <Shield className="w-9 h-9 text-text-main" />
-        </CardIcon>
-        <CardTitle>{t("services.items.cyber.title")}</CardTitle>
-        <CardDescription>{t("services.items.cyber.description")}</CardDescription>
-        <CardLink href="/services/cybersecurity">{t("services.items.cyber.link")}</CardLink>
-      </Card>
+        <div className="mt-12 space-y-6">
+          {/* Row 1 — 4 cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <Card hover>
+              <CardIcon>
+                <Shield className="w-9 h-9 text-text-main" />
+              </CardIcon>
+              <CardTitle>{t("services.items.cyber.title")}</CardTitle>
+              <CardDescription>{t("services.items.cyber.description")}</CardDescription>
+              <CardLink href="/services/cybersecurity">{t("services.items.cyber.link")}</CardLink>
+            </Card>
 
-      <Card hover>
-        <CardIcon>
-          <Cloud className="w-9 h-9 text-text-main" />
-        </CardIcon>
-        <CardTitle>{t("services.items.cloud.title")}</CardTitle>
-        <CardDescription>{t("services.items.cloud.description")}</CardDescription>
-        <CardLink href="/services/cloud">{t("services.items.cloud.link")}</CardLink>
-      </Card>
+            <Card hover>
+              <CardIcon>
+                <Cloud className="w-9 h-9 text-text-main" />
+              </CardIcon>
+              <CardTitle>{t("services.items.cloud.title")}</CardTitle>
+              <CardDescription>{t("services.items.cloud.description")}</CardDescription>
+              <CardLink href="/services/cloud">{t("services.items.cloud.link")}</CardLink>
+            </Card>
 
-      <Card hover>
-        <CardIcon>
-          <Scale className="w-9 h-9 text-text-main" />
-        </CardIcon>
-        <CardTitle>{t("services.items.grc.title")}</CardTitle>
-        <CardDescription>{t("services.items.grc.description")}</CardDescription>
-        <CardLink href="/services/grc">{t("services.items.grc.link")}</CardLink>
-      </Card>
+            <Card hover>
+              <CardIcon>
+                <Scale className="w-9 h-9 text-text-main" />
+              </CardIcon>
+              <CardTitle>{t("services.items.grc.title")}</CardTitle>
+              <CardDescription>{t("services.items.grc.description")}</CardDescription>
+              <CardLink href="/services/grc">{t("services.items.grc.link")}</CardLink>
+            </Card>
 
-      <Card hover>
-        <CardIcon>
-          <Settings className="w-9 h-9 text-text-main" />
-        </CardIcon>
-        <CardTitle>{t("services.items.dt.title")}</CardTitle>
-        <CardDescription>{t("services.items.dt.description")}</CardDescription>
-        <CardLink href="/services/digital-transformation">{t("services.items.dt.link")}</CardLink>
-      </Card>
-    </div>
+            <Card hover>
+              <CardIcon>
+                <Settings className="w-9 h-9 text-text-main" />
+              </CardIcon>
+              <CardTitle>{t("services.items.dt.title")}</CardTitle>
+              <CardDescription>{t("services.items.dt.description")}</CardDescription>
+              <CardLink href="/services/digital-transformation">{t("services.items.dt.link")}</CardLink>
+            </Card>
+          </div>
 
-    {/* Row 2 — 3 cards centered */}
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:w-3/4 lg:mx-auto">
-      <Card hover>
-        <CardIcon>
-          <RefreshCw className="w-9 h-9 text-text-main" />
-        </CardIcon>
-        <CardTitle>{t("services.items.bcm.title")}</CardTitle>
-        <CardDescription>{t("services.items.bcm.description")}</CardDescription>
-        <CardLink href="/services/business-continuity">{t("services.items.bcm.link")}</CardLink>
-      </Card>
+          {/* Row 2 — 3 cards centered */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:w-3/4 lg:mx-auto">
+            <Card hover>
+              <CardIcon>
+                <RefreshCw className="w-9 h-9 text-text-main" />
+              </CardIcon>
+              <CardTitle>{t("services.items.bcm.title")}</CardTitle>
+              <CardDescription>{t("services.items.bcm.description")}</CardDescription>
+              <CardLink href="/services/business-continuity">{t("services.items.bcm.link")}</CardLink>
+            </Card>
 
-      <Card hover>
-        <CardIcon>
-          <Bot className="w-9 h-9 text-text-main" />
-        </CardIcon>
-        <CardTitle>{t("services.items.ai.title")}</CardTitle>
-        <CardDescription>{t("services.items.ai.description")}</CardDescription>
-        <CardLink href="/services/ai">{t("services.items.ai.link")}</CardLink>
-      </Card>
+            <Card hover>
+              <CardIcon>
+                <Bot className="w-9 h-9 text-text-main" />
+              </CardIcon>
+              <CardTitle>{t("services.items.ai.title")}</CardTitle>
+              <CardDescription>{t("services.items.ai.description")}</CardDescription>
+              <CardLink href="/services/ai">{t("services.items.ai.link")}</CardLink>
+            </Card>
 
-      <Card hover>
-        <CardIcon>
-          <Server className="w-9 h-9 text-text-main" />
-        </CardIcon>
-        <CardTitle>{t("services.items.infrastructure.title")}</CardTitle>
-        <CardDescription>{t("services.items.infrastructure.description")}</CardDescription>
-        <CardLink href="/services/cloud-infrastructure">{t("services.items.infrastructure.link")}</CardLink>
-      </Card>
-    </div>
-  </div>
-</Section>
+            <Card hover>
+              <CardIcon>
+                <Server className="w-9 h-9 text-text-main" />
+              </CardIcon>
+              <CardTitle>{t("services.items.infrastructure.title")}</CardTitle>
+              <CardDescription>{t("services.items.infrastructure.description")}</CardDescription>
+              <CardLink href="/services/cloud-infrastructure">{t("services.items.infrastructure.link")}</CardLink>
+            </Card>
+          </div>
+        </div>
+      </Section>
 
       {/* Divider */}
       <div className="h-px bg-card-border mx-8" />
@@ -213,8 +217,8 @@ export default function HomePage() {
         />
       </Section> */}
 
-    {/* PAM Services */}
-    <PAMPage/>
+      {/* PAM Services */}
+      <PAMPage />
 
 
       {/* Why Samurai */}
@@ -292,7 +296,7 @@ export default function HomePage() {
       </Section>
 
       {/* CISO Testimonial */}
-      <Section background="secondary">
+      {/* <Section background="secondary">
         <SectionLabel>{t("testimonial.label")}</SectionLabel>
         <Testimonial
           quote={t("testimonial.quote")}
@@ -303,7 +307,8 @@ export default function HomePage() {
             {t("testimonial.cta")}
           </Button>
         </div>
-      </Section>
+      </Section> */}
+      <TestimonialSection/>
 
       {/* Technology Partners Carousel */}
       <Section className="py-12">
@@ -393,9 +398,8 @@ export default function HomePage() {
           ].map((city, index) => (
             <div
               key={index}
-              className={`bg-card-bg border rounded-xl p-5 flex items-center gap-3 ${
-                city.highlighted ? "border-accent/50" : "border-card-border"
-              }`}
+              className={`bg-card-bg border rounded-xl p-5 flex items-center gap-3 ${city.highlighted ? "border-accent/50" : "border-card-border"
+                }`}
             >
               <div className="w-3 h-3 rounded-full bg-accent flex-shrink-0" />
               <div>
@@ -418,7 +422,8 @@ export default function HomePage() {
         <p className="text-text-secondary mt-4 mb-10 text-base max-w-2xl mx-auto">
           {t("finalCta.description")}
         </p>
-        <Button variant="fill" size="lg" asLink href="/contact">
+        <Button variant="fill" size="lg" onClick={() => setIsModalOpen(true)}
+        >
           {t("finalCta.cta")}
         </Button>
       </Section>
@@ -441,6 +446,10 @@ export default function HomePage() {
       `}</style>
 
       <Footer />
+      <ChatWizardModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
     </>
   );
 }

@@ -60,7 +60,7 @@ export default function ServicesPage() {
     },
     {
       icon: Server,
-      key: "infrastructureService",
+      key: "infrastructure",
       href: "/services/cloud-infrastructure",
       tags: ["Azure", "AWS", "SITE Cloud", "Oracle OCI", "CSPM", "OT/ICS", "SCADA"],
     },
@@ -89,35 +89,30 @@ export default function ServicesPage() {
         </div>
 
         <Section>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="space-y-6">
             {services.map((service) => (
-              <Card
+              <div
                 key={service.key}
-                className="hover:border-accent/40 transition-all flex flex-col justify-between"
+                className="bg-card-bg border border-card-border rounded-xl p-8 hover:border-accent/40 transition-all"
               >
-                <div>
-                  <div className="flex items-center gap-3 mb-4">
-                    <service.icon className="w-8 h-8 text-text-main flex-shrink-0" />
-                    <CardTitle>
+                <div className="flex items-start gap-4 mb-4">
+                  <service.icon className="w-8 h-8 text-text-main flex-shrink-0" />
+                  <div className="flex-1">
+                    <h2 className="text-xl font-bold text-white mb-3">
                       {t(`${service.key}.breadcrumb`)}
-                    </CardTitle>
-                  </div>
-
-                  <CardDescription>
-                    {t(`${service.key}.description`)}
-                  </CardDescription>
-
-                  <div className="flex flex-wrap gap-2 my-4">
-                    {service.tags.map((tag, index) => (
-                      <Tag key={index}>{tag}</Tag>
-                    ))}
+                    </h2>
+                    <p className="text-sm text-text-secondary mb-4">
+                      {t(`${service.key}.description`)}
+                    </p>
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {service.tags.map((tag, index) => (
+                        <Tag key={index}>{tag}</Tag>
+                      ))}
+                    </div>
+                    <CardLink href={service.href as Pathnames}>Explore →</CardLink>
                   </div>
                 </div>
-
-                <div className="mt-auto">
-                  <CardLink href={service.href as Pathnames}>Explore →</CardLink>
-                </div>
-              </Card>
+              </div>
             ))}
           </div>
         </Section>

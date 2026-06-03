@@ -15,10 +15,13 @@ import {
   Button,
 } from "./ui";
 import { Lock, Factory, Eye, Rocket } from "lucide-react";
+import { useState } from "react";
+import ChatWizardModal from "./ChatWizardModal";
 
 export default function PAMPage() {
   const t = useTranslations("solutions.pam");
-
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  
   const items = [
     { icon: Lock, key: "integration" },
     { icon: Factory, key: "coverage" },
@@ -51,12 +54,17 @@ export default function PAMPage() {
           </div>
 
           <div className="mt-12 text-center">
-            <Button variant="fill" size="lg" asLink href="/assessment">
+            <Button variant="fill" size="lg" onClick={() => setIsModalOpen(true)}>
               {t("cta")}
             </Button>
           </div>
         </Section>
       </div>
+      <ChatWizardModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        defaultService="Cloud & Infrastructure"
+      />
     </>
   );
 }
