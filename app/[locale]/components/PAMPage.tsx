@@ -1,8 +1,8 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import Navbar from "../../components/Navbar";
-import Footer from "../../components/Footer";
+import Navbar from "./Navbar";
+import Footer from "./Footer";
 import {
   Breadcrumb,
   Section,
@@ -13,7 +13,7 @@ import {
   CardTitle,
   CardDescription,
   Button,
-} from "../../components/ui";
+} from "./ui";
 import { Lock, Factory, Eye, Rocket } from "lucide-react";
 
 export default function PAMPage() {
@@ -30,14 +30,6 @@ export default function PAMPage() {
     <>
       <Navbar />
       <div className="pt-16">
-        <Breadcrumb
-          items={[
-            { label: "Home", href: "/" },
-            { label: "Solutions", href: "/solutions" },
-            { label: t("breadcrumb") },
-          ]}
-        />
-
         <Section>
           <SectionLabel>{t("label")}</SectionLabel>
           <SectionTitle className="mb-4">
@@ -65,7 +57,6 @@ export default function PAMPage() {
           </div>
         </Section>
       </div>
-      <Footer />
     </>
   );
 }

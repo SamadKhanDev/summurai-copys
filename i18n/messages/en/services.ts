@@ -18,7 +18,7 @@ const services = {
         description: "Continuous monitoring, detection & incident response. Threat hunting, alert triage, and vulnerability prioritization aligned with MITRE ATT&CK and NCA ECC frameworks.",
         tags: ["SIEM", "SOAR", "EDR/XDR", "24×7"],
       },
-      infrastructure: {
+      infraProtection: {
         title: "Infrastructure Protection",
         description: "Next-gen Firewalls, IDS/IPS, WAF, DLP, and Endpoint Security. IAM, PAM, MFA, and Zero Trust Architecture. CSPM and configuration hardening.",
         tags: ["NGFW", "Zero Trust", "PAM/IAM", "CSPM"],
@@ -93,6 +93,38 @@ const services = {
       },
     },
     cta: "Book a Compliance Review →",
+  },
+  infrastructure: {
+    breadcrumb: "Cloud & Infrastructure",
+    label: "Services / Cloud & Infrastructure",
+    title: "Cloud & ",
+    titleAccent: "Infrastructure",
+    description:
+      "Unified management across data centers and multi-cloud platforms with security, cost transparency, and automated scaling. Network, server, and endpoint administration with patch and configuration control.",
+    items: {
+      multicloud: {
+        title: "Multi-Cloud Platform Management",
+        description:
+          "Centralized operations across Azure, AWS, SITE Cloud, and Oracle OCI — with cost transparency, automated scaling, and unified governance across all environments.",
+        tags: ["Azure", "AWS", "SITE Cloud", "Oracle OCI"],
+      },
+      cspm: {
+        title: "Cloud Security Posture Management",
+        description:
+          "Continuous misconfiguration detection, compliance benchmarking, and automated remediation across your cloud estate — enforcing Zero Trust principles at scale.",
+      },
+      ot: {
+        title: "OT/ICS & SCADA Monitoring",
+        description:
+          "Specialized monitoring and protection for operational technology environments — including industrial control systems and SCADA networks — aligned with NCA OT controls.",
+      },
+      operations: {
+        title: "Network & Endpoint Operations",
+        description:
+          "Full-lifecycle network, server, and endpoint administration with automated patch management, configuration control, and 24×7 health monitoring across on-premise and cloud workloads.",
+      },
+    },
+    cta: "Book an Infrastructure Review →",
   },
   bcm: {
     breadcrumb: "Business Continuity",

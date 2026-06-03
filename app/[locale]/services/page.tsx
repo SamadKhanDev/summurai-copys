@@ -15,7 +15,8 @@ import {
   CardLink,
   Tag,
 } from "../components/ui";
-import { Shield, Cloud, Scale, RefreshCw, Bot, Settings } from "lucide-react";
+import { Shield, Cloud, Scale, RefreshCw, Bot, Settings, Server } from "lucide-react";
+import { Pathnames } from "@/i18n/routing";
 
 export default function ServicesPage() {
   const t = useTranslations("services");
@@ -57,6 +58,12 @@ export default function ServicesPage() {
       href: "/services/digital-transformation",
       tags: ["RPA", "Power BI", "Custom Dev", "Data Warehousing"],
     },
+    {
+      icon: Server,
+      key: "infrastructureService",
+      href: "/services/cloud-infrastructure",
+      tags: ["Azure", "AWS", "SITE Cloud", "Oracle OCI", "CSPM", "OT/ICS", "SCADA"],
+    },
   ];
 
   return (
@@ -82,30 +89,35 @@ export default function ServicesPage() {
         </div>
 
         <Section>
-          <div className="space-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {services.map((service) => (
-              <div
+              <Card
                 key={service.key}
-                className="bg-card-bg border border-card-border rounded-xl p-8 hover:border-accent/40 transition-all"
+                className="hover:border-accent/40 transition-all flex flex-col justify-between"
               >
-                <div className="flex items-start gap-4 mb-4">
-                  <service.icon className="w-8 h-8 text-text-main flex-shrink-0" />
-                  <div className="flex-1">
-                    <h2 className="text-xl font-bold text-white mb-3">
+                <div>
+                  <div className="flex items-center gap-3 mb-4">
+                    <service.icon className="w-8 h-8 text-text-main flex-shrink-0" />
+                    <CardTitle>
                       {t(`${service.key}.breadcrumb`)}
-                    </h2>
-                    <p className="text-sm text-text-secondary mb-4">
-                      {t(`${service.key}.description`)}
-                    </p>
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      {service.tags.map((tag, index) => (
-                        <Tag key={index}>{tag}</Tag>
-                      ))}
-                    </div>
-                    <CardLink href={service.href}>Explore →</CardLink>
+                    </CardTitle>
+                  </div>
+
+                  <CardDescription>
+                    {t(`${service.key}.description`)}
+                  </CardDescription>
+
+                  <div className="flex flex-wrap gap-2 my-4">
+                    {service.tags.map((tag, index) => (
+                      <Tag key={index}>{tag}</Tag>
+                    ))}
                   </div>
                 </div>
-              </div>
+
+                <div className="mt-auto">
+                  <CardLink href={service.href as Pathnames}>Explore →</CardLink>
+                </div>
+              </Card>
             ))}
           </div>
         </Section>

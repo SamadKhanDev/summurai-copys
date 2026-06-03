@@ -35,6 +35,8 @@ import {
 } from "lucide-react";
 import HeroSection from "./components/HeroSection";
 import { Server } from "lucide-react";
+import { Link } from "@/i18n/navigation";
+import PAMPage from "./components/PAMPage";
 
 export default function HomePage() {
   const t = useTranslations("home");
@@ -167,7 +169,7 @@ export default function HomePage() {
         </CardIcon>
         <CardTitle>{t("services.items.infrastructure.title")}</CardTitle>
         <CardDescription>{t("services.items.infrastructure.description")}</CardDescription>
-        <CardLink href="/services/infrastructure">{t("services.items.infrastructure.link")}</CardLink>
+        <CardLink href="/services/cloud-infrastructure">{t("services.items.infrastructure.link")}</CardLink>
       </Card>
     </div>
   </div>
@@ -202,14 +204,18 @@ export default function HomePage() {
       <div className="h-px bg-card-border mx-8" />
 
       {/* VAPT Callout */}
-      <Section className="py-12">
+      {/* <Section className="py-12">
         <CalloutBanner
           title={t("vapt.title")}
           description={t("vapt.description")}
           ctaText={t("vapt.cta")}
           ctaHref="/assessment"
         />
-      </Section>
+      </Section> */}
+
+    {/* PAM Services */}
+    <PAMPage/>
+
 
       {/* Why Samurai */}
       <Section background="secondary">
