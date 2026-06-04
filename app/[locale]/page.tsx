@@ -34,10 +34,20 @@ import {
   Building,
 } from "lucide-react";
 import HeroSection from "./components/HeroSection";
+import { Server } from "lucide-react";
+import { Link } from "@/i18n/navigation";
+import PAMPage from "./components/PAMPage";
+import ChatWizardModal from "./components/ChatWizardModal";
+import { useState } from "react";
+import TestimonialSection from "./components/Testimonialsection";
+import WhySamurai from "./components/Whysamurai";
+import GlobalPresenceSection from "./components/GlobalPresenceSection";
+import TrustedBySection from "./components/TrustedMarquee";
 
 export default function HomePage() {
   const t = useTranslations("home");
   const tCommon = useTranslations("common");
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <>
@@ -66,7 +76,7 @@ export default function HomePage() {
           </div>
         </div>
       </div> */}
-      <HeroSection onBookBriefingClick={() => window.dispatchEvent(new Event("open-contact-modal"))} />
+      <HeroSection />
 
       {/* Stats Bar */}
       <StatsBar
@@ -100,84 +110,75 @@ export default function HomePage() {
         </SectionTitle>
         <SectionDescription>{t("services.description")}</SectionDescription>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
-          <Card hover>
-            <CardIcon>
-              <Shield className="w-9 h-9 text-text-main" />
-            </CardIcon>
-            <CardTitle>{t("services.items.cyber.title")}</CardTitle>
-            <CardDescription>
-              {t("services.items.cyber.description")}
-            </CardDescription>
-            <CardLink href="/services/cybersecurity">
-              {t("services.items.cyber.link")}
-            </CardLink>
-          </Card>
+        <div className="mt-12 space-y-6">
+          {/* Row 1 — 4 cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <Card hover>
+              <CardIcon>
+                <Shield className="w-9 h-9 text-text-main" />
+              </CardIcon>
+              <CardTitle>{t("services.items.cyber.title")}</CardTitle>
+              <CardDescription>{t("services.items.cyber.description")}</CardDescription>
+              <CardLink href="/services/cybersecurity">{t("services.items.cyber.link")}</CardLink>
+            </Card>
 
-          <Card hover>
-            <CardIcon>
-              <Cloud className="w-9 h-9 text-text-main" />
-            </CardIcon>
-            <CardTitle>{t("services.items.cloud.title")}</CardTitle>
-            <CardDescription>
-              {t("services.items.cloud.description")}
-            </CardDescription>
-            <CardLink href="/services/cloud">
-              {t("services.items.cloud.link")}
-            </CardLink>
-          </Card>
+            <Card hover>
+              <CardIcon>
+                <Cloud className="w-9 h-9 text-text-main" />
+              </CardIcon>
+              <CardTitle>{t("services.items.cloud.title")}</CardTitle>
+              <CardDescription>{t("services.items.cloud.description")}</CardDescription>
+              <CardLink href="/services/cloud">{t("services.items.cloud.link")}</CardLink>
+            </Card>
 
-          <Card hover>
-            <CardIcon>
-              <Scale className="w-9 h-9 text-text-main" />
-            </CardIcon>
-            <CardTitle>{t("services.items.grc.title")}</CardTitle>
-            <CardDescription>
-              {t("services.items.grc.description")}
-            </CardDescription>
-            <CardLink href="/services/grc">
-              {t("services.items.grc.link")}
-            </CardLink>
-          </Card>
+            <Card hover>
+              <CardIcon>
+                <Scale className="w-9 h-9 text-text-main" />
+              </CardIcon>
+              <CardTitle>{t("services.items.grc.title")}</CardTitle>
+              <CardDescription>{t("services.items.grc.description")}</CardDescription>
+              <CardLink href="/services/grc">{t("services.items.grc.link")}</CardLink>
+            </Card>
 
-          <Card hover>
-            <CardIcon>
-              <Bot className="w-9 h-9 text-text-main" />
-            </CardIcon>
-            <CardTitle>{t("services.items.ai.title")}</CardTitle>
-            <CardDescription>
-              {t("services.items.ai.description")}
-            </CardDescription>
-            <CardLink href="/services/ai">
-              {t("services.items.ai.link")}
-            </CardLink>
-          </Card>
+            <Card hover>
+              <CardIcon>
+                <Settings className="w-9 h-9 text-text-main" />
+              </CardIcon>
+              <CardTitle>{t("services.items.dt.title")}</CardTitle>
+              <CardDescription>{t("services.items.dt.description")}</CardDescription>
+              <CardLink href="/services/digital-transformation">{t("services.items.dt.link")}</CardLink>
+            </Card>
+          </div>
 
-          <Card hover>
-            <CardIcon>
-              <RefreshCw className="w-9 h-9 text-text-main" />
-            </CardIcon>
-            <CardTitle>{t("services.items.bcm.title")}</CardTitle>
-            <CardDescription>
-              {t("services.items.bcm.description")}
-            </CardDescription>
-            <CardLink href="/services/business-continuity">
-              {t("services.items.bcm.link")}
-            </CardLink>
-          </Card>
+          {/* Row 2 — 3 cards centered */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:w-3/4 lg:mx-auto">
+            <Card hover>
+              <CardIcon>
+                <RefreshCw className="w-9 h-9 text-text-main" />
+              </CardIcon>
+              <CardTitle>{t("services.items.bcm.title")}</CardTitle>
+              <CardDescription>{t("services.items.bcm.description")}</CardDescription>
+              <CardLink href="/services/business-continuity">{t("services.items.bcm.link")}</CardLink>
+            </Card>
 
-          <Card hover>
-            <CardIcon>
-              <Settings className="w-9 h-9 text-text-main" />
-            </CardIcon>
-            <CardTitle>{t("services.items.dt.title")}</CardTitle>
-            <CardDescription>
-              {t("services.items.dt.description")}
-            </CardDescription>
-            <CardLink href="/services/digital-transformation">
-              {t("services.items.dt.link")}
-            </CardLink>
-          </Card>
+            <Card hover>
+              <CardIcon>
+                <Bot className="w-9 h-9 text-text-main" />
+              </CardIcon>
+              <CardTitle>{t("services.items.ai.title")}</CardTitle>
+              <CardDescription>{t("services.items.ai.description")}</CardDescription>
+              <CardLink href="/services/ai">{t("services.items.ai.link")}</CardLink>
+            </Card>
+
+            <Card hover>
+              <CardIcon>
+                <Server className="w-9 h-9 text-text-main" />
+              </CardIcon>
+              <CardTitle>{t("services.items.infrastructure.title")}</CardTitle>
+              <CardDescription>{t("services.items.infrastructure.description")}</CardDescription>
+              <CardLink href="/services/cloud-infrastructure">{t("services.items.infrastructure.link")}</CardLink>
+            </Card>
+          </div>
         </div>
       </Section>
 
@@ -210,17 +211,21 @@ export default function HomePage() {
       <div className="h-px bg-card-border mx-8" />
 
       {/* VAPT Callout */}
-      <Section className="py-12">
+      {/* <Section className="py-12">
         <CalloutBanner
           title={t("vapt.title")}
           description={t("vapt.description")}
           ctaText={t("vapt.cta")}
           ctaHref="/assessment"
         />
-      </Section>
+      </Section> */}
+
+      {/* PAM Services */}
+      <PAMPage />
+
 
       {/* Why Samurai */}
-      <Section background="secondary">
+      {/* <Section background="secondary">
         <SectionLabel>{t("whySamurai.label")}</SectionLabel>
         <SectionTitle>
           {t("whySamurai.title")}
@@ -260,7 +265,8 @@ export default function HomePage() {
             </CardDescription>
           </Card>
         </div>
-      </Section>
+      </Section> */}
+      <WhySamurai/>
 
       {/* Industries Served */}
       <Section>
@@ -294,7 +300,7 @@ export default function HomePage() {
       </Section>
 
       {/* CISO Testimonial */}
-      <Section background="secondary">
+      {/* <Section background="secondary">
         <SectionLabel>{t("testimonial.label")}</SectionLabel>
         <Testimonial
           quote={t("testimonial.quote")}
@@ -305,74 +311,14 @@ export default function HomePage() {
             {t("testimonial.cta")}
           </Button>
         </div>
-      </Section>
+      </Section> */}
+      <TestimonialSection/>
 
       {/* Technology Partners Carousel */}
-      <Section className="py-12">
-        <SectionLabel>{t("partners.label")}</SectionLabel>
-        <div className="overflow-hidden mt-8 relative">
-          <div className="flex gap-10 animate-scroll whitespace-nowrap">
-            {[
-              "Cisco",
-              "Microsoft",
-              "IBM",
-              "Fortinet",
-              "VMware",
-              "Dell",
-              "Wallix",
-              "Red Hat",
-              "One Identity",
-              "Broadcom",
-              "Forcepoint",
-              "HPE",
-              "Recorded Future",
-              "McAfee",
-              "Tenable",
-              "SolarWinds",
-              "Sophos",
-              "Thales",
-              "NetApp",
-              "Dynatrace",
-              "Trend Micro",
-            ].map((partner, index) => (
-              <div
-                key={index}
-                className="bg-card-bg border border-card-border rounded-lg px-6 py-3 text-sm font-bold text-text-secondary inline-block"
-              >
-                {partner}
-              </div>
-            ))}
-            {/* Duplicate for seamless loop */}
-            {[
-              "Cisco",
-              "Microsoft",
-              "IBM",
-              "Fortinet",
-              "VMware",
-              "Dell",
-              "Wallix",
-              "Red Hat",
-              "One Identity",
-              "Broadcom",
-            ].map((partner, index) => (
-              <div
-                key={`dup-${index}`}
-                className="bg-card-bg border border-card-border rounded-lg px-6 py-3 text-sm font-bold text-text-secondary inline-block"
-              >
-                {partner}
-              </div>
-            ))}
-          </div>
-        </div>
-        <div className="text-center mt-8">
-          <Button variant="outline" asLink href="/partners">
-            {t("partners.viewAll")}
-          </Button>
-        </div>
-      </Section>
+      <TrustedBySection title={t("partners.label")} logos={t.raw("partners.logos")} cta={t("partners.viewAll")} />
 
       {/* Global Presence */}
-      <Section background="secondary">
+      {/* <Section background="secondary">
         <SectionLabel>{t("globalPresence.label")}</SectionLabel>
         <SectionTitle>
           {t("globalPresence.title")}
@@ -395,9 +341,8 @@ export default function HomePage() {
           ].map((city, index) => (
             <div
               key={index}
-              className={`bg-card-bg border rounded-xl p-5 flex items-center gap-3 ${
-                city.highlighted ? "border-accent/50" : "border-card-border"
-              }`}
+              className={`bg-card-bg border rounded-xl p-5 flex items-center gap-3 ${city.highlighted ? "border-accent/50" : "border-card-border"
+                }`}
             >
               <div className="w-3 h-3 rounded-full bg-accent flex-shrink-0" />
               <div>
@@ -409,8 +354,9 @@ export default function HomePage() {
             </div>
           ))}
         </div>
-      </Section>
-
+      </Section> */}
+      <GlobalPresenceSection/>
+      
       {/* Final CTA */}
       <Section className="text-center">
         <SectionTitle className="mx-auto">
@@ -420,7 +366,8 @@ export default function HomePage() {
         <p className="text-text-secondary mt-4 mb-10 text-base max-w-2xl mx-auto">
           {t("finalCta.description")}
         </p>
-        <Button variant="fill" size="lg" onClick={() => window.dispatchEvent(new Event("open-contact-modal"))}>
+        <Button variant="fill" size="lg" onClick={() => setIsModalOpen(true)}
+        >
           {t("finalCta.cta")}
         </Button>
       </Section>
@@ -443,6 +390,10 @@ export default function HomePage() {
       `}</style>
 
       <Footer />
+      <ChatWizardModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
     </>
   );
 }

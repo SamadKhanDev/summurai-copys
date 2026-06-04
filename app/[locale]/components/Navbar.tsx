@@ -51,21 +51,21 @@ export default function Navbar() {
           : "bg-background/85 backdrop-blur-md border-b border-border/5"
           }`}
       >
-        <div className="max-w-7xl mx-auto px-8 h-[72px] flex items-center justify-between gap-6">
+        <div className="max-w-7xl mx-auto px-8 h-[72px] flex items-center justify-center gap-6">
           {/* Logo */}
           <Link
             href="/"
             className="shrink-0 mr-6 flex items-center"
           >
             <img
-              src={`${basePath}/assests/logoUP.webp`}
+              src={`${basePath}/assets/logoUP.webp`}
               alt="Samurai Logo"
               className="h-10 w-auto object-contain"
             />
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex justify-end items-center flex-1 gap-0.5">
+          <div className="hidden lg:flex justify-satry items-center flex-1 gap-0.5">
             <Link
               href="/"
               className="px-3 py-2 text-[11px] font-semibold tracking-wider uppercase text-text-secondary hover:text-text-main hover:bg-white/5 rounded-md transition-colors"
@@ -88,11 +88,12 @@ export default function Navbar() {
                 <Link href="/services/digital-transformation" className={dropdownLink}>{t("dropdowns.services.dt")}</Link>
                 <Link href="/services/business-continuity" className={dropdownLink}>{t("dropdowns.services.bcm")}</Link>
                 <Link href="/services/ai" className={dropdownLink}>{t("dropdowns.services.ai")}</Link>
+                <Link href="/services/cloud-infrastructure" className={dropdownLink}>{t("dropdowns.services.infras")}</Link>
               </div>
             </div>
 
             {/* Solutions Dropdown */}
-            <div className="relative group">
+            {/* <div className="relative group">
               <button className="flex items-center gap-1.5 px-3 py-2 text-[11px] font-semibold tracking-wider uppercase text-text-secondary hover:text-text-main hover:bg-white/5 rounded-md transition-colors">
                 {t("links.solutions")}
                 <ChevronDown className="w-3 h-3 transition-transform duration-200 group-hover:rotate-180" />
@@ -104,7 +105,7 @@ export default function Navbar() {
                 <Link href="/solutions/grc" className={dropdownLink}>{t("dropdowns.solutions.grc")}</Link>
                 <Link href="/solutions/iam" className={dropdownLink}>{t("dropdowns.solutions.iam")}</Link>
               </div>
-            </div>
+            </div> */}
 
             {/* Industries Dropdown */}
             <div className="relative group">

@@ -1,8 +1,8 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import Navbar from "../../components/Navbar";
-import Footer from "../../components/Footer";
+import Navbar from "./Navbar";
+import Footer from "./Footer";
 import {
   Breadcrumb,
   Section,
@@ -13,12 +13,15 @@ import {
   CardTitle,
   CardDescription,
   Button,
-} from "../../components/ui";
+} from "./ui";
 import { Lock, Factory, Eye, Rocket } from "lucide-react";
+import { useState } from "react";
+import ChatWizardModal from "./ChatWizardModal";
 
 export default function PAMPage() {
   const t = useTranslations("solutions.pam");
-
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  
   const items = [
     { icon: Lock, key: "integration" },
     { icon: Factory, key: "coverage" },
@@ -30,14 +33,6 @@ export default function PAMPage() {
     <>
       <Navbar />
       <div className="pt-16">
-        <Breadcrumb
-          items={[
-            { label: "Home", href: "/" },
-            { label: "Solutions", href: "/solutions" },
-            { label: t("breadcrumb") },
-          ]}
-        />
-
         <Section>
           <SectionLabel>{t("label")}</SectionLabel>
           <SectionTitle className="mb-4">
@@ -59,13 +54,17 @@ export default function PAMPage() {
           </div>
 
           <div className="mt-12 text-center">
-            <Button variant="fill" size="lg" asLink href="/assessment">
+            <Button variant="fill" size="lg" onClick={() => setIsModalOpen(true)}>
               {t("cta")}
             </Button>
           </div>
         </Section>
       </div>
-      <Footer />
+      <ChatWizardModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        defaultService="Cloud & Infrastructure"
+      />
     </>
   );
 }

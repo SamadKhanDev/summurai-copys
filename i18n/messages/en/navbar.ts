@@ -21,6 +21,7 @@ const navbar = {
       dt: "Digital Transformation",
       bcm: "Business Continuity",
       ai: "AI & Automation",
+      infras: "Cloud & Infrastructure",
     },
     solutions: {
       all: "All Solutions",

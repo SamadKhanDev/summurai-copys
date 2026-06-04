@@ -15,7 +15,8 @@ import {
   CardLink,
   Tag,
 } from "../components/ui";
-import { Shield, Cloud, Scale, RefreshCw, Bot, Settings } from "lucide-react";
+import { Shield, Cloud, Scale, RefreshCw, Bot, Settings, Server } from "lucide-react";
+import { Pathnames } from "@/i18n/routing";
 
 export default function ServicesPage() {
   const t = useTranslations("services");
@@ -56,6 +57,12 @@ export default function ServicesPage() {
       key: "dt",
       href: "/services/digital-transformation",
       tags: ["RPA", "Power BI", "Custom Dev", "Data Warehousing"],
+    },
+    {
+      icon: Server,
+      key: "infrastructure",
+      href: "/services/cloud-infrastructure",
+      tags: ["Azure", "AWS", "SITE Cloud", "Oracle OCI", "CSPM", "OT/ICS", "SCADA"],
     },
   ];
 
@@ -102,7 +109,7 @@ export default function ServicesPage() {
                         <Tag key={index}>{tag}</Tag>
                       ))}
                     </div>
-                    <CardLink href={service.href}>Explore →</CardLink>
+                    <CardLink href={service.href as Pathnames}>Explore →</CardLink>
                   </div>
                 </div>
               </div>

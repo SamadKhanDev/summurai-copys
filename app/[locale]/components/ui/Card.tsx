@@ -1,3 +1,5 @@
+import { Link } from "@/i18n/navigation";
+import type { Pathnames } from "@/i18n/routing";
 import React from "react";
 
 interface CardProps {
@@ -76,7 +78,7 @@ export function CardDescription({
 
 interface CardLinkProps {
   children: React.ReactNode;
-  href?: string;
+  href?: Pathnames;
   onClick?: () => void;
   className?: string;
 }
@@ -87,13 +89,19 @@ export function CardLink({
   onClick,
   className = "",
 }: CardLinkProps) {
+  const commonClasses = `inline-flex items-center gap-1 mt-4 text-sm font-semibold text-text-main hover:text-white transition-colors cursor-pointer ${className}`;
+
+  if (!href) {
+    return (
+      <button onClick={onClick} className={commonClasses}>
+        {children}
+      </button>
+    );
+  }
+
   return (
-    <a
-      href={href}
-      onClick={onClick}
-      className={`inline-flex items-center gap-1 mt-4 text-sm font-semibold text-text-main hover:text-white transition-colors ${className}`}
-    >
+    <Link href={href} onClick={onClick} className={commonClasses}>
       {children}
-    </a>
+    </Link>
   );
 }

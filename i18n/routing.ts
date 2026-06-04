@@ -13,6 +13,7 @@ export const routing = defineRouting({
     "/services/digital-transformation": "/services/digital-transformation",
     "/services/business-continuity": "/services/business-continuity",
     "/services/ai": "/services/ai",
+    "/services/cloud-infrastructure": "/services/cloud-infrastructure",
     "/solutions": "/solutions",
     "/solutions/pam": "/solutions/pam",
     "/solutions/grc": "/solutions/grc",

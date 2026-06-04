@@ -157,6 +157,16 @@ h6 .text-\[\#E11D48\] {
   background: var(--accent-hover);
 }
 
+@keyframes trustedMarquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
 /* Global input placeholder styling */
 input::placeholder,
 textarea::placeholder {
