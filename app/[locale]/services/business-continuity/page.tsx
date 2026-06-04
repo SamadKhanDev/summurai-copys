@@ -14,6 +14,7 @@ import {
   Button,
 } from "../../components/ui";
 import { AnimatedHeading } from "../../components/animations/textBehavior";
+import ScrollReveal from "../../components/animations/ScrollReveal";
 
 export default function BusinessContinuityPage() {
   const t = useTranslations("services.bcm");
@@ -72,35 +73,43 @@ export default function BusinessContinuityPage() {
             className="mb-4"
             Component={SectionTitle}
           />
-          <SectionDescription>{t("description")}</SectionDescription>
+          <ScrollReveal delay={0.5}>
+            <SectionDescription>{t("description")}</SectionDescription>
+          </ScrollReveal>
 
           <div className="mt-12 space-y-0">
+
             {steps.map((step, index) => (
-              <div
-                key={step.number}
-                className={`flex gap-6 py-6 ${index < steps.length - 1 ? "border-b border-card-border" : ""
-                  }`}
-              >
-                <div className="text-5xl font-extrabold text-text-main/25 flex-shrink-0 w-20 text-center">
-                  {step.number}
+              <ScrollReveal delay={0.5}>
+                <div
+                  key={step.number}
+                  className={`flex gap-6 py-6 ${index < steps.length - 1 ? "border-b border-card-border" : ""
+                    }`}
+                >
+                  <div className="text-5xl font-extrabold text-text-main/25 flex-shrink-0 w-20 text-center">
+                    {step.number}
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-base font-bold text-white mb-2">
+                      {step.title}
+                    </h3>
+                    <p className="text-sm text-text-secondary leading-relaxed">
+                      {step.description}
+                    </p>
+                  </div>
                 </div>
-                <div className="flex-1">
-                  <h3 className="text-base font-bold text-white mb-2">
-                    {step.title}
-                  </h3>
-                  <p className="text-sm text-text-secondary leading-relaxed">
-                    {step.description}
-                  </p>
-                </div>
-              </div>
+              </ScrollReveal>
             ))}
           </div>
 
-          <div className="mt-12 text-center">
-            <Button variant="fill" size="lg" onClick={() => setIsModalOpen(true)}>
-              {t("cta")}
-            </Button>
-          </div>
+          <ScrollReveal delay={0.5}>
+            <div className="mt-12 text-center">
+              <Button variant="fill" size="lg" onClick={() => setIsModalOpen(true)}>
+                {t("cta")}
+              </Button>
+            </div>
+          </ScrollReveal>
+
         </Section>
       </div>
       <Footer />

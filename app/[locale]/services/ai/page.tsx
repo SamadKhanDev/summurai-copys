@@ -18,6 +18,7 @@ import {
 } from "../../components/ui";
 import { Brain, BarChart3, MessageSquare, Eye, Zap, Server } from "lucide-react";
 import { AnimatedHeading } from "../../components/animations/textBehavior";
+import ScrollReveal from "../../components/animations/ScrollReveal";
 
 export default function AIPage() {
   const t = useTranslations("services.ai");
@@ -52,26 +53,34 @@ export default function AIPage() {
             className="mb-4"
             Component={SectionTitle}
           />
-          <SectionDescription>{t("description")}</SectionDescription>
+          <ScrollReveal delay={0.5}>
+
+            <SectionDescription>{t("description")}</SectionDescription>
+          </ScrollReveal>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
             {items.map((item) => (
-              <Card key={item.key} hover>
-                <item.icon className="w-9 h-9 text-text-main mb-4" />
-                <CardTitle>{t(`items.${item.key}.title`)}</CardTitle>
-                <CardDescription>
-                  {t(`items.${item.key}.description`)}
-                </CardDescription>
-              </Card>
+              <ScrollReveal delay={0.5}>
+                <Card key={item.key} hover>
+                  <item.icon className="w-9 h-9 text-text-main mb-4" />
+                  <CardTitle>{t(`items.${item.key}.title`)}</CardTitle>
+                  <CardDescription>
+                    {t(`items.${item.key}.description`)}
+                  </CardDescription>
+                </Card >
+              </ScrollReveal>
             ))}
           </div>
 
-          <div className="mt-12 text-center">
-            {/* Click karne par modal open hoga with default reference context */}
-            <Button variant="fill" size="lg" onClick={() => setIsModalOpen(true)}>
-              {t("cta")}
-            </Button>
-          </div>
+          <ScrollReveal delay={0.5}>
+
+            <div className="mt-12 text-center">
+              {/* Click karne par modal open hoga with default reference context */}
+              <Button variant="fill" size="lg" onClick={() => setIsModalOpen(true)}>
+                {t("cta")}
+              </Button>
+            </div>
+          </ScrollReveal>
         </Section>
       </div>
       <Footer />
