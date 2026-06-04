@@ -51,7 +51,7 @@ export default function Navbar() {
           : "bg-background/85 backdrop-blur-md border-b border-border/5"
           }`}
       >
-        <div className="max-w-7xl mx-auto px-8 h-[72px] flex items-center justify-center gap-6">
+        <div className="max-w-7xl mx-auto px-8 h-[80px] flex items-center justify-center gap-6">
           {/* Logo */}
           <Link
             href="/"
@@ -60,12 +60,12 @@ export default function Navbar() {
             <img
               src={`${basePath}/assets/logoUP.webp`}
               alt="Samurai Logo"
-              className="h-10 w-auto object-contain"
+              className="h-15 w-auto object-contain"
             />
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex justify-satry items-center flex-1 gap-0.5">
+          <div className="hidden lg:flex justify-end items-center flex-1 gap-0.5">
             <Link
               href="/"
               className="px-3 py-2 text-[11px] font-semibold tracking-wider uppercase text-text-secondary hover:text-text-main hover:bg-white/5 rounded-md transition-colors"
