@@ -51,7 +51,7 @@ export default function Navbar() {
             className="shrink-0 mr-6 flex items-center"
           >
             <img
-              src={`${basePath}/assests/logoUP.webp`}
+              src={`${basePath}/assets/logoUP.webp`}
               alt="Samurai Logo"
               className="h-10 w-auto object-contain"
             />

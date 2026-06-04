@@ -41,6 +41,8 @@ import ChatWizardModal from "./components/ChatWizardModal";
 import { useState } from "react";
 import TestimonialSection from "./components/Testimonialsection";
 import WhySamurai from "./components/Whysamurai";
+import GlobalPresenceSection from "./case-studies/GlobalPresenceSection";
+import TrustedBySection from "./components/TrustedMarquee";
 
 export default function HomePage() {
   const t = useTranslations("home");
@@ -313,71 +315,10 @@ export default function HomePage() {
       <TestimonialSection/>
 
       {/* Technology Partners Carousel */}
-      <Section className="py-12">
-        <SectionLabel>{t("partners.label")}</SectionLabel>
-        <div className="overflow-hidden mt-8 relative">
-          <div className="flex gap-10 animate-scroll whitespace-nowrap">
-            {[
-              "Cisco",
-              "Microsoft",
-              "IBM",
-              "Fortinet",
-              "VMware",
-              "Dell",
-              "Wallix",
-              "Red Hat",
-              "One Identity",
-              "Broadcom",
-              "Forcepoint",
-              "HPE",
-              "Recorded Future",
-              "McAfee",
-              "Tenable",
-              "SolarWinds",
-              "Sophos",
-              "Thales",
-              "NetApp",
-              "Dynatrace",
-              "Trend Micro",
-            ].map((partner, index) => (
-              <div
-                key={index}
-                className="bg-card-bg border border-card-border rounded-lg px-6 py-3 text-sm font-bold text-text-secondary inline-block"
-              >
-                {partner}
-              </div>
-            ))}
-            {/* Duplicate for seamless loop */}
-            {[
-              "Cisco",
-              "Microsoft",
-              "IBM",
-              "Fortinet",
-              "VMware",
-              "Dell",
-              "Wallix",
-              "Red Hat",
-              "One Identity",
-              "Broadcom",
-            ].map((partner, index) => (
-              <div
-                key={`dup-${index}`}
-                className="bg-card-bg border border-card-border rounded-lg px-6 py-3 text-sm font-bold text-text-secondary inline-block"
-              >
-                {partner}
-              </div>
-            ))}
-          </div>
-        </div>
-        <div className="text-center mt-8">
-          <Button variant="outline" asLink href="/partners">
-            {t("partners.viewAll")}
-          </Button>
-        </div>
-      </Section>
+      <TrustedBySection title={t("partners.label")} logos={t.raw("partners.logos")} cta={t("partners.viewAll")} />
 
       {/* Global Presence */}
-      <Section background="secondary">
+      {/* <Section background="secondary">
         <SectionLabel>{t("globalPresence.label")}</SectionLabel>
         <SectionTitle>
           {t("globalPresence.title")}
@@ -413,8 +354,9 @@ export default function HomePage() {
             </div>
           ))}
         </div>
-      </Section>
-
+      </Section> */}
+      <GlobalPresenceSection/>
+      
       {/* Final CTA */}
       <Section className="text-center">
         <SectionTitle className="mx-auto">
