@@ -192,7 +192,6 @@ export default function Footer() {
             >
               {t("bottom.linkedin")}
             </a>
-            <span className="text-xs text-text-secondary">{t("bottom.languages")}</span>
           </div>
         </div>
       </div>
