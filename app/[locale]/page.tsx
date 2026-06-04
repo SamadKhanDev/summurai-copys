@@ -44,6 +44,8 @@ import WhySamurai from "./components/Whysamurai";
 import GlobalPresenceSection from "./components/GlobalPresenceSection";
 import TrustedBySection from "./components/TrustedMarquee";
 import ServicesSection from "./components/ServicesSection";
+import { AnimatedHeading } from "./components/animations/textBehavior";
+import ScrollReveal from "./components/animations/ScrollReveal";
 
 export default function HomePage() {
   const t = useTranslations("home");
@@ -189,16 +191,17 @@ export default function HomePage() {
           </Card>
         </div>
       </Section> */}
-      <WhySamurai/>
+      <WhySamurai />
 
       {/* Industries Served */}
       <Section>
         <SectionLabel>{t("industries.label")}</SectionLabel>
-        <SectionTitle>
-          {t("industries.title")}
-          <span className="text-text-main">{t("industries.titleAccent")}</span>
-        </SectionTitle>
-
+        <AnimatedHeading
+          titleText={t("industries.title")}
+          accentText={t("industries.titleAccent")}
+          className="mb-4"
+          Component={SectionTitle}
+        />
         <div className="flex flex-wrap gap-4 mt-10">
           {[
             { icon: Landmark, label: "Government" },
@@ -208,16 +211,18 @@ export default function HomePage() {
             { icon: GraduationCap, label: "Education" },
             { icon: Building, label: "Enterprise" },
           ].map((industry, index) => (
-            <a
-              key={index}
-              href="/industries"
-              className="bg-card-bg border border-card-border rounded-xl p-6 flex flex-col items-center justify-center text-center hover:border-accent hover:bg-accent/5 transition-all cursor-pointer min-w-[180px]"
-            >
-              <industry.icon className="w-8 h-8 text-text-main mb-3" />
-              <span className="text-xs font-semibold text-text-secondary">
-                {industry.label}
-              </span>
-            </a>
+            <ScrollReveal delay={index * 0.1} animation="blur">
+              <a
+                key={index}
+                href="/industries"
+                className="bg-card-bg border border-card-border rounded-xl p-6 flex flex-col items-center justify-center text-center hover:border-accent hover:bg-accent/5 transition-all cursor-pointer min-w-[180px]"
+              >
+                <industry.icon className="w-8 h-8 text-text-main mb-3" />
+                <span className="text-xs font-semibold text-text-secondary">
+                  {industry.label}
+                </span>
+              </a>
+            </ScrollReveal>
           ))}
         </div>
       </Section>
@@ -235,7 +240,7 @@ export default function HomePage() {
           </Button>
         </div>
       </Section> */}
-      <TestimonialSection/>
+      <TestimonialSection />
 
       {/* Technology Partners Carousel */}
       <TrustedBySection title={t("partners.label")} logos={t.raw("partners.logos")} cta={t("partners.viewAll")} />
@@ -278,21 +283,25 @@ export default function HomePage() {
           ))}
         </div>
       </Section> */}
-      <GlobalPresenceSection/>
-      
+      <GlobalPresenceSection />
+
       {/* Final CTA */}
       <Section className="text-center">
-        <SectionTitle className="mx-auto">
-          {t("finalCta.title")}
-          <span className="text-text-main">{t("finalCta.titleAccent")}</span>
-        </SectionTitle>
-        <p className="text-text-secondary mt-4 mb-10 text-base max-w-2xl mx-auto">
-          {t("finalCta.description")}
-        </p>
-        <Button variant="fill" size="lg" onClick={() => setIsModalOpen(true)}
-        >
-          {t("finalCta.cta")}
-        </Button>
+        <AnimatedHeading
+          titleText={t("finalCta.title")}
+          accentText={t("finalCta.titleAccent")}
+          className="mb-4"
+          Component={SectionTitle}
+        />
+        <ScrollReveal animation="fadeUp" delay={0.2}>
+          <p className="text-text-secondary mt-4 mb-10 text-base max-w-2xl mx-auto">
+            {t("finalCta.description")}
+          </p>
+          <Button variant="fill" size="lg" onClick={() => setIsModalOpen(true)}
+          >
+            {t("finalCta.cta")}
+          </Button>
+        </ScrollReveal>
       </Section>
 
       <style jsx>{`

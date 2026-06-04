@@ -44,17 +44,6 @@ export default function PAMPage() {
             className="mb-4"
             Component={SectionTitle}
           />
-          <SectionDescription>{t("description")}</SectionDescription>
-          <ScrollReveal delay={0}>
-            <SectionLabel>{t("label")}</SectionLabel>
-          </ScrollReveal>
-
-          <ScrollReveal animation="blur" delay={0.1}>
-            <SectionTitle className="mb-4">
-              {t("title")}
-              <span className="text-text-main">{t("titleAccent")}</span>
-            </SectionTitle>
-          </ScrollReveal>
 
           <ScrollReveal animation="blur" delay={0.1}>
             <SectionDescription>{t("description")}</SectionDescription>

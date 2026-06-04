@@ -133,10 +133,9 @@ const home = {
     viewAll: "View All Partners →",
   },
   globalPresence: {
-    eyebrow: "06 / FOOTPRINT",
+    eyebrow: "FOOTPRINT",
     title1: "Five countries.",
-    title2: "One accountable",
-    title3: "partner.",
+    title2: "One accountable partner.",
     description:
       "Engineers in your time zone. SOC analysts in your jurisdiction. Contracts that recognize your regulator. Founded 2010 · independent · privately held.",
     offices: [
