@@ -13,6 +13,7 @@ import {
   Button,
 } from "../components/ui";
 import { Clock, Search, MapIcon } from "lucide-react";
+import { AnimatedHeading } from "../components/animations/textBehavior";
 
 export default function AssessmentPage() {
   const t = useTranslations("assessment");
@@ -33,10 +34,12 @@ export default function AssessmentPage() {
             {/* Left Side - Info */}
             <div>
               <SectionLabel>{t("label")}</SectionLabel>
-              <SectionTitle className="mb-4">
-                {t("title")}
-                <span className="text-text-main">{t("titleAccent")}</span>
-              </SectionTitle>
+              <AnimatedHeading
+                titleText={t("title")}
+                accentText={t("titleAccent")}
+                className="mb-4"
+                Component={SectionTitle}
+              />
               <SectionDescription className="mb-8">
                 {t("description")}
               </SectionDescription>

@@ -3,7 +3,8 @@
 import { useRef, useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { Trophy, Link2, ShieldCheck, MapPin } from "lucide-react";
-import { SectionLabel } from "./ui";
+import { SectionLabel, SectionTitle } from "./ui";
+import { AnimatedHeading } from "./animations/textBehavior";
 
 const ITEMS = [
   { key: "expertise", icon: Trophy },
@@ -44,13 +45,13 @@ export default function WhySamurai() {
       {/* Faint grid */}
       <div
         className="absolute inset-0 pointer-events-none"
-        // style={{
-        //   backgroundImage: `
-        //     linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
-        //     linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px)
-        //   `,
-        //   backgroundSize: "48px 48px",
-        // }}
+      // style={{
+      //   backgroundImage: `
+      //     linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
+      //     linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px)
+      //   `,
+      //   backgroundSize: "48px 48px",
+      // }}
       />
 
       {/* Subtle center glow */}
@@ -75,13 +76,12 @@ export default function WhySamurai() {
 
 
         {/* Title */}
-        <h2
-          ref={addRef(1)}
-          className="font-space-grotesk font-extrabold leading-tight tracking-[-0.03em] text-white mb-16 opacity-0 translate-y-7 transition-all duration-700 delay-100 text-4xl md:text-5xl lg:text-[3.2rem]"
-        >
-          {t("title")}
-          <span className="text-[#E11D48]">{t("titleAccent")}</span>
-        </h2>
+        <AnimatedHeading
+          titleText={t("title")}
+          accentText={t("titleAccent")}
+          className="mb-4"
+          Component={SectionTitle}
+        />
 
         {/* Cards — 2×2 grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">

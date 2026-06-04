@@ -13,6 +13,7 @@ import {
   Badge,
   Testimonial,
 } from "../components/ui";
+import { AnimatedHeading } from "../components/animations/textBehavior";
 
 export default function CaseStudiesPage() {
   const t = useTranslations("caseStudies");
@@ -33,10 +34,12 @@ export default function CaseStudiesPage() {
 
         <Section>
           <SectionLabel>{t("label")}</SectionLabel>
-          <SectionTitle className="mb-4">
-            {t("title")}
-            <span className="text-text-main">{t("titleAccent")}</span>
-          </SectionTitle>
+          <AnimatedHeading
+                      titleText={t("title")}
+                      accentText={t("titleAccent")}
+                      className="mb-4"
+                      Component={SectionTitle}
+                    />
           <SectionDescription>{t("description")}</SectionDescription>
 
           {/* Filters */}

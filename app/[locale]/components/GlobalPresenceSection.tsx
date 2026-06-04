@@ -1,7 +1,9 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { SectionLabel } from "./ui";
+import { SectionLabel, SectionTitle } from "./ui";
+import { AnimatedHeading } from "./animations/textBehavior";
+import ScrollReveal from "./animations/ScrollReveal";
 // import { useInViewTrigger } from "@/hooks/useInViewTrigger";
 // import { useTypingEffect } from "@/hooks/useTypingEffect";
 // import ScrollReveal from "./animations/ScrollReveal";
@@ -137,7 +139,6 @@ export default function GlobalPresenceSection() {
 
   // const { ref, isInView } = useInViewTrigger();
 
-  const fullTitle = `${t("title1")} ${t("title2")}`;
 
   //   const { displayed: typedText, showCursor } = useTypingEffect(
   //   fullTitle,
@@ -158,26 +159,29 @@ export default function GlobalPresenceSection() {
 
         {/* Hero text */}
         <div className="flex gap-26 mb-12">
-          <h2 className="font-space-grotesk text-5xl text-[#f4f1ea] font-medium md:text-[76px] leading-[1.05]">
-            {fullTitle}
-          </h2>
-          {/* <ScrollReveal delay={0.2}> */}
+          <AnimatedHeading
+            titleText={t("title1")}
+            accentText={t("title2")}
+            className="mb-4"
+            Component={SectionTitle}
+          />
           <p className="text-[#a8a59c] text-[17px] leading-relaxed self-end max-w-md">
             {t("description")}
           </p>
-          {/* </ScrollReveal> */}
         </div>
 
         {/* Map + list */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
           {/* Map card */}
+          <ScrollReveal animation="fadeUp" delay={0.5}>
           <div className="rounded-xl border border-white/10 bg-[#111] p-4 aspect-square">
             <FootprintMap />
           </div>
-
+          </ScrollReveal>
           {/* Office list */}
           <div className="flex flex-col divide-y divide-white/10 self-center">
             {offices.map((o) => (
+              <ScrollReveal animation="fadeUp" delay={0.5}>
               <div key={o.num} className="flex items-start gap-6 py-5">
                 <span className="font-jetbrains-mono text-[11px] text-white/25 pt-1 w-5 shrink-0">
                   {o.num}
@@ -203,6 +207,7 @@ export default function GlobalPresenceSection() {
                   {o.role}
                 </p>
               </div>
+              </ScrollReveal>
             ))}
           </div>
         </div>

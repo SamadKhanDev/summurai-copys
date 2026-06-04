@@ -15,6 +15,7 @@ import {
   Badge,
 } from "../components/ui";
 import { Target, Handshake, Shield, Globe as GlobeIcon } from "lucide-react";
+import { AnimatedHeading } from "../components/animations/textBehavior";
 
 export default function AboutPage() {
   const t = useTranslations("about");
@@ -32,10 +33,12 @@ export default function AboutPage() {
 
         <Section>
           <SectionLabel>{t("label")}</SectionLabel>
-          <SectionTitle>
-            {t("title")}
-            <span className="text-text-main">{t("titleAccent")}</span>
-          </SectionTitle>
+          <AnimatedHeading
+            titleText={t("title")}
+            accentText={t("titleAccent")}
+            className="mb-4"
+            Component={SectionTitle}
+          />
           <SectionDescription>{t("description")}</SectionDescription>
 
           {/* Mission Callout */}

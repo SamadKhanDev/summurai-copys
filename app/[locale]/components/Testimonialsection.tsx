@@ -3,6 +3,7 @@
 import { useRef, useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { SectionLabel } from "./ui";
+import ScrollReveal from "./animations/ScrollReveal";
 
 export default function TestimonialSection() {
   const t = useTranslations("home.testimonial");
@@ -73,64 +74,68 @@ export default function TestimonialSection() {
 
 
         {/* Quote card */}
-        <article
-          ref={ref}
-          className="relative w-full rounded-2xl px-10 py-12 md:px-16 md:py-14 opacity-0 translate-y-7 transition-all duration-700"
-          style={{
-            background: "rgba(255,255,255,0.02)",
-            border: "1px solid rgba(255,255,255,0.07)",
-          }}
-        >
-          {/* Top shimmer line */}
-          <div
-            className="absolute top-0 left-12 right-12 h-px pointer-events-none"
+        <ScrollReveal delay={0} animation="blur">
+
+          <article
+            ref={ref}
+            className="relative w-full rounded-2xl px-10 py-12 md:px-16 md:py-14 opacity-0 translate-y-7 transition-all duration-700"
             style={{
-              background:
-                "linear-gradient(90deg, transparent, rgba(225,29,72,0.5), transparent)",
+              background: "rgba(255,255,255,0.02)",
+              border: "1px solid rgba(255,255,255,0.07)",
             }}
-          />
-
-          {/* Large decorative quote mark */}
-          <div
-            className="absolute top-8 left-10 font-space-grotesk font-extrabold leading-none select-none pointer-events-none"
-            style={{
-              fontSize: "7rem",
-              lineHeight: 1,
-              color: "rgba(225,29,72,0.12)",
-            }}
-            aria-hidden
           >
-            "
-          </div>
+            {/* Top shimmer line */}
+            <div
+              className="absolute top-0 left-12 right-12 h-px pointer-events-none"
+              style={{
+                background:
+                  "linear-gradient(90deg, transparent, rgba(225,29,72,0.5), transparent)",
+              }}
+            />
 
-          {/* Quote text */}
-          <blockquote
-            className="relative z-10 font-space-grotesk font-bold leading-[1.55] tracking-[-0.01em] text-white mb-10 text-xl md:text-2xl lg:text-[1.65rem]"
-          >
-            {t("quote")}
-          </blockquote>
-
-          {/* Divider */}
-          <div
-            className="w-12 h-px mx-auto mb-8"
-            style={{ background: "rgba(225,29,72,0.4)" }}
-          />
-
-          {/* Author */}
-          <div className="flex flex-col items-center gap-1">
-            <span
-              className="font-space-grotesk font-bold text-[0.75rem] tracking-[0.15em] uppercase text-white"
+            {/* Large decorative quote mark */}
+            <div
+              className="absolute top-8 left-10 font-space-grotesk font-extrabold leading-none select-none pointer-events-none"
+              style={{
+                fontSize: "7rem",
+                lineHeight: 1,
+                color: "rgba(225,29,72,0.12)",
+              }}
+              aria-hidden
             >
-              {t("author")}
-            </span>
-            <span
-              className="text-[0.7rem] tracking-[0.08em] font-space-grotesk"
-              style={{ color: "rgba(148,163,184,0.5)" }}
+              "
+            </div>
+
+            {/* Quote text */}
+            <blockquote
+              className="relative z-10 font-space-grotesk font-bold leading-[1.55] tracking-[-0.01em] text-white mb-10 text-xl md:text-2xl lg:text-[1.65rem]"
             >
-              Saudi Financial Institution
-            </span>
-          </div>
-        </article>
+              {t("quote")}
+            </blockquote>
+
+            {/* Divider */}
+            <div
+              className="w-12 h-px mx-auto mb-8"
+              style={{ background: "rgba(225,29,72,0.4)" }}
+            />
+
+            {/* Author */}
+            <div className="flex flex-col items-center gap-1">
+              <span
+                className="font-space-grotesk font-bold text-[0.75rem] tracking-[0.15em] uppercase text-white"
+              >
+                {t("author")}
+              </span>
+              <span
+                className="text-[0.7rem] tracking-[0.08em] font-space-grotesk"
+                style={{ color: "rgba(148,163,184,0.5)" }}
+              >
+                Saudi Financial Institution
+              </span>
+            </div>
+          </article>
+        </ScrollReveal>
+
 
         {/* CTA */}
         {/* <a

@@ -17,6 +17,8 @@ import {
 } from "../components/ui";
 import { Shield, Cloud, Scale, RefreshCw, Bot, Settings, Server } from "lucide-react";
 import { Pathnames } from "@/i18n/routing";
+import { AnimatedHeading } from "../components/animations/textBehavior";
+import ScrollReveal from "../components/animations/ScrollReveal";
 
 export default function ServicesPage() {
   const t = useTranslations("services");
@@ -80,39 +82,44 @@ export default function ServicesPage() {
         <div className="bg-background-secondary py-20 px-8">
           <div className="max-w-7xl mx-auto">
             <SectionLabel>{t("hero.label")}</SectionLabel>
-            <SectionTitle className="mb-4">
-              {t("hero.title")}
-              <span className="text-text-main">{t("hero.titleAccent")}</span>
-            </SectionTitle>
-            <SectionDescription>{t("hero.description")}</SectionDescription>
+            <AnimatedHeading
+              titleText={t("hero.title")}
+              accentText={t("hero.titleAccent")}
+              className="mb-4"
+              Component={SectionTitle}
+            />
+            <ScrollReveal animation="fadeUp" delay={0.2}>
+              <SectionDescription>{t("hero.description")}</SectionDescription>
+            </ScrollReveal>
           </div>
         </div>
 
         <Section>
           <div className="space-y-6">
             {services.map((service) => (
-              <div
-                key={service.key}
-                className="bg-card-bg border border-card-border rounded-xl p-8 hover:border-accent/40 transition-all"
-              >
-                <div className="flex items-start gap-4 mb-4">
-                  <service.icon className="w-8 h-8 text-text-main flex-shrink-0" />
-                  <div className="flex-1">
-                    <h2 className="text-xl font-bold text-white mb-3">
-                      {t(`${service.key}.breadcrumb`)}
-                    </h2>
-                    <p className="text-sm text-text-secondary mb-4">
-                      {t(`${service.key}.description`)}
-                    </p>
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      {service.tags.map((tag, index) => (
-                        <Tag key={index}>{tag}</Tag>
-                      ))}
+              <ScrollReveal key={service.key} animation="fadeUp" delay={0.5}>
+                <div
+                  className="bg-card-bg border border-card-border rounded-xl p-8 hover:border-accent/40 transition-all"
+                >
+                  <div className="flex items-start gap-4 mb-4">
+                    <service.icon className="w-8 h-8 text-text-main flex-shrink-0" />
+                    <div className="flex-1">
+                      <h2 className="text-xl font-bold text-white mb-3">
+                        {t(`${service.key}.breadcrumb`)}
+                      </h2>
+                      <p className="text-sm text-text-secondary mb-4">
+                        {t(`${service.key}.description`)}
+                      </p>
+                      <div className="flex flex-wrap gap-2 mb-4">
+                        {service.tags.map((tag, index) => (
+                          <Tag key={index}>{tag}</Tag>
+                        ))}
+                      </div>
+                      <CardLink href={service.href as Pathnames}>Explore →</CardLink>
                     </div>
-                    <CardLink href={service.href as Pathnames}>Explore →</CardLink>
                   </div>
                 </div>
-              </div>
+              </ScrollReveal>
             ))}
           </div>
         </Section>

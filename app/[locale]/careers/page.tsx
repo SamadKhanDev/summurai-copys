@@ -13,6 +13,7 @@ import {
   Button,
 } from "../components/ui";
 import { Globe, Rocket, TrendingUp } from "lucide-react";
+import { AnimatedHeading } from "../components/animations/textBehavior";
 
 export default function CareersPage() {
   const t = useTranslations("careers");
@@ -30,10 +31,12 @@ export default function CareersPage() {
 
         <Section>
           <SectionLabel>{t("label")}</SectionLabel>
-          <SectionTitle className="mb-4">
-            {t("title")}
-            <span className="text-text-main">{t("titleAccent")}</span>
-          </SectionTitle>
+          <AnimatedHeading
+            titleText={t("title")}
+            accentText={t("titleAccent")}
+            className="mb-4"
+            Component={SectionTitle}
+          />
           <SectionDescription>{t("description")}</SectionDescription>
 
           {/* No Openings Notice */}
