@@ -149,12 +149,12 @@ export default function Footer() {
               >
                 {t("legal.cookies")}
               </Link>
-              <Link
-                href="/contact"
-                className="block text-sm text-text-secondary hover:text-text-main transition-colors"
+              <button
+                onClick={() => window.dispatchEvent(new Event("open-contact-modal"))}
+                className="block text-sm text-text-secondary hover:text-text-main transition-colors cursor-pointer bg-transparent border-none text-left p-0"
               >
                 Contact
-              </Link>
+              </button>
             </div>
           </div>
         </div>
@@ -187,17 +187,6 @@ export default function Footer() {
           </div>
         </div>
       </div>
-
-      {/* WhatsApp Widget */}
-      <a
-        href={`https://wa.me/${t("brand.phone").replace(/\s/g, "")}`}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="fixed bottom-8 right-8 w-14 h-14 bg-[#25d366] text-white rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform z-50"
-        aria-label={t("whatsapp.title")}
-      >
-        <span className="text-2xl">💬</span>
-      </a>
     </footer>
   );
 }

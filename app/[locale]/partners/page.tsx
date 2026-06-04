@@ -53,7 +53,7 @@ export default function PartnersPage() {
               title={t("callout.title")}
               description={t("callout.description")}
               ctaText={t("callout.cta")}
-              ctaHref="/contact"
+              onCtaClick={() => window.dispatchEvent(new Event("open-contact-modal"))}
             />
           </div>
         </Section>

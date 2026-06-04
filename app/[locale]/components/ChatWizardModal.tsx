@@ -7,6 +7,7 @@ interface ChatModalProps {
     isOpen: boolean;
     onClose: () => void;
     defaultService?: string; // Pre-selection tracker context prop
+    mode?: "default" | "contact";
 }
 
 interface Message {
@@ -16,19 +17,12 @@ interface Message {
     isCustomForm?: boolean;
 }
 
-export default function ChatWizardModal({ isOpen, onClose, defaultService }: ChatModalProps) {
+export default function ChatWizardModal({ isOpen, onClose, defaultService, mode = "default" }: ChatModalProps) {
     const [shouldRender, setShouldRender] = useState(false);
     const [animateClass, setAnimateClass] = useState(false);
     const [step, setStep] = useState<number>(1);
 
-    const [messages, setMessages] = useState<Message[]>([
-        {
-            id: "init",
-            sender: "bot",
-            text: "Hi there! Welcome. Which service area are you exploring? You can select multiple options:",
-            isCustomForm: true
-        },
-    ]);
+    const [messages, setMessages] = useState<Message[]>([]);
 
     const [isBotTyping, setIsBotTyping] = useState<boolean>(false);
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
@@ -67,15 +61,27 @@ export default function ChatWizardModal({ isOpen, onClose, defaultService }: Cha
         "Other"
     ];
 
-    // Pre-selection validation logic block trigger
-    useEffect(() => {
-        if (isOpen && defaultService && SERVICE_OPTIONS.includes(defaultService)) {
-            setSelectedServices([defaultService]);
-        }
-    }, [isOpen, defaultService]);
-
+    // Reset and initialize chatbot wizard state when modal opens
     useEffect(() => {
         if (isOpen) {
+            setStep(1);
+            setSelectedServices(
+                defaultService && SERVICE_OPTIONS.includes(defaultService) ? [defaultService] : []
+            );
+            setCustomServiceText("");
+            setSelectedSlot("");
+            setCustomSlotText("");
+            setChatFields({ name: "", email: "", phone: "", company: "", role: "" });
+            setMessages([
+                {
+                    id: "init",
+                    sender: "bot",
+                    text: mode === "contact"
+                        ? "Hi there! Welcome. Please provide your full name, work email, and phone number:"
+                        : "Welcome! We've pre-selected the area based on your current page. Feel free to add more options:",
+                    isCustomForm: true
+                }
+            ]);
             setShouldRender(true);
             const timer = setTimeout(() => setAnimateClass(true), 10);
             return () => clearTimeout(timer);
@@ -84,7 +90,7 @@ export default function ChatWizardModal({ isOpen, onClose, defaultService }: Cha
             const timer = setTimeout(() => setShouldRender(false), 300);
             return () => clearTimeout(timer);
         }
-    }, [isOpen]);
+    }, [isOpen, mode, defaultService]);
 
     useEffect(() => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -102,113 +108,20 @@ export default function ChatWizardModal({ isOpen, onClose, defaultService }: Cha
         );
     };
 
-    // Step 1: Handle Checkbox Selection Form Submission
-    const handleFormSubmitStep1 = (e: React.FormEvent) => {
-        e.preventDefault();
-        if (selectedServices.length === 0) return;
-        if (selectedServices.includes("Other") && !customServiceText.trim()) return;
-
-        const finalServices = selectedServices.map(s =>
-            s === "Other" ? `Other (${customServiceText.trim()})` : s
-        );
-
-        setMessages((prev) => [
-            ...prev,
-            { id: `user-${Date.now()}`, sender: "user", text: `Exploring: ${finalServices.join(", ")}` }
-        ]);
-        setIsBotTyping(true);
-
-        setTimeout(() => {
-            setIsBotTyping(false);
-            setMessages((prev) => [
-                ...prev,
-                {
-                    id: `bot-${Date.now()}`,
-                    sender: "bot",
-                    text: "Perfect! Please provide your full name, work email, and an optional phone number:",
-                    isCustomForm: true
-                },
-            ]);
-            setStep(2);
-        }, 1500);
-    };
-
-    // Step 2: Contact Info Handler
-    const handleFormSubmitStep2 = (e: React.FormEvent) => {
-        e.preventDefault();
-        if (!chatFields.name.trim() || !isValidEmail(chatFields.email)) return;
-
-        const userText = chatFields.phone.trim()
-            ? `${chatFields.name} (${chatFields.email}) — Phone: ${chatFields.phone}`
-            : `${chatFields.name} (${chatFields.email})`;
-
-        setMessages((prev) => [...prev, { id: `user-${Date.now()}`, sender: "user", text: userText }]);
-        setIsBotTyping(true);
-
-        setTimeout(() => {
-            setIsBotTyping(false);
-            setMessages((prev) => [
-                ...prev,
-                {
-                    id: `bot-${Date.now()}`,
-                    sender: "bot",
-                    text: `Great to meet you, ${chatFields.name}! What’s the name of your organization/company and your current role?`,
-                    isCustomForm: true
-                },
-            ]);
-            setStep(3);
-        }, 1500);
-    };
-
-    // Step 3: Company & Role Handler
-    const handleFormSubmitStep3 = (e: React.FormEvent) => {
-        e.preventDefault();
-        if (!chatFields.company.trim() || !chatFields.role.trim()) return;
-
-        const userText = `${chatFields.company} — ${chatFields.role}`;
-        setMessages((prev) => [...prev, { id: `user-${Date.now()}`, sender: "user", text: userText }]);
-        setIsBotTyping(true);
-
-        setTimeout(() => {
-            setIsBotTyping(false);
-            setMessages((prev) => [
-                ...prev,
-                {
-                    id: `bot-${Date.now()}`,
-                    sender: "bot",
-                    text: "Understood. Lastly, what is your preferred briefing slot?",
-                    isCustomForm: true
-                },
-            ]);
-            setStep(4);
-        }, 1500);
-    };
-
-    // Step 4: Radio Button Selection & API Data Dispatch
-    const handleFormSubmitStep4 = async (e: React.FormEvent) => {
-        e.preventDefault();
-        if (!selectedSlot || isSubmitting) return;
-        if (selectedSlot === "Other" && !customSlotText.trim()) return;
-
-        const finalSlotValue = selectedSlot === "Other" ? `Other (${customSlotText.trim()})` : selectedSlot;
-        const finalServicesValue = selectedServices.map(s =>
-            s === "Other" ? `Other (${customServiceText.trim()})` : s
-        ).join(", ");
-
-        setMessages((prev) => [...prev, { id: `user-${Date.now()}`, sender: "user", text: `Preferred Slot: ${finalSlotValue}` }]);
+    // Helper to send registration data to the Zoho CRM API endpoint
+    const dispatchToZoho = async (slotValue: string, servicesValue: string) => {
         setIsSubmitting(true);
         setIsBotTyping(true);
 
         try {
-            // Clean dynamic payload routing architecture execution block
             const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
             await axios.post(`${basePath}/api/zoho`, {
                 name: chatFields.name,
                 email: chatFields.email,
                 phone: chatFields.phone || "Not Provided",
                 company: chatFields.company,
-                preferredSolutions: finalServicesValue,
-                selectedSlot: finalSlotValue,
+                preferredSolutions: servicesValue,
+                selectedSlot: slotValue,
                 title: "Data coming from web",
                 leadDetails: "Data coming from web"
             });
@@ -239,6 +152,131 @@ export default function ChatWizardModal({ isOpen, onClose, defaultService }: Cha
         }
     };
 
+    // Handle Checkbox Selection Form Submission
+    const submitServicesForm = async (e: React.FormEvent) => {
+        e.preventDefault();
+        if (selectedServices.length === 0) return;
+        if (selectedServices.includes("Other") && !customServiceText.trim()) return;
+
+        const finalServices = selectedServices.map(s =>
+            s === "Other" ? `Other (${customServiceText.trim()})` : s
+        );
+
+        setMessages((prev) => [
+            ...prev,
+            { id: `user-${Date.now()}`, sender: "user", text: `Exploring: ${finalServices.join(", ")}` }
+        ]);
+
+        setIsBotTyping(true);
+        setTimeout(() => {
+            setIsBotTyping(false);
+            if (mode === "contact") {
+                setMessages((prev) => [
+                    ...prev,
+                    {
+                        id: `bot-${Date.now()}`,
+                        sender: "bot",
+                        text: "Understood. What is your preferred briefing slot?",
+                        isCustomForm: true
+                    },
+                ]);
+                setStep(4);
+            } else {
+                setMessages((prev) => [
+                    ...prev,
+                    {
+                        id: `bot-${Date.now()}`,
+                        sender: "bot",
+                        text: "Perfect! Please provide your full name, work email, and an optional phone number:",
+                        isCustomForm: true
+                    },
+                ]);
+                setStep(2);
+            }
+        }, 1500);
+    };
+
+    // Contact Info Handler
+    const submitContactInfoForm = (e: React.FormEvent) => {
+        e.preventDefault();
+        if (!chatFields.name.trim() || !isValidEmail(chatFields.email)) return;
+
+        const userText = chatFields.phone.trim()
+            ? `${chatFields.name} (${chatFields.email}) — Phone: ${chatFields.phone}`
+            : `${chatFields.name} (${chatFields.email})`;
+
+        setMessages((prev) => [...prev, { id: `user-${Date.now()}`, sender: "user", text: userText }]);
+        setIsBotTyping(true);
+
+        setTimeout(() => {
+            setIsBotTyping(false);
+            setMessages((prev) => [
+                ...prev,
+                {
+                    id: `bot-${Date.now()}`,
+                    sender: "bot",
+                    text: `Great to meet you, ${chatFields.name}! What’s the name of your organization/company and your current role?`,
+                    isCustomForm: true
+                },
+            ]);
+            setStep(mode === "contact" ? 2 : 3);
+        }, 1500);
+    };
+
+    // Company & Role Handler
+    const submitCompanyIdentityForm = (e: React.FormEvent) => {
+        e.preventDefault();
+        if (!chatFields.company.trim() || !chatFields.role.trim()) return;
+
+        const userText = `${chatFields.company} — ${chatFields.role}`;
+        setMessages((prev) => [...prev, { id: `user-${Date.now()}`, sender: "user", text: userText }]);
+        setIsBotTyping(true);
+
+        setTimeout(() => {
+            setIsBotTyping(false);
+            if (mode === "contact") {
+                setMessages((prev) => [
+                    ...prev,
+                    {
+                        id: `bot-${Date.now()}`,
+                        sender: "bot",
+                        text: "Which service areas are you exploring today? You can select multiple options:",
+                        isCustomForm: true
+                    },
+                ]);
+                setStep(3);
+            } else {
+                setMessages((prev) => [
+                    ...prev,
+                    {
+                        id: `bot-${Date.now()}`,
+                        sender: "bot",
+                        text: "Understood. Lastly, what is your preferred briefing slot?",
+                        isCustomForm: true
+                    },
+                ]);
+                setStep(4);
+            }
+        }, 1500);
+    };
+
+    // Radio Button Selection Form Submission
+    const submitBriefingSlotsForm = async (e: React.FormEvent) => {
+        e.preventDefault();
+        if (!selectedSlot || isSubmitting) return;
+        if (selectedSlot === "Other" && !customSlotText.trim()) return;
+
+        const finalSlotValue = selectedSlot === "Other" ? `Other (${customSlotText.trim()})` : selectedSlot;
+
+        setMessages((prev) => [...prev, { id: `user-${Date.now()}`, sender: "user", text: `Preferred Slot: ${finalSlotValue}` }]);
+
+        const finalServicesValue = selectedServices.map(s =>
+            s === "Other" ? `Other (${customServiceText.trim()})` : s
+        ).join(", ");
+
+        await dispatchToZoho(finalSlotValue, finalServicesValue);
+    };
+
     const handleBackClick = () => {
         if (step > 1 && step <= 4) {
             setStep((prev) => prev - 1);
@@ -259,7 +297,9 @@ export default function ChatWizardModal({ isOpen, onClose, defaultService }: Cha
                 {
                     id: "init",
                     sender: "bot",
-                    text: "Hi there! Welcome. Which service area are you exploring? You can select multiple options:",
+                    text: mode === "contact"
+                        ? "Hi there! Welcome. Please provide your full name, work email, and phone number:"
+                        : "Welcome! We've pre-selected the area based on your current page. Feel free to add more options:",
                     isCustomForm: true
                 },
             ]);
@@ -306,9 +346,9 @@ export default function ChatWizardModal({ isOpen, onClose, defaultService }: Cha
                             {msg.isCustomForm && msg.sender === "bot" && (
                                 <div className="pl-14 max-w-[85%] animate-messageEnter">
 
-                                    {/* Step 1 Form Layout: Services Checkboxes */}
-                                    {step === 1 && index === 0 && (
-                                        <form onSubmit={handleFormSubmitStep1} className="bg-[#141519] border border-white/5 p-6 rounded-2xl space-y-4">
+                                    {/* Services Checkboxes Form */}
+                                    {((mode !== "contact" && step === 1 && index === 0) || (mode === "contact" && step === 3 && index === 4)) && (
+                                        <form onSubmit={submitServicesForm} className="bg-[#141519] border border-white/5 p-6 rounded-2xl space-y-4">
                                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                                                 {SERVICE_OPTIONS.map((service) => (
                                                     <label key={service} className="flex items-center gap-3 cursor-pointer select-none text-white/70 hover:text-white">
@@ -338,9 +378,9 @@ export default function ChatWizardModal({ isOpen, onClose, defaultService }: Cha
                                         </form>
                                     )}
 
-                                    {/* Step 2 Form Layout: Contact Information */}
-                                    {step === 2 && index === 2 && (
-                                        <form onSubmit={handleFormSubmitStep2} className="bg-[#141519] border border-white/5 p-6 rounded-2xl space-y-4">
+                                    {/* Contact Information Form */}
+                                    {((mode !== "contact" && step === 2 && index === 2) || (mode === "contact" && step === 1 && index === 0)) && (
+                                        <form onSubmit={submitContactInfoForm} className="bg-[#141519] border border-white/5 p-6 rounded-2xl space-y-4">
                                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                                 <div className="flex flex-col gap-1">
                                                     <label className="text-[0.7rem] tracking-widest text-white/40 uppercase">Full Name</label>
@@ -353,7 +393,7 @@ export default function ChatWizardModal({ isOpen, onClose, defaultService }: Cha
                                             </div>
                                             <div className="flex flex-col gap-1">
                                                 <label className="text-[0.7rem] tracking-widest text-white/40 uppercase">Phone Number <span className="lowercase text-white/20">(optional)</span></label>
-                                                <input type="tel" value={chatFields.phone} onChange={(e) => setChatFields({ ...chatFields, phone: e.target.value })} placeholder="e.g. +966 50 123 4567" className="bg-transparent border-b border-white/10 py-1.5 text-white focus:outline-none focus:border-[#E11D48]" />
+                                                <input type="tel" value={chatFields.phone} onChange={(e) => setChatFields({ ...chatFields, phone: e.target.value.replace(/[^0-9+\s-]/g, "") })} placeholder="e.g. +966 50 123 4567" className="bg-transparent border-b border-white/10 py-1.5 text-white focus:outline-none focus:border-[#E11D48]" />
                                             </div>
                                             <button type="submit" disabled={!chatFields.name.trim() || !isValidEmail(chatFields.email)} className="bg-[#E11D48] text-white font-medium text-xs uppercase tracking-wider px-5 py-2.5 rounded-xl">
                                                 Proceed Next →
@@ -361,9 +401,9 @@ export default function ChatWizardModal({ isOpen, onClose, defaultService }: Cha
                                         </form>
                                     )}
 
-                                    {/* Step 3 Form Layout: Company Identity */}
-                                    {step === 3 && index === 4 && (
-                                        <form onSubmit={handleFormSubmitStep3} className="bg-[#141519] border border-white/5 p-6 rounded-2xl space-y-4">
+                                    {/* Company Identity Form */}
+                                    {((mode !== "contact" && step === 3 && index === 4) || (mode === "contact" && step === 2 && index === 2)) && (
+                                        <form onSubmit={submitCompanyIdentityForm} className="bg-[#141519] border border-white/5 p-6 rounded-2xl space-y-4">
                                             <div className="flex flex-col gap-1">
                                                 <label className="text-[0.7rem] tracking-widest text-white/40 uppercase">Organization Name</label>
                                                 <input type="text" required value={chatFields.company} onChange={(e) => setChatFields({ ...chatFields, company: e.target.value })} placeholder="e.g. Samurai" className="bg-transparent border-b border-white/10 py-1.5 text-white focus:outline-none focus:border-[#E11D48]" />
@@ -378,9 +418,9 @@ export default function ChatWizardModal({ isOpen, onClose, defaultService }: Cha
                                         </form>
                                     )}
 
-                                    {/* Step 4 Form Layout: Briefing Time Slots Radios */}
-                                    {step === 4 && index === 6 && (
-                                        <form onSubmit={handleFormSubmitStep4} className="bg-[#141519] border border-white/5 p-6 rounded-2xl space-y-4">
+                                    {/* Briefing Time Slots Radios Form */}
+                                    {(step === 4 && index === 6) && (
+                                        <form onSubmit={submitBriefingSlotsForm} className="bg-[#141519] border border-white/5 p-6 rounded-2xl space-y-4">
                                             <div className="flex flex-col gap-3">
                                                 {SLOT_OPTIONS.map((slot) => (
                                                     <label key={slot} className="flex items-center gap-3 cursor-pointer select-none text-white/70 hover:text-white">
