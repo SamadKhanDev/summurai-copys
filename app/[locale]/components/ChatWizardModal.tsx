@@ -50,6 +50,7 @@ export default function ChatWizardModal({ isOpen, onClose, defaultService, mode 
         "Digital Transformation", // From image_dabaff.png
         "Business Continuity", // From image_dabaff.png
         "AI & Automation", // From image_dabaff.png
+        "Cloud & Infrastructure", // From image_dabaff.png
         "Other"
     ];
 
