@@ -18,6 +18,7 @@ interface Message {
 }
 
 export default function ChatWizardModal({ isOpen, onClose, defaultService, mode = "default" }: ChatModalProps) {
+    const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
     const [shouldRender, setShouldRender] = useState(false);
     const [animateClass, setAnimateClass] = useState(false);
     const [step, setStep] = useState<number>(1);
@@ -50,7 +51,6 @@ export default function ChatWizardModal({ isOpen, onClose, defaultService, mode 
         "Digital Transformation", // From image_dabaff.png
         "Business Continuity", // From image_dabaff.png
         "AI & Automation", // From image_dabaff.png
-        "Cloud & Infrastructure", // From image_dabaff.png
         "Other"
     ];
 
@@ -115,7 +115,6 @@ export default function ChatWizardModal({ isOpen, onClose, defaultService, mode 
         setIsBotTyping(true);
 
         try {
-            const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
             await axios.post(`${basePath}/api/zoho`, {
                 name: chatFields.name,
                 email: chatFields.email,
@@ -311,8 +310,18 @@ export default function ChatWizardModal({ isOpen, onClose, defaultService, mode 
         <div className={`fixed inset-0 z-[9999] flex items-center justify-center p-4 transition-all duration-300 ease-out ${animateClass ? "bg-black/85 backdrop-blur-md opacity-100" : "bg-black/0 backdrop-blur-none opacity-0"}`}>
             <div className={`w-full max-w-[920px] bg-[#0E0F12] border border-white/5 rounded-[2.5rem] p-10 relative flex flex-col justify-between h-[640px] shadow-2xl overflow-hidden transition-all duration-300 ease-out ${animateClass ? "opacity-100 scale-100 translate-y-0" : "opacity-0 scale-95 translate-y-4"}`}>
 
+                {/* Background Favicon Icon */}
+                <div className="absolute -right-20 top-1/2 -translate-y-1/2 w-[360px] h-[360px] opacity-[0.3] pointer-events-none select-none z-0">
+                    <img
+                        src={`${basePath}/assets/logoUP.webp`}
+                        alt="Samurai Crest"
+                        className="w-full h-full object-cover object-left"
+                        style={{ filter: "grayscale(100%) sepia(100%) saturate(1000%) hue-rotate(320deg) brightness(85%)" }}
+                    />
+                </div>
+
                 {/* Top Actions Nav Header */}
-                <div className="flex items-center justify-between mb-4 flex-shrink-0">
+                <div className="flex items-center justify-between mb-4 flex-shrink-0 relative z-10">
                     {step > 1 && step < 5 ? (
                         <button onClick={handleBackClick} className="text-[#E11D48] hover:text-[#FF2E5B] cursor-pointer bg-transparent border-none">
                             <svg className="w-6 h-6 stroke-[3]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -329,13 +338,17 @@ export default function ChatWizardModal({ isOpen, onClose, defaultService, mode 
                 </div>
 
                 {/* Main Logs Feed Layout */}
-                <div className="flex-1 overflow-y-auto space-y-6 pr-2 mb-6 scrollbar-none">
+                <div className="flex-1 overflow-y-auto space-y-6 pr-2 mb-6 scrollbar-none relative z-10">
                     {messages.map((msg, index) => (
                         <div key={msg.id} className="space-y-4">
                             <div className={`flex items-start gap-4 ${msg.sender === "user" ? "justify-end" : "justify-start"}`}>
                                 {msg.sender === "bot" && (
-                                    <div className="w-11 h-11 rounded-full bg-[#15161A] border border-[#E11D48]/30 flex items-center justify-center flex-shrink-0">
-                                        <div className="w-2.5 h-2.5 rounded-full bg-[#E11D48]" />
+                                    <div className="w-11 h-11 rounded-full bg-[#15161A] border border-[#E11D48]/30 overflow-hidden flex items-center justify-center flex-shrink-0">
+                                        <img
+                                            src={`${basePath}/favicon.ico`}
+                                            alt="Samurai Favicon"
+                                            className="w-full h-full object-contain"
+                                        />
                                     </div>
                                 )}
                                 <div className={`px-6 py-4 rounded-[1.75rem] text-[1.02rem] max-w-[70%] shadow-xl ${msg.sender === "user" ? "bg-[#1B1C20] text-white/90 rounded-br-none" : "bg-white text-[#0E0F12] font-medium rounded-bl-none"}`}>
@@ -448,7 +461,13 @@ export default function ChatWizardModal({ isOpen, onClose, defaultService, mode 
 
                     {isBotTyping && (
                         <div className="flex items-start gap-4 justify-start animate-pulse">
-                            <div className="w-11 h-11 rounded-full bg-[#15161A] border border-[#E11D48]/30 flex items-center justify-center flex-shrink-0"><div className="w-2.5 h-2.5 rounded-full bg-[#E11D48]" /></div>
+                            <div className="w-11 h-11 rounded-full bg-[#15161A] border border-[#E11D48]/30 overflow-hidden flex items-center justify-center flex-shrink-0">
+                                <img
+                                    src={`${basePath}/favicon.ico`}
+                                    alt="Samurai Favicon"
+                                    className="w-full h-full object-contain p-[6px]"
+                                />
+                            </div>
                             <div className="bg-white text-black px-6 py-4 rounded-[1.75rem] rounded-bl-none flex items-center gap-1.5 justify-center min-w-[80px]">
                                 <span className="w-1.5 h-1.5 bg-black rounded-full animate-bounce [animation-delay:-0.3s]"></span>
                                 <span className="w-1.5 h-1.5 bg-black rounded-full animate-bounce [animation-delay:-0.15s]"></span>
@@ -460,7 +479,7 @@ export default function ChatWizardModal({ isOpen, onClose, defaultService, mode 
                 </div>
 
                 {/* Footer Finish Actions Wrapper */}
-                <div className="flex-shrink-0 pl-14 border-t border-white/5 pt-4">
+                <div className="flex-shrink-0 pl-14 border-t border-white/5 pt-4 relative z-10">
                     {step === 5 ? (
                         <div className="flex justify-start pt-2 opacity-0 scale-95 translate-y-2 animate-messageEnter">
                             <button onClick={handleFinish} className="bg-[#1C1D21] border border-white/5 text-white/90 hover:bg-[#25262B] px-8 py-3 rounded-2xl text-[0.95rem] font-medium tracking-wide transition-all duration-300 shadow-lg">Finish Conversation</button>

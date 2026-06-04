@@ -42,9 +42,10 @@ export const AnimatedHeading: React.FC<AnimatedHeadingProps> = ({
     className = "",
     Component = "h1",
 }) => {
-    const letters = Array.from(titleText);
-    const typingSpeed = 0.05;
-    const totalTypingTime = letters.length * typingSpeed;
+    const isArabic = /[\u0600-\u06FF]/.test(titleText);
+    const items = isArabic ? titleText.split(" ") : Array.from(titleText);
+    const typingSpeed = isArabic ? 0.15 : 0.05;
+    const totalTypingTime = items.length * typingSpeed;
 
     return (
         <Component className={className}>
@@ -55,16 +56,23 @@ export const AnimatedHeading: React.FC<AnimatedHeadingProps> = ({
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.5 }} // amount 0.5 ka matlab jab 50% heading dikhe tab chalay
             >
-                {letters.map((char, index) => (
-                    <motion.span key={index} variants={letterVariants}>
-                        {char === " " ? "\u00A0" : char}
+                {items.map((item, index) => (
+                    <motion.span 
+                        key={index} 
+                        variants={letterVariants}
+                        className={isArabic ? "inline-block" : ""}
+                    >
+                        {isArabic 
+                            ? `${item}${index < items.length - 1 ? "\u00A0" : ""}` 
+                            : (item === " " ? "\u00A0" : item)
+                        }
                     </motion.span>
                 ))}
             </motion.span>
 
             {/* Drop-in Effect for Accent Text - Triggered when in view */}
             <motion.span
-                className="text-text-main inline-block ml-2"
+                className="text-text-main inline-block ms-2"
                 variants={dropInVariants(totalTypingTime)}
                 initial="hidden"
                 whileInView="visible"
