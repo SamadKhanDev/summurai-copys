@@ -9,7 +9,7 @@ const partners = {
     { name: "Microsoft", description: "Cloud, productivity, and identity solutions", logo: "microsoft.73bad900.svg" },
     { name: "IBM", description: "Enterprise security and analytics platforms", logo: "ibm.576bf1a1.svg" },
     { name: "VMware", description: "Virtualization and multi-cloud management", logo: "VMware.0fe65568.svg" },
-    { name: "Red Hat", description: "Open-source enterprise solutions", logo: "redhat.e8db6e38" },
+    { name: "Red Hat", description: "Open-source enterprise solutions", logo: "redhat.e8db6e38.svg" },
     { name: "One Identity", description: "Identity governance and administration", logo: "one-identity.7b92d378.svg" },
     { name: "NetIQ", description: "Identity and access management", logo: "netIQ.5e3cc5a2.svg" },
     { name: "Redgate", description: "Database DevOps tools", logo: "redgate.7bbae350.svg" },
