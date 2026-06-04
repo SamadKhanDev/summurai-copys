@@ -31,7 +31,7 @@ export default function CybersecurityPage() {
     },
     {
       icon: Flame,
-      key: "infrastructure",
+      key: "infraProtection",
     },
     {
       icon: Microscope,
