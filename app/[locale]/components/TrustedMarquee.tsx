@@ -56,7 +56,7 @@ export default function TrustedBySection({
               className="font-jetbrains-mono text-[22px] font-medium tracking-[0.08em] text-[#6d6b64] hover:text-[#F4F1E4] transition-colors duration-300 whitespace-nowrap cursor-default select-none uppercase flex justify-center items-center"
             >
               <Image
-                src={`/new/assets/logos/${name}`}
+                src={`/new/assets/logos/${name}.svg`}
                 alt="Logo"
                 width={100}
                 height={100}
