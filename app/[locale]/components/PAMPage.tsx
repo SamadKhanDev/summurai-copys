@@ -17,11 +17,12 @@ import {
 import { Lock, Factory, Eye, Rocket } from "lucide-react";
 import { useState } from "react";
 import ChatWizardModal from "./ChatWizardModal";
+import { AnimatedHeading } from "./animations/textBehavior";
 
 export default function PAMPage() {
   const t = useTranslations("solutions.pam");
   const [isModalOpen, setIsModalOpen] = useState(false);
-  
+
   const items = [
     { icon: Lock, key: "integration" },
     { icon: Factory, key: "coverage" },
@@ -35,10 +36,12 @@ export default function PAMPage() {
       <div className="pt-16">
         <Section>
           <SectionLabel>{t("label")}</SectionLabel>
-          <SectionTitle className="mb-4">
-            {t("title")}
-            <span className="text-text-main">{t("titleAccent")}</span>
-          </SectionTitle>
+          <AnimatedHeading
+            titleText={t("title")}
+            accentText={t("titleAccent")}
+            className="mb-4"
+            Component={SectionTitle}
+          />
           <SectionDescription>{t("description")}</SectionDescription>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">

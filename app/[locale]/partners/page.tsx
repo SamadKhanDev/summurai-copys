@@ -11,6 +11,7 @@ import {
   SectionDescription,
   CalloutBanner,
 } from "../components/ui";
+import { AnimatedHeading } from "../components/animations/textBehavior";
 
 export default function PartnersPage() {
   const t = useTranslations("partners");
@@ -28,10 +29,13 @@ export default function PartnersPage() {
 
         <Section>
           <SectionLabel>{t("label")}</SectionLabel>
-          <SectionTitle className="mb-4">
-            {t("title")}
-            <span className="text-text-main">{t("titleAccent")}</span>
-          </SectionTitle>
+          <AnimatedHeading
+            titleText={t("title")}
+            accentText={t("titleAccent")}
+            className="mb-4"
+            Component={SectionTitle}
+          />
+
           <SectionDescription>{t("description")}</SectionDescription>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mt-12">

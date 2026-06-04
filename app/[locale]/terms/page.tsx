@@ -3,6 +3,7 @@
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { Breadcrumb, Section, SectionLabel, SectionTitle } from "../components/ui";
+import { AnimatedHeading } from "../components/animations/textBehavior";
 
 export default function TermsPage() {
   return (
@@ -18,9 +19,12 @@ export default function TermsPage() {
 
         <Section>
           <SectionLabel>Legal</SectionLabel>
-          <SectionTitle className="mb-4">
-            Terms of <span className="text-text-main">Use</span>
-          </SectionTitle>
+          <AnimatedHeading
+            titleText={"Terms of "}
+            accentText={"Use"}
+            className="mb-4"
+            Component={SectionTitle}
+          />
           <p className="text-sm text-text-secondary mb-12">Last updated: January 2025</p>
 
           <div className="max-w-4xl space-y-8">

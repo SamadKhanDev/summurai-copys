@@ -18,6 +18,7 @@ import {
   Button,
 } from "../../components/ui";
 import { Monitor, Flame, Microscope, Target, CloudIcon } from "lucide-react";
+import { AnimatedHeading } from "../../components/animations/textBehavior";
 
 export default function CybersecurityPage() {
   const t = useTranslations("services.cyber");
@@ -60,10 +61,12 @@ export default function CybersecurityPage() {
 
         <Section>
           <SectionLabel>{t("label")}</SectionLabel>
-          <SectionTitle className="mb-4">
-            {t("title")}
-            <span className="text-text-main">{t("titleAccent")}</span>
-          </SectionTitle>
+          <AnimatedHeading
+            titleText={t("title")}
+            accentText={t("titleAccent")}
+            className="mb-4"
+            Component={SectionTitle}
+          />
           <SectionDescription>{t("description")}</SectionDescription>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">

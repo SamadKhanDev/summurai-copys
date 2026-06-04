@@ -13,6 +13,7 @@ import {
   SectionDescription,
   Button,
 } from "../../components/ui";
+import { AnimatedHeading } from "../../components/animations/textBehavior";
 
 export default function BusinessContinuityPage() {
   const t = useTranslations("services.bcm");
@@ -65,19 +66,20 @@ export default function BusinessContinuityPage() {
 
         <Section>
           <SectionLabel>{t("label")}</SectionLabel>
-          <SectionTitle className="mb-4">
-            {t("title")}
-            <span className="text-text-main">{t("titleAccent")}</span>
-          </SectionTitle>
+          <AnimatedHeading
+            titleText={t("title")}
+            accentText={t("titleAccent")}
+            className="mb-4"
+            Component={SectionTitle}
+          />
           <SectionDescription>{t("description")}</SectionDescription>
 
           <div className="mt-12 space-y-0">
             {steps.map((step, index) => (
               <div
                 key={step.number}
-                className={`flex gap-6 py-6 ${
-                  index < steps.length - 1 ? "border-b border-card-border" : ""
-                }`}
+                className={`flex gap-6 py-6 ${index < steps.length - 1 ? "border-b border-card-border" : ""
+                  }`}
               >
                 <div className="text-5xl font-extrabold text-text-main/25 flex-shrink-0 w-20 text-center">
                   {step.number}

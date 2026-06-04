@@ -18,6 +18,7 @@ import {
   Button,
 } from "../../components/ui";
 import { Cloud, ShieldCheck, Network, Settings2 } from "lucide-react";
+import { AnimatedHeading } from "../../components/animations/textBehavior";
 
 export default function CloudInfrastructurePage() {
   const t = useTranslations("services.infrastructure");
@@ -44,10 +45,12 @@ export default function CloudInfrastructurePage() {
 
         <Section>
           <SectionLabel>{t("label")}</SectionLabel>
-          <SectionTitle className="mb-4">
-            {t("title")}
-            <span className="text-text-main">{t("titleAccent")}</span>
-          </SectionTitle>
+          <AnimatedHeading
+            titleText={t("title")}
+            accentText={t("titleAccent")}
+            className="mb-4"
+            Component={SectionTitle}
+          />
           <SectionDescription>{t("description")}</SectionDescription>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">

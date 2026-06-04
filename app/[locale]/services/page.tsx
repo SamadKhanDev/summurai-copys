@@ -17,6 +17,7 @@ import {
 } from "../components/ui";
 import { Shield, Cloud, Scale, RefreshCw, Bot, Settings, Server } from "lucide-react";
 import { Pathnames } from "@/i18n/routing";
+import { AnimatedHeading } from "../components/animations/textBehavior";
 
 export default function ServicesPage() {
   const t = useTranslations("services");
@@ -80,10 +81,12 @@ export default function ServicesPage() {
         <div className="bg-background-secondary py-20 px-8">
           <div className="max-w-7xl mx-auto">
             <SectionLabel>{t("hero.label")}</SectionLabel>
-            <SectionTitle className="mb-4">
-              {t("hero.title")}
-              <span className="text-text-main">{t("hero.titleAccent")}</span>
-            </SectionTitle>
+            <AnimatedHeading
+              titleText={t("hero.title")}
+              accentText={t("hero.titleAccent")}
+              className="mb-4"
+              Component={SectionTitle}
+            />
             <SectionDescription>{t("hero.description")}</SectionDescription>
           </div>
         </div>
