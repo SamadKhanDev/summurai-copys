@@ -173,3 +173,14 @@ textarea::placeholder {
   color: color-mix(in oklab, var(--color-white) 20%, transparent) !important;
   font-weight: 100 !important;
 }
+
+/* for trusted marquee section */
+@keyframes trustedMarquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
