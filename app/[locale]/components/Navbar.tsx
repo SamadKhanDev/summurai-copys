@@ -19,7 +19,14 @@ export default function Navbar() {
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+
+    const handleOpenModal = () => setIsModalOpen(true);
+    window.addEventListener("open-contact-modal", handleOpenModal);
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("open-contact-modal", handleOpenModal);
+    };
   }, []);
 
   const toggleLanguage = () => {
@@ -116,20 +123,12 @@ export default function Navbar() {
               </div>
             </div>
 
-            {/* About Dropdown */}
-            <div className="relative group">
-              <button className="flex items-center gap-1.5 px-3 py-2 text-[11px] font-semibold tracking-wider uppercase text-text-secondary hover:text-text-main hover:bg-white/5 rounded-md transition-colors">
-                {t("links.about")}
-                <ChevronDown className="w-3 h-3 transition-transform duration-200 group-hover:rotate-180" />
-              </button>
-              <div className={dropdownBase}>
-                <Link href="/about" className={dropdownAllLink}>{t("dropdowns.about.overview")}</Link>
-                <div className="h-px bg-border/10 mx-3 my-1" />
-                <Link href={"/about#leadership" as any} className={dropdownLink}>{t("dropdowns.about.leadership")}</Link>
-                <Link href={"/about#global" as any} className={dropdownLink}>{t("dropdowns.about.global")}</Link>
-                <Link href={"/about#certifications" as any} className={dropdownLink}>{t("dropdowns.about.certifications")}</Link>
-              </div>
-            </div>
+            <Link
+              href="/about"
+              className="px-3 py-2 text-[11px] font-semibold tracking-wider uppercase text-text-secondary hover:text-text-main hover:bg-white/5 rounded-md transition-colors"
+            >
+              {t("links.about")}
+            </Link>
 
             <Link href="/partners" className="px-3 py-2 text-[11px] font-semibold tracking-wider uppercase text-text-secondary hover:text-text-main hover:bg-white/5 rounded-md transition-colors">{t("links.partners")}</Link>
             <Link href="/insights" className="px-3 py-2 text-[11px] font-semibold tracking-wider uppercase text-text-secondary hover:text-text-main hover:bg-white/5 rounded-md transition-colors">{t("links.insights")}</Link>
@@ -229,6 +228,7 @@ export default function Navbar() {
       <ChatWizardModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
+        mode="contact"
       />
     </>
   );

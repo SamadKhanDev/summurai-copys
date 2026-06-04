@@ -87,7 +87,12 @@ body {
   min-height: 100vh;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-space-grotesk), var(--font-sans);
 }
 
@@ -102,8 +107,15 @@ h2 .text-accent,
 h3 .text-accent,
 h4 .text-accent,
 h5 .text-accent,
-h6 .text-accent {
-  font-style: italic;
+h6 .text-accent,
+h1 .text-\[\#E11D48\],
+h2 .text-\[\#E11D48\],
+h3 .text-\[\#E11D48\],
+h4 .text-\[\#E11D48\],
+h5 .text-\[\#E11D48\],
+h6 .text-\[\#E11D48\] {
+  font-family: var(--font-space-grotesk), var(--font-sans) !important;
+  font-style: italic !important;
   font-weight: 300 !important;
 }
 
@@ -153,4 +165,11 @@ h6 .text-accent {
   to {
     transform: translateX(-50%);
   }
+}
+
+/* Global input placeholder styling */
+input::placeholder,
+textarea::placeholder {
+  color: color-mix(in oklab, var(--color-white) 20%, transparent) !important;
+  font-weight: 100 !important;
 }
