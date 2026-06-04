@@ -14,6 +14,7 @@ import {
 } from "../components/ui";
 import { Globe, Rocket, TrendingUp } from "lucide-react";
 import { AnimatedHeading } from "../components/animations/textBehavior";
+import { FileText } from 'lucide-react';
 
 export default function CareersPage() {
   const t = useTranslations("careers");
@@ -41,7 +42,7 @@ export default function CareersPage() {
 
           {/* No Openings Notice */}
           <div className="bg-card-bg border border-card-border rounded-xl p-10 text-center mt-12 mb-12">
-            <div className="text-5xl mb-4">📋</div>
+            <div className="text-5xl mb-4 flex justify-center"> <FileText className="w-9 h-9 text-text-main" /></div>
             <h3 className="text-white text-lg font-bold mb-3">
               {t("noOpenings.title")}
             </h3>
