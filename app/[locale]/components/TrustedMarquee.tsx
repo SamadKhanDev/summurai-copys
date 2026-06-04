@@ -65,7 +65,7 @@ export default function TrustedBySection({
           ))}
         </div>
       </div>
-      <div className="text-center">
+      <div className="text-center mt-4">
           <Button variant="outline" asLink href="/partners">
             {cta}
           </Button>

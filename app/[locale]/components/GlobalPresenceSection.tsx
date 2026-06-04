@@ -1,6 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
+import { SectionLabel } from "./ui";
 // import { useInViewTrigger } from "@/hooks/useInViewTrigger";
 // import { useTypingEffect } from "@/hooks/useTypingEffect";
 // import ScrollReveal from "./animations/ScrollReveal";
@@ -150,9 +151,8 @@ export default function GlobalPresenceSection() {
       <div className="max-w-screen-xl mx-auto">
         {/* Eyebrow */}
         <div className="flex items-center gap-3 mb-10">
-          <span className="w-5 h-px bg-[#C9a55a]" />
           <span className="font-jetbrains-mono text-[11px] tracking-[0.2em] text-[#a8a59c] uppercase">
-            {t("eyebrow")}
+            <SectionLabel>{t("eyebrow")}</SectionLabel>
           </span>
         </div>
 
@@ -162,9 +162,9 @@ export default function GlobalPresenceSection() {
             {fullTitle}
           </h2>
           {/* <ScrollReveal delay={0.2}> */}
-            <p className="text-[#a8a59c] text-[17px] leading-relaxed self-end max-w-md">
-              {t("description")}
-            </p>
+          <p className="text-[#a8a59c] text-[17px] leading-relaxed self-end max-w-md">
+            {t("description")}
+          </p>
           {/* </ScrollReveal> */}
         </div>
 

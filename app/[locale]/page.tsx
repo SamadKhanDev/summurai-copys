@@ -41,7 +41,7 @@ import ChatWizardModal from "./components/ChatWizardModal";
 import { useState } from "react";
 import TestimonialSection from "./components/Testimonialsection";
 import WhySamurai from "./components/Whysamurai";
-import GlobalPresenceSection from "./case-studies/GlobalPresenceSection";
+import GlobalPresenceSection from "./components/GlobalPresenceSection";
 import TrustedBySection from "./components/TrustedMarquee";
 
 export default function HomePage() {

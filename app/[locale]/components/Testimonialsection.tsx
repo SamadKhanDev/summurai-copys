@@ -133,7 +133,7 @@ export default function TestimonialSection() {
         </article>
 
         {/* CTA */}
-        <a
+        {/* <a
           href="/case-studies"
           className="group mt-10 inline-flex items-center gap-2 px-7 py-3 rounded-full font-space-grotesk font-bold text-[0.65rem] tracking-[0.18em] uppercase text-white transition-all duration-300 hover:border-[#E11D48] hover:text-[#E11D48]"
           style={{
@@ -151,7 +151,7 @@ export default function TestimonialSection() {
         >
           {t("cta")}
           <span className="transition-transform duration-200 group-hover:translate-x-0.5">→</span>
-        </a>
+        </a> */}
       </div>
 
       <style>{`

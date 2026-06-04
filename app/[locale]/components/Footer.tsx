@@ -6,6 +6,7 @@ import { Link } from "@/i18n/navigation";
 
 export default function Footer() {
   const t = useTranslations("footer");
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
   return (
     <footer className="bg-background-secondary border-t border-card-border pt-16 pb-8 px-8">
@@ -15,9 +16,17 @@ export default function Footer() {
           {/* Brand Column */}
           <div className="lg:col-span-2">
             <div className="font-extrabold text-base tracking-[0.18em] text-white mb-4">
-              {t("brand.name")}
-              <span className="text-text-main">{t("brand.dot")}</span>
-              {t("brand.suffix")}
+              <Link
+                href="/"
+                className="shrink-0 mr-6 flex items-center"
+              >
+                <img
+                  src={`${basePath}/assets/logoUP.webp`}
+                  alt="Samurai Logo"
+                  className="h-20 w-auto object-contain"
+                />
+              </Link>
+
             </div>
             <p className="text-sm text-text-secondary leading-relaxed max-w-xs mb-4">
               {t("brand.description")}
