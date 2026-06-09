@@ -4,12 +4,12 @@ import createNextIntlPlugin from "next-intl/plugin";
 const withNextIntl = createNextIntlPlugin();
 
 const nextConfig: NextConfig = {
-  basePath: "/new",
+  basePath: "/v0",
   async redirects() {
     return [
       {
         source: "/",
-        destination: "/new",
+        destination: "/v0",
         permanent: false,
         basePath: false,
       },

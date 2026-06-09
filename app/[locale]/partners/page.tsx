@@ -51,7 +51,7 @@ export default function PartnersPage() {
                   {partner.logo && (
                     <div className="w-16 h-12 mb-3 relative flex items-center justify-center">
                       <Image
-                        src={`/new/assets/logos/${partner.logo}`}
+                        src={`/v0/assets/logos/${partner.logo}`}
                         alt={`${partner.name} logo`}
                         fill
                         className="object-contain"
