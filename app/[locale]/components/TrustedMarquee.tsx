@@ -2,6 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import Image from "next/image";
+import { withBasePath } from "@/lib/basePath";
 import { Button } from "./ui";
 
 type TrustedBySectionProps = {
@@ -56,7 +57,7 @@ export default function TrustedBySection({
               className="font-jetbrains-mono text-[22px] font-medium tracking-[0.08em] text-[#6d6b64] hover:text-[#F4F1E4] transition-colors duration-300 whitespace-nowrap cursor-default select-none uppercase flex justify-center items-center"
             >
               <Image
-                src={`/v0/assets/logos/${name}`}
+                src={withBasePath(`/assets/logos/${name}`)}
                 alt="Logo"
                 width={100}
                 height={100}

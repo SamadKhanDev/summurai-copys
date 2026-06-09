@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useTranslations, useLocale } from "next-intl";
 import { usePathname, useRouter, Link } from "@/i18n/navigation";
+import { withBasePath } from "@/lib/basePath";
 import { Globe, ChevronDown } from "lucide-react";
 import ChatWizardModal from "./ChatWizardModal";
 
@@ -14,7 +15,6 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -58,7 +58,7 @@ export default function Navbar() {
             className="shrink-0 mr-6 flex items-center"
           >
             <img
-              src={`${basePath}/assets/logoUP.webp`}
+              src={withBasePath("/assets/logoUP.webp")}
               alt="Samurai Logo"
               className="h-15 w-auto object-contain"
             />

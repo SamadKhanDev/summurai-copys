@@ -3,10 +3,10 @@
 import { useTranslations } from "next-intl";
 import { Mail, Phone, Globe } from "lucide-react";
 import { Link } from "@/i18n/navigation";
+import { withBasePath } from "@/lib/basePath";
 
 export default function Footer() {
   const t = useTranslations("footer");
-  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
   return (
     <footer className="bg-background-secondary border-t border-card-border pt-16 pb-8 px-8">
@@ -21,7 +21,7 @@ export default function Footer() {
                 className="shrink-0 mr-6 flex items-center"
               >
                 <img
-                  src={`${basePath}/assets/logoUP.webp`}
+                  src={withBasePath("/assets/logoUP.webp")}
                   alt="Samurai Logo"
                   className="h-20 w-auto object-contain"
                 />

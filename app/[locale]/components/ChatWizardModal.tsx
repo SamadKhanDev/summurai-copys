@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import axios from "axios";
+import { withBasePath } from "@/lib/basePath";
 
 interface ChatModalProps {
     isOpen: boolean;
@@ -18,7 +19,6 @@ interface Message {
 }
 
 export default function ChatWizardModal({ isOpen, onClose, defaultService, mode = "default" }: ChatModalProps) {
-    const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
     const [shouldRender, setShouldRender] = useState(false);
     const [animateClass, setAnimateClass] = useState(false);
     const [step, setStep] = useState<number>(1);
@@ -115,7 +115,7 @@ export default function ChatWizardModal({ isOpen, onClose, defaultService, mode 
         setIsBotTyping(true);
 
         try {
-            await axios.post(`${basePath}/api/zoho`, {
+            await axios.post(withBasePath("/api/zoho"), {
                 name: chatFields.name,
                 email: chatFields.email,
                 phone: chatFields.phone || "Not Provided",
@@ -313,7 +313,7 @@ export default function ChatWizardModal({ isOpen, onClose, defaultService, mode 
                 {/* Background Favicon Icon */}
                 <div className="absolute -right-20 top-1/2 -translate-y-1/2 w-[360px] h-[360px] opacity-[0.3] pointer-events-none select-none z-0">
                     <img
-                        src={`${basePath}/assets/logoUP.webp`}
+                        src={withBasePath("/assets/logoUP.webp")}
                         alt="Samurai Crest"
                         className="w-full h-full object-cover object-left"
                         style={{ filter: "grayscale(100%) sepia(100%) saturate(1000%) hue-rotate(320deg) brightness(85%)" }}
@@ -345,7 +345,7 @@ export default function ChatWizardModal({ isOpen, onClose, defaultService, mode 
                                 {msg.sender === "bot" && (
                                     <div className="w-11 h-11 rounded-full bg-[#15161A] border border-[#E11D48]/30 overflow-hidden flex items-center justify-center flex-shrink-0">
                                         <img
-                                            src={`${basePath}/favicon.ico`}
+                                            src={withBasePath("/favicon.ico")}
                                             alt="Samurai Favicon"
                                             className="w-full h-full object-contain"
                                         />
@@ -463,7 +463,7 @@ export default function ChatWizardModal({ isOpen, onClose, defaultService, mode 
                         <div className="flex items-start gap-4 justify-start animate-pulse">
                             <div className="w-11 h-11 rounded-full bg-[#15161A] border border-[#E11D48]/30 overflow-hidden flex items-center justify-center flex-shrink-0">
                                 <img
-                                    src={`${basePath}/favicon.ico`}
+                                    src={withBasePath("/favicon.ico")}
                                     alt="Samurai Favicon"
                                     className="w-full h-full object-contain p-[6px]"
                                 />

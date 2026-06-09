@@ -2,6 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import Image from "next/image";
+import { withBasePath } from "@/lib/basePath";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import {
@@ -51,7 +52,7 @@ export default function PartnersPage() {
                   {partner.logo && (
                     <div className="w-16 h-12 mb-3 relative flex items-center justify-center">
                       <Image
-                        src={`/v0/assets/logos/${partner.logo}`}
+                        src={withBasePath(`/assets/logos/${partner.logo}`)}
                         alt={`${partner.name} logo`}
                         fill
                         className="object-contain"
