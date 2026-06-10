@@ -43,7 +43,7 @@ import TestimonialSection from "./components/Testimonialsection";
 import WhySamurai from "./components/Whysamurai";
 import GlobalPresenceSection from "./components/GlobalPresenceSection";
 import TrustedBySection from "./components/TrustedMarquee";
-import ServicesSection from "./components/ServicesSection";
+import SevenPillarsSection from "./components/SevenPillarsSection";
 import { AnimatedHeading } from "./components/animations/textBehavior";
 import ScrollReveal from "./components/animations/ScrollReveal";
 
@@ -62,19 +62,19 @@ export default function HomePage() {
           <div className="text-xs font-semibold tracking-[0.14em] text-text-main uppercase mb-5">
             {t("hero.tag")}
           </div>
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight max-w-4xl text-white">
+          <h1 className="text-4xl md:text-6xl font-extrabold text-white tracking-tight leading-tight max-w-4xl">
             {t("hero.title")}
             <span className="text-text-main">{t("hero.titleAccent")}</span>
           </h1>
-          <p className="mt-6 mb-10 text-lg text-text-secondary max-w-2xl leading-relaxed">
+          <p className="mt-6 text-base md:text-lg text-text-muted max-w-2xl leading-relaxed">
             {t("hero.description")}
           </p>
-          <div className="flex gap-4 flex-wrap">
-            <Button variant="fill" size="lg" asLink href="/contact">
+          <div className="mt-10 flex flex-wrap gap-4">
+            <Button variant="primary" size="lg" onClick={() => setIsModalOpen(true)}>
               {t("hero.ctaPrimary")}
             </Button>
-            <Button variant="outline" size="lg" asLink href="/services">
-              {t("hero.ctaSecondary")}
+            <Button variant="secondary" size="lg" asChild>
+              <Link href="#services">{t("hero.ctaSecondary")}</Link>
             </Button>
           </div>
         </div>
@@ -104,8 +104,16 @@ export default function HomePage() {
         logos={["Aramco", "Ministry of Health", "Hassana", "Edarat", "Bousma"]}
       />
 
-      {/* Core Services Overview */}
-      <ServicesSection />
+      {/* Seven Pillars — Interactive Stacked Cards */}
+      <Section id="services">
+        <SectionLabel>{t("services.label")}</SectionLabel>
+        <SectionTitle>
+          {t("services.title")}
+          <span className="text-text-main">{t("services.titleAccent")}</span>
+        </SectionTitle>
+        <SectionDescription>{t("services.description")}</SectionDescription>
+        <SevenPillarsSection />
+      </Section>
 
       {/* Divider */}
       <div className="h-px bg-card-border mx-8" />
