@@ -15,7 +15,7 @@ const industries = {
       },
     },
     government: {
-      title: "Government & Public Sector",
+      title: "Government",
       description: "Data sovereignty, on-premise deployment, and critical infrastructure security for government entities aligned with NDMO mandates and Vision 2030 digital transformation goals.",
       tags: ["NDMO", "Data Sovereignty", "On-Prem Deployment", "Critical Infrastructure"],
     },
@@ -25,7 +25,7 @@ const industries = {
       tags: ["Patient Data Security", "PDPL", "Ministry of Health", "Regulatory Compliance"],
     },
     energy: {
-      title: "Energy & Critical Infrastructure",
+      title: "Energy",
       description: "OT/ICS and SCADA security, NCA ECC compliance, and operational continuity for energy companies and critical infrastructure operators across the Kingdom.",
       tags: ["OT/ICS", "SCADA", "NCA ECC", "Operational Continuity", "Aramco-tier"],
     },

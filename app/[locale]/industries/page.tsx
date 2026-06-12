@@ -58,6 +58,7 @@ export default function IndustriesPage() {
                 key={sector.key}
                 id={sector.key}
                 className="bg-card-bg border border-card-border rounded-2xl p-8 md:p-10 hover:border-accent/30 hover:bg-accent/[0.01] hover:-translate-y-1 transition-all duration-300 ease-out"
+                style={{ scrollMarginTop: '96px' }}
               >
                 <div className="flex flex-col sm:flex-row items-start gap-6">
                   {/* Icon Container */}

@@ -50,6 +50,7 @@ import ScrollReveal from "./components/animations/ScrollReveal";
 export default function HomePage() {
   const t = useTranslations("home");
   const tCommon = useTranslations("common");
+  const tInd = useTranslations("industries");
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
@@ -210,28 +211,298 @@ export default function HomePage() {
           className="mb-4"
           Component={SectionTitle}
         />
-        <div className="flex flex-wrap gap-4 mt-10">
+
+        {/* Fortinet-Inspired Premium Enterprise Cards - Smaller 6-in-a-row layout */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-[16px] mt-12 w-full overflow-visible">
           {[
-            { icon: Landmark, label: "Government" },
-            { icon: Building2, label: "Financial Services" },
-            { icon: Hospital, label: "Healthcare" },
-            { icon: Zap, label: "Energy & Critical Infrastructure" },
-            { icon: GraduationCap, label: "Education" },
-            { icon: Building, label: "Enterprise" },
-          ].map((industry, index) => (
-            <ScrollReveal delay={index * 0.1} animation="blur">
-              <a
-                key={index}
-                href="/industries"
-                className="bg-card-bg border border-card-border rounded-xl p-6 flex flex-col items-center justify-center text-center hover:border-accent hover:bg-accent/5 transition-all cursor-pointer min-w-[180px]"
-              >
-                <industry.icon className="w-8 h-8 text-text-main mb-3" />
-                <span className="text-xs font-semibold text-text-secondary">
-                  {industry.label}
-                </span>
-              </a>
-            </ScrollReveal>
-          ))}
+            {
+              key: "government",
+              icon: Landmark,
+              color: "#ffffff",
+              accentColor: "#A1151C",
+              borderColor: "border-[#A1151C]/30",
+              shadow: "hover:shadow-[0_20px_40px_rgba(161,21,28,0.35)]",
+              borderGlow: "hover:border-[#A1151C]/60",
+              cardBg: "radial-gradient(circle at 50% 35%, #A1151C 0%, #4c0a0c 65%, #1b0203 100%)",
+              textColor: "text-[#ffd6bd]",
+              textHighlight: "rgba(0, 0, 0, 0.6)",
+              subtitle: "Saudi Arabia",
+              svgBackground: (
+                <svg className="w-24 h-24 mb-3 drop-shadow-[0_2px_8px_rgba(255,208,176,0.3)]" viewBox="0 0 100 100" fill="none">
+                  <style>{`
+                    @keyframes gov-bob {
+                      0%, 100% { transform: translateY(0); }
+                      50% { transform: translateY(-4px); }
+                    }
+                    .gov-group {
+                      animation: gov-bob 4s ease-in-out infinite;
+                    }
+                  `}</style>
+                  <g className="gov-group">
+                    {/* Front Metallic Layer */}
+                    <path d="M15,80 L85,80" stroke="#ffd0b0" strokeWidth="4.5" strokeLinecap="round" />
+                    <path d="M22,72 L78,72" stroke="#ffd0b0" strokeWidth="3" strokeLinecap="round" />
+                    <path d="M22,36 L78,36" stroke="#ffd0b0" strokeWidth="3.5" strokeLinecap="round" />
+                    <path d="M22,36 L50,16 L78,36 Z" fill="#ffd0b0" stroke="#ffd0b0" strokeWidth="1" />
+
+                    {/* Columns */}
+                    <line x1="70" y1="36" x2="70" y2="72" stroke="#ffd0b0" strokeWidth="4" strokeLinecap="round" />
+                    <line x1="57" y1="36" x2="57" y2="72" stroke="#ffd0b0" strokeWidth="4" strokeLinecap="round" />
+                    <line x1="43" y1="36" x2="43" y2="72" stroke="#ffd0b0" strokeWidth="4" strokeLinecap="round" />
+                    <line x1="30" y1="36" x2="30" y2="72" stroke="#ffd0b0" strokeWidth="4" strokeLinecap="round" />
+                  </g>
+                </svg>
+              ),
+              features: ["NDMO Alignment", "Data Sovereignty", "Vision 2030 Goals", "OT Infrastructure"]
+            },
+            {
+              key: "financial",
+              icon: Building2,
+              color: "#ffffff",
+              accentColor: "#A1151C",
+              borderColor: "border-[#A1151C]/30",
+              shadow: "hover:shadow-[0_20px_40px_rgba(161,21,28,0.35)]",
+              borderGlow: "hover:border-[#A1151C]/60",
+              cardBg: "radial-gradient(circle at 50% 35%, #A1151C 0%, #4c0a0c 65%, #1b0203 100%)",
+              textColor: "text-[#ffd6bd]",
+              textHighlight: "rgba(0, 0, 0, 0.6)",
+              subtitle: "Security & Trust",
+              svgBackground: (
+                <svg className="w-24 h-24 mb-3 drop-shadow-[0_2px_8px_rgba(0,0,0,0.4)] animate-[spin_20s_linear_infinite]" viewBox="0 0 100 100" fill="none">
+                  <circle cx="50" cy="50" r="30" stroke="#ffd0b0" strokeWidth="3" />
+                  <circle cx="50" cy="50" r="20" stroke="#ffd0b0" strokeWidth="1.5" strokeDasharray="3 3" />
+                  <path d="M50,10 L50,20 M50,80 L50,90 M10,50 L20,50 M80,50 L90,50 M22,22 L29,29 M71,71 L78,78 M78,22 L71,29 M29,71 L22,78" stroke="#ffd0b0" strokeWidth="2.5" />
+                  <circle cx="50" cy="50" r="4" fill="#ffd0b0" />
+                </svg>
+              ),
+              features: ["SAMA BCM", "PDPL Compliance", "Transaction Guard", "Resilience"]
+            },
+            {
+              key: "healthcare",
+              icon: Hospital,
+              color: "#ffffff",
+              accentColor: "#A1151C",
+              borderColor: "border-[#A1151C]/30",
+              shadow: "hover:shadow-[0_20px_40px_rgba(161,21,28,0.35)]",
+              borderGlow: "hover:border-[#A1151C]/60",
+              cardBg: "radial-gradient(circle at 50% 35%, #A1151C 0%, #4c0a0c 65%, #1b0203 100%)",
+              textColor: "text-[#ffd6bd]",
+              textHighlight: "rgba(0, 0, 0, 0.6)",
+              subtitle: "Critical Care",
+              svgBackground: (
+                <svg className="w-24 h-24 mb-3 drop-shadow-[0_2px_8px_rgba(0,0,0,0.4)]" viewBox="0 0 100 100" fill="none">
+                  {/* Outer Shield */}
+                  <path d="M50,15 L15,30 L15,60 C15,75 50,90 50,90 C50,90 85,75 85,60 L85,30 Z" stroke="#ffd0b0" strokeWidth="3" />
+
+                  {/* Inner Alert Cross */}
+                  <path
+                    d="M50,30 L50,70 M30,50 L70,50"
+                    stroke="#ffd0b0"
+                    strokeWidth="5"
+                    strokeLinecap="round"
+                    className="animate-[pulse_1s_ease-in-out_infinite]"
+                  />
+                </svg>
+              ),
+              features: ["Patient Records", "MOH Standards", "Clinic Shield", "Access Audit"]
+            },
+            {
+              key: "energy",
+              icon: Zap,
+              color: "#ffffff",
+              accentColor: "#A1151C",
+              borderColor: "border-[#A1151C]/30",
+              shadow: "hover:shadow-[0_20px_40px_rgba(161,21,28,0.35)]",
+              borderGlow: "hover:border-[#A1151C]/60",
+              cardBg: "radial-gradient(circle at 50% 35%, #A1151C 0%, #4c0a0c 65%, #1b0203 100%)",
+              textColor: "text-[#ffd6bd]",
+              textHighlight: "rgba(0, 0, 0, 0.6)",
+              subtitle: "National Grid",
+              svgBackground: (
+                <svg className="w-24 h-24 mb-3 drop-shadow-[0_2px_6px_rgba(255,208,176,0.3)]" viewBox="0 0 100 100" fill="none">
+                  {/* Main Lightning Bolt with Pulse */}
+                  <path
+                    d="M55,10 L20,55 L50,55 L45,90 L80,45 L50,45 Z"
+                    stroke="#ffd0b0"
+                    strokeWidth="3"
+                    fill="none"
+                    strokeLinejoin="round"
+                    className="animate-[pulse_2s_cubic-bezier(0.4,0,0.6,1)_infinite]"
+                  />
+                  <path d="M50,45 L55,10" stroke="#ffd0b0" strokeWidth="1.2" className="animate-[pulse_2s_cubic-bezier(0.4,0,0.6,1)_infinite]" />
+
+                  {/* Diagonal Spark 1 (Top Left) */}
+                  <line
+                    x1="22" y1="28" x2="28" y2="34"
+                    stroke="#ffd0b0"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    className="animate-[pulse_0.8s_ease-in-out_infinite]"
+                  />
+
+                  {/* Diagonal Spark 2 (Bottom Right) */}
+                  <line
+                    x1="78" y1="62" x2="72" y2="68"
+                    stroke="#ffd0b0"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    className="animate-[pulse_1.2s_ease-in-out_infinite]"
+                  />
+
+                  {/* Tiny glowing energy particle */}
+                  <circle
+                    cx="30" cy="70" r="1"
+                    fill="#ffd0b0"
+                    className="animate-[pulse_0.9s_ease-in-out_infinite]"
+                  />
+                </svg>
+              ),
+              features: ["SCADA/ICS OT", "Aramco Compliance", "Incident Response", "OT Continuity"]
+            },
+            {
+              key: "education",
+              icon: GraduationCap,
+              color: "#ffffff",
+              accentColor: "#A1151C",
+              borderColor: "border-[#A1151C]/30",
+              shadow: "hover:shadow-[0_20px_40px_rgba(161,21,28,0.35)]",
+              borderGlow: "hover:border-[#A1151C]/60",
+              cardBg: "radial-gradient(circle at 50% 35%, #A1151C 0%, #4c0a0c 65%, #1b0203 100%)",
+              textColor: "text-[#ffd6bd]",
+              textHighlight: "rgba(0, 0, 0, 0.6)",
+              subtitle: "Knowledge",
+              svgBackground: (
+                <svg className="w-24 h-24 mb-3 drop-shadow-[0_2px_8px_rgba(0,0,0,0.4)]" viewBox="0 0 100 100" fill="none">
+                  <style>{`
+                    @keyframes cap-toss {
+                      0%, 100% { transform: translateY(0) rotate(0deg); }
+                      30% { transform: translateY(-18px) rotate(-12deg); }
+                      65% { transform: translateY(0) rotate(0deg); }
+                    }
+                    .edu-cap {
+                      transform-origin: 50px 50px;
+                      animation: cap-toss 2.2s ease-in-out infinite;
+                    }
+                  `}</style>
+                  <g className="edu-cap">
+                    <path d="M50,20 L85,38 L50,56 L15,38 Z" stroke="#ffd0b0" strokeWidth="3" fill="none" />
+                    <path d="M22,42 L22,70 C22,78 50,83 50,83 C50,83 78,78 78,70 L78,42" stroke="#ffd0b0" strokeWidth="2" />
+                    <path d="M80,41 L80,78" stroke="#ffd0b0" strokeWidth="2.5" />
+                    <circle cx="80" cy="78" r="2" fill="#ffd0b0" />
+                  </g>
+                </svg>
+              ),
+              features: ["Student Privacy", "E-Learning IAM", "DDoS Shield", "Compliance"]
+            },
+            {
+              key: "enterprise",
+              icon: Building,
+              color: "#ffffff",
+              accentColor: "#A1151C",
+              borderColor: "border-[#A1151C]/30",
+              shadow: "hover:shadow-[0_20px_40px_rgba(161,21,28,0.35)]",
+              borderGlow: "hover:border-[#A1151C]/60",
+              cardBg: "radial-gradient(circle at 50% 35%, #A1151C 0%, #4c0a0c 65%, #1b0203 100%)",
+              textColor: "text-[#ffd6bd]",
+              textHighlight: "rgba(0, 0, 0, 0.6)",
+              subtitle: "Global Scale",
+              svgBackground: (
+                <svg className="w-24 h-24 mb-3 drop-shadow-[0_2px_8px_rgba(0,0,0,0.4)]" viewBox="0 0 100 100" fill="none">
+                  <style>{`
+                    @keyframes win-glow-a {
+                      0%, 100% { opacity: 0.3; }
+                      50% { opacity: 1; }
+                    }
+                    @keyframes win-glow-b {
+                      0%, 100% { opacity: 1; }
+                      50% { opacity: 0.3; }
+                    }
+                    .win-a {
+                      animation: win-glow-a 2s infinite ease-in-out;
+                    }
+                    .win-b {
+                      animation: win-glow-b 2s infinite ease-in-out;
+                    }
+                  `}</style>
+                  <rect x="25" y="15" width="50" height="70" rx="3" stroke="#ffd0b0" strokeWidth="3" />
+
+                  {/* Row 1 */}
+                  <rect x="35.5" y="26" width="7" height="3" rx="0.75" fill="#ffd0b0" className="win-a" />
+                  <rect x="57.5" y="26" width="7" height="3" rx="0.75" fill="#ffd0b0" className="win-b" />
+
+                  {/* Row 2 */}
+                  <rect x="35.5" y="40" width="7" height="3" rx="0.75" fill="#ffd0b0" className="win-b" />
+                  <rect x="57.5" y="40" width="7" height="3" rx="0.75" fill="#ffd0b0" className="win-a" />
+
+                  {/* Row 3 */}
+                  <rect x="35.5" y="54" width="7" height="3" rx="0.75" fill="#ffd0b0" className="win-a" />
+                  <rect x="57.5" y="54" width="7" height="3" rx="0.75" fill="#ffd0b0" className="win-b" />
+
+                  {/* Row 4 */}
+                  <rect x="35.5" y="68" width="7" height="3" rx="0.75" fill="#ffd0b0" className="win-b" />
+                  <rect x="57.5" y="68" width="7" height="3" rx="0.75" fill="#ffd0b0" className="win-a" />
+                </svg>
+              ),
+              features: ["Cloud Tenants", "Next-Gen SOC", "PAM Lifecycle", "Vendor Audits"]
+            },
+          ].map((industry, index) => {
+            const title = tInd(`sectors.${industry.key}.title`);
+            const description = tInd(`sectors.${industry.key}.description`);
+
+            return (
+              <ScrollReveal key={index} delay={index * 0.05} animation="blur" className="relative overflow-visible">
+                <div
+                  className={`group relative block w-full h-[260px] rounded-[18px] overflow-hidden cursor-pointer ${industry.borderColor} border transition-all duration-400 ease-out feature-card ${industry.shadow} ${industry.borderGlow}`}
+                  style={{
+                    background: industry.cardBg,
+                    ["--accent-color" as any]: industry.accentColor
+                  }}
+                >
+                  <div
+                    className="absolute inset-0 card-bg-slide pointer-events-none z-0 bg-white"
+                  />
+                  <div className="absolute inset-0 flex flex-col items-center justify-center p-4 pt-6 text-center card-front-title z-10">
+                    <div className="opacity-95 pointer-events-none flex items-center justify-center transition-opacity duration-300 group-hover:opacity-0 mb-3 transform -translate-y-2">
+                      {industry.svgBackground}
+                    </div>
+                    <h3
+                      className="text-[17px] font-medium font-serif tracking-[0.12em] uppercase leading-none"
+                      style={{ color: "#ffd6bd", textShadow: `0px 2px 4px ${industry.textHighlight}` }}
+                    >
+                      {title}
+                    </h3>
+                    <p
+                      className="text-[10px] font-serif tracking-[0.20em] uppercase opacity-75 mt-2"
+                      style={{ color: "#e2a282", textShadow: `0px 1px 2px ${industry.textHighlight}` }}
+                    >
+                      {industry.subtitle}
+                    </p>
+                  </div>
+                  <div className="absolute inset-0 p-4 pt-12 flex flex-col items-start justify-between text-left card-hover-details pointer-events-none group-hover:pointer-events-auto z-10">
+                    <div>
+                      <h4 className="text-[14.5px] font-black text-slate-900 group-hover:text-[var(--accent-color)] uppercase tracking-wider mb-1.5 leading-tight transition-colors duration-300">{title}</h4>
+                      <p className="text-slate-700 text-[11px] font-semibold leading-relaxed mb-2.5 max-w-[95%] line-clamp-2 transition-colors duration-300">{description}</p>
+                      <ul className="space-y-1 w-full">
+                        {industry.features.slice(0, 3).map((feat, i) => (
+                          <li key={i} className="flex items-center gap-1.5 text-slate-800 text-[10.5px] font-bold transition-colors duration-300">
+                            <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent-color)] flex-shrink-0 transition-colors duration-300" />
+                            {feat}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                    <Link
+                      href={{ pathname: '/industries', hash: industry.key }}
+                      className="px-5 py-2 rounded-full bg-[var(--accent-color)] text-white text-[10.5px] font-black transition-all duration-300 uppercase tracking-wider shadow-md inline-flex items-center gap-1"
+                    >
+                      Learn More
+                      <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+                    </Link>
+                  </div>
+                </div>
+              </ScrollReveal>
+            );
+          })}
         </div>
       </Section>
 
@@ -248,11 +519,11 @@ export default function HomePage() {
           </Button>
         </div>
       </Section> */}
-      <TestimonialSection />
+      {/* <TestimonialSection />    */}
 
       {/* Technology Partners Carousel */}
       <TrustedBySection title={t("partners.label")} logos={t.raw("partners.logos")} cta={t("partners.viewAll")} />
-
+      <TestimonialSection />
       {/* Global Presence */}
       {/* <Section background="secondary">
         <SectionLabel>{t("globalPresence.label")}</SectionLabel>
@@ -326,6 +597,67 @@ export default function HomePage() {
         }
         .animate-scroll:hover {
           animation-play-state: paused;
+        }
+        .feature-card {
+          transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s, box-shadow 0.4s;
+          transform: translate3d(0, 0, 0);
+          will-change: transform;
+          -webkit-font-smoothing: antialiased;
+        }
+        .feature-card:hover {
+          transform: translate3d(0, -8px, 0);
+        }
+        .card-bg-slide {
+          transform: translate3d(0, 100%, 0);
+          transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+          will-change: transform;
+        }
+        .group:hover .card-bg-slide {
+          transform: translate3d(0, 0, 0);
+        }
+        .card-front-title {
+          transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s;
+          will-change: transform, opacity;
+        }
+        .group:hover .card-front-title {
+          transform: translate3d(0, -100px, 0);
+          opacity: 0;
+        }
+        .card-hover-details {
+          opacity: 0;
+          transform: translate3d(0, 25px, 0);
+          transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1), transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+          will-change: transform, opacity;
+          -webkit-font-smoothing: antialiased;
+        }
+        .group:hover .card-hover-details {
+          opacity: 1;
+          transform: translate3d(0, 0, 0);
+        }
+        /* Staggered lists entry */
+        .card-hover-details li {
+          opacity: 0;
+          transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+          will-change: opacity;
+        }
+        .group:hover .card-hover-details li:nth-child(1) { transition-delay: 0.1s; opacity: 1; }
+        .group:hover .card-hover-details li:nth-child(2) { transition-delay: 0.15s; opacity: 1; }
+        .group:hover .card-hover-details li:nth-child(3) { transition-delay: 0.2s; opacity: 1; }
+        .group:hover .card-hover-details li:nth-child(4) { transition-delay: 0.25s; opacity: 1; }
+        .front-icon {
+          filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.75));
+          transition: transform 0.4s ease-out, filter 0.3s;
+        }
+        .group:hover .front-icon {
+          filter: none;
+        }
+        .hover-icon {
+          filter: drop-shadow(0 0 1px rgba(255, 255, 255, 0.5));
+          transition: filter 0.45s ease-out, color 0.45s;
+        }
+        .group:hover .hover-icon {
+          color: var(--accent-color) !important;
+          filter: drop-shadow(0 0 5px var(--accent-color));
         }
       `}</style>
 
