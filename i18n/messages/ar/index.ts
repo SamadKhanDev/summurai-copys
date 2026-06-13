@@ -12,6 +12,7 @@ import partners from "./partners";
 import insights from "./insights";
 import caseStudies from "./caseStudies";
 import careers from "./careers";
+import privacy from "./privacy";
 
 const messages = {
   navbar,
@@ -28,6 +29,7 @@ const messages = {
   insights,
   caseStudies,
   careers,
+  privacy,
 } as const;
 
 export default messages;

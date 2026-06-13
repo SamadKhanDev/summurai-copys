@@ -67,9 +67,8 @@ export default function AboutPage() {
               { key: "clients", icon: "2,800+" },
               { key: "expertise", icon: "15+" },
             ].map((stat) => (
-              <ScrollReveal delay={0.5}>
-
-                <Card key={stat.key} className="text-center">
+              <ScrollReveal key={stat.key} delay={0.5}>
+                <Card className="text-center">
                   <div className="text-4xl font-extrabold text-text-main mb-2">
                     {t(`stats.${stat.key}.value`)}
                   </div>

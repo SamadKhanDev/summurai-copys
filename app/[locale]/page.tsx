@@ -34,7 +34,8 @@ import {
   Building,
 } from "lucide-react";
 import HeroSection from "./components/HeroSection";
-import { Server } from "lucide-react";
+import { Server, Globe, FileText, Database, Cpu } from "lucide-react";
+import { motion } from "framer-motion";
 import { Link } from "@/i18n/navigation";
 import PAMPage from "./components/PAMPage";
 import ChatWizardModal from "./components/ChatWizardModal";
@@ -52,6 +53,7 @@ export default function HomePage() {
   const tCommon = useTranslations("common");
   const tInd = useTranslations("industries");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isCtaHovered, setIsCtaHovered] = useState(false);
 
   return (
     <>
@@ -565,7 +567,223 @@ export default function HomePage() {
       <GlobalPresenceSection />
 
       {/* Final CTA */}
-      <Section className="text-center">
+      <Section className="text-center relative overflow-hidden">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-accent/5 rounded-full blur-[120px] pointer-events-none" />
+        
+        {/* Floating cards left side */}
+        <motion.div 
+          className="absolute left-[2%] xl:left-[6%] top-1/2 -translate-y-1/2 hidden lg:block w-[136px] h-[136px] border border-transparent pointer-events-none select-none"
+          initial={{
+            borderColor: "rgba(255, 255, 255, 0)",
+            backgroundColor: "rgba(255, 255, 255, 0)"
+          }}
+          animate={{
+            borderColor: "rgba(255, 255, 255, 0)",
+            backgroundColor: isCtaHovered ? "rgba(255, 255, 255, 0.02)" : "rgba(255, 255, 255, 0)"
+          }}
+          transition={{ duration: 0.3 }}
+        >
+          {/* Selection corner brackets */}
+          <motion.div className="absolute top-0 left-0 w-3.5 h-3.5 border-t border-l border-white/60" initial={{ opacity: 0 }} animate={{ opacity: isCtaHovered ? 1 : 0 }} transition={{ duration: 0.3 }} />
+          <motion.div className="absolute top-0 right-0 w-3.5 h-3.5 border-t border-r border-white/60" initial={{ opacity: 0 }} animate={{ opacity: isCtaHovered ? 1 : 0 }} transition={{ duration: 0.3 }} />
+          <motion.div className="absolute bottom-0 left-0 w-3.5 h-3.5 border-b border-l border-white/60" initial={{ opacity: 0 }} animate={{ opacity: isCtaHovered ? 1 : 0 }} transition={{ duration: 0.3 }} />
+          <motion.div className="absolute bottom-0 right-0 w-3.5 h-3.5 border-b border-r border-white/60" initial={{ opacity: 0 }} animate={{ opacity: isCtaHovered ? 1 : 0 }} transition={{ duration: 0.3 }} />
+
+          {/* Card 1: Globe (Top-Center) */}
+          <motion.div
+            className="absolute left-[40px] top-[10px] w-14 h-14 rounded-xl border border-dashed border-white/20 bg-background-tertiary/80 backdrop-blur-md flex items-center justify-center shadow-lg"
+            initial={{ y: -150, opacity: 0 }}
+            animate={isCtaHovered ? {
+              x: 0,
+              y: 0,
+              rotate: 0,
+              opacity: 1,
+              borderColor: "rgba(255, 255, 255, 0.3)",
+              boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.4)",
+              zIndex: 10
+            } : {
+              x: 20,
+              y: [-45, -50, -45],
+              rotate: -12,
+              opacity: 1,
+              borderColor: "rgba(255, 255, 255, 0.08)",
+              boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.3)",
+              zIndex: 10,
+              transition: {
+                y: { repeat: Infinity, duration: 4, ease: "easeInOut" }
+              }
+            }}
+            transition={{ type: "spring", stiffness: 120, damping: 14 }}
+          >
+            <Globe className="w-6 h-6 text-white/70" />
+          </motion.div>
+
+          {/* Card 2: FileText (Bottom-Left) */}
+          <motion.div
+            className="absolute left-[10px] top-[70px] w-14 h-14 rounded-xl border border-dashed border-white/20 bg-background-tertiary/80 backdrop-blur-md flex items-center justify-center shadow-lg"
+            initial={{ y: -150, opacity: 0 }}
+            animate={isCtaHovered ? {
+              x: 0,
+              y: 0,
+              rotate: 0,
+              opacity: 1,
+              borderColor: "rgba(255, 255, 255, 0.3)",
+              boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.4)",
+              zIndex: 20
+            } : {
+              x: -70,
+              y: [10, 15, 10],
+              rotate: 15,
+              opacity: 1,
+              borderColor: "rgba(255, 255, 255, 0.08)",
+              boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.3)",
+              zIndex: 20,
+              transition: {
+                y: { repeat: Infinity, duration: 4, ease: "easeInOut", delay: 0.5 }
+              }
+            }}
+            transition={{ type: "spring", stiffness: 120, damping: 14 }}
+          >
+            <FileText className="w-6 h-6 text-text-main" />
+          </motion.div>
+
+          {/* Card 3: Database (Bottom-Right) */}
+          <motion.div
+            className="absolute left-[70px] top-[70px] w-14 h-14 rounded-xl border border-dashed border-white/20 bg-background-tertiary/80 backdrop-blur-md flex items-center justify-center shadow-lg"
+            initial={{ y: -150, opacity: 0 }}
+            animate={isCtaHovered ? {
+              x: 0,
+              y: 0,
+              rotate: 0,
+              opacity: 1,
+              borderColor: "rgba(255, 255, 255, 0.3)",
+              boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.4)",
+              zIndex: 30
+            } : {
+              x: 30,
+              y: [80, 75, 80],
+              rotate: -8,
+              opacity: 1,
+              borderColor: "rgba(255, 255, 255, 0.08)",
+              boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.3)",
+              zIndex: 30,
+              transition: {
+                y: { repeat: Infinity, duration: 4, ease: "easeInOut", delay: 1 }
+              }
+            }}
+            transition={{ type: "spring", stiffness: 120, damping: 14 }}
+          >
+            <Database className="w-6 h-6 text-white/70" />
+          </motion.div>
+        </motion.div>
+
+        {/* Floating cards right side */}
+        <motion.div 
+          className="absolute right-[2%] xl:right-[6%] top-1/2 -translate-y-1/2 hidden lg:block w-[136px] h-[136px] border border-transparent pointer-events-none select-none"
+          initial={{
+            borderColor: "rgba(255, 255, 255, 0)",
+            backgroundColor: "rgba(255, 255, 255, 0)"
+          }}
+          animate={{
+            borderColor: "rgba(255, 255, 255, 0)",
+            backgroundColor: isCtaHovered ? "rgba(255, 255, 255, 0.02)" : "rgba(255, 255, 255, 0)"
+          }}
+          transition={{ duration: 0.3 }}
+        >
+          {/* Selection corner brackets */}
+          <motion.div className="absolute top-0 left-0 w-3.5 h-3.5 border-t border-l border-white/60" initial={{ opacity: 0 }} animate={{ opacity: isCtaHovered ? 1 : 0 }} transition={{ duration: 0.3 }} />
+          <motion.div className="absolute top-0 right-0 w-3.5 h-3.5 border-t border-r border-white/60" initial={{ opacity: 0 }} animate={{ opacity: isCtaHovered ? 1 : 0 }} transition={{ duration: 0.3 }} />
+          <motion.div className="absolute bottom-0 left-0 w-3.5 h-3.5 border-b border-l border-white/60" initial={{ opacity: 0 }} animate={{ opacity: isCtaHovered ? 1 : 0 }} transition={{ duration: 0.3 }} />
+          <motion.div className="absolute bottom-0 right-0 w-3.5 h-3.5 border-b border-r border-white/60" initial={{ opacity: 0 }} animate={{ opacity: isCtaHovered ? 1 : 0 }} transition={{ duration: 0.3 }} />
+
+          {/* Card 1: Server (Top-Center) */}
+          <motion.div
+            className="absolute left-[40px] top-[10px] w-14 h-14 rounded-xl border border-dashed border-white/20 bg-background-tertiary/80 backdrop-blur-md flex items-center justify-center shadow-lg"
+            initial={{ y: -150, opacity: 0 }}
+            animate={isCtaHovered ? {
+              x: 0,
+              y: 0,
+              rotate: 0,
+              opacity: 1,
+              borderColor: "rgba(255, 255, 255, 0.3)",
+              boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.4)",
+              zIndex: 10
+            } : {
+              x: -20,
+              y: [-45, -50, -45],
+              rotate: 12,
+              opacity: 1,
+              borderColor: "rgba(255, 255, 255, 0.08)",
+              boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.3)",
+              zIndex: 10,
+              transition: {
+                y: { repeat: Infinity, duration: 4, ease: "easeInOut" }
+              }
+            }}
+            transition={{ type: "spring", stiffness: 120, damping: 14 }}
+          >
+            <Server className="w-6 h-6 text-text-main" />
+          </motion.div>
+
+          {/* Card 2: Shield (Bottom-Left) */}
+          <motion.div
+            className="absolute left-[10px] top-[70px] w-14 h-14 rounded-xl border border-dashed border-white/20 bg-background-tertiary/80 backdrop-blur-md flex items-center justify-center shadow-lg"
+            initial={{ y: -150, opacity: 0 }}
+            animate={isCtaHovered ? {
+              x: 0,
+              y: 0,
+              rotate: 0,
+              opacity: 1,
+              borderColor: "rgba(255, 255, 255, 0.3)",
+              boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.4)",
+              zIndex: 20
+            } : {
+              x: -60,
+              y: [50, 45, 50],
+              rotate: -15,
+              opacity: 1,
+              borderColor: "rgba(255, 255, 255, 0.08)",
+              boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.3)",
+              zIndex: 20,
+              transition: {
+                y: { repeat: Infinity, duration: 4, ease: "easeInOut", delay: 0.7 }
+              }
+            }}
+            transition={{ type: "spring", stiffness: 120, damping: 14 }}
+          >
+            <Shield className="w-6 h-6 text-white/70" />
+          </motion.div>
+
+          {/* Card 3: Cpu (Bottom-Right) */}
+          <motion.div
+            className="absolute left-[70px] top-[70px] w-14 h-14 rounded-xl border border-dashed border-white/20 bg-background-tertiary/80 backdrop-blur-md flex items-center justify-center shadow-lg"
+            initial={{ y: -150, opacity: 0 }}
+            animate={isCtaHovered ? {
+              x: 0,
+              y: 0,
+              rotate: 0,
+              opacity: 1,
+              borderColor: "rgba(255, 255, 255, 0.3)",
+              boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.4)",
+              zIndex: 30
+            } : {
+              x: 70,
+              y: [15, 19, 15],
+              rotate: 8,
+              opacity: 1,
+              borderColor: "rgba(255, 255, 255, 0.08)",
+              boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.3)",
+              zIndex: 30,
+              transition: {
+                y: { repeat: Infinity, duration: 4, ease: "easeInOut", delay: 1.2 }
+              }
+            }}
+            transition={{ type: "spring", stiffness: 120, damping: 14 }}
+          >
+            <Cpu className="w-6 h-6 text-white/70" />
+          </motion.div>
+        </motion.div>
+
         <AnimatedHeading
           titleText={t("finalCta.title")}
           accentText={t("finalCta.titleAccent")}
@@ -576,7 +794,12 @@ export default function HomePage() {
           <p className="text-text-secondary mt-4 mb-10 text-base max-w-2xl mx-auto">
             {t("finalCta.description")}
           </p>
-          <Button variant="fill" size="lg" onClick={() => setIsModalOpen(true)}
+          <Button 
+            variant="fill" 
+            size="lg" 
+            onClick={() => setIsModalOpen(true)}
+            onMouseEnter={() => setIsCtaHovered(true)}
+            onMouseLeave={() => setIsCtaHovered(false)}
           >
             {t("finalCta.cta")}
           </Button>

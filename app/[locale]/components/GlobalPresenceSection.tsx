@@ -181,8 +181,8 @@ export default function GlobalPresenceSection() {
           {/* Office list */}
           <div className="flex flex-col divide-y divide-white/10 self-center">
             {offices.map((o) => (
-              <ScrollReveal animation="fadeUp" delay={0.5}>
-              <div key={o.num} className="flex items-start gap-6 py-5">
+              <ScrollReveal key={o.num} animation="fadeUp" delay={0.5}>
+              <div className="flex items-start gap-6 py-5">
                 <span className="font-jetbrains-mono text-[11px] text-white/25 pt-1 w-5 shrink-0">
                   {o.num}
                 </span>

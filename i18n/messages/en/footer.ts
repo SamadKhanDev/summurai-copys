@@ -6,6 +6,7 @@ const footer = {
     description: "Samurai Systems — an affiliate of Neusol. We build long-term partnerships that empower organizations to thrive in a fast-evolving digital world.",
     email: "connect@samurai.systems",
     phone: "+966 11 292 3918",
+    location: "Riyadh, Saudi Arabia",
     affiliate: "Affiliate of Neusol",
   },
   services: {
