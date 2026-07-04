@@ -453,7 +453,8 @@ export default function HomePage() {
 
             return (
               <ScrollReveal key={index} delay={index * 0.05} animation="blur" className="relative overflow-visible">
-                <div
+                <Link
+                  href={{ pathname: '/industries', hash: industry.key }}
                   className={`group relative block w-full h-[260px] rounded-[18px] overflow-hidden cursor-pointer ${industry.borderColor} border transition-all duration-400 ease-out feature-card ${industry.shadow} ${industry.borderGlow}`}
                   style={{
                     background: industry.cardBg,
@@ -493,15 +494,14 @@ export default function HomePage() {
                         ))}
                       </ul>
                     </div>
-                    <Link
-                      href={{ pathname: '/industries', hash: industry.key }}
-                      className="px-5 py-2 rounded-full bg-[var(--accent-color)] text-white text-[10.5px] font-black transition-all duration-300 uppercase tracking-wider shadow-md inline-flex items-center gap-1"
+                    <span
+                      className="px-5 py-2 rounded-full bg-[var(--accent-color)] text-white text-[10.5px] font-black transition-all duration-300 uppercase tracking-wider shadow-md inline-flex items-center gap-1 cursor-pointer"
                     >
                       Learn More
                       <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
-                    </Link>
+                    </span>
                   </div>
-                </div>
+                </Link>
               </ScrollReveal>
             );
           })}
