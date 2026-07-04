@@ -1,130 +1,366 @@
-"use client";
+'use client';
 
-import { useTranslations } from "next-intl";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
-import {
-  Breadcrumb,
-  Section,
-  SectionLabel,
-  SectionTitle,
-  SectionDescription,
-  Card,
-  CardTitle,
-  CardDescription,
-  CardLink,
-  Tag,
-} from "../components/ui";
-import { Shield, Cloud, Scale, RefreshCw, Bot, Settings, Server } from "lucide-react";
-import { Pathnames } from "@/i18n/routing";
-import { AnimatedHeading } from "../components/animations/textBehavior";
-import ScrollReveal from "../components/animations/ScrollReveal";
+import React, { useEffect, useRef } from 'react';
+import CarouselCanvas from '../components/CarouselCanvas';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 export default function ServicesPage() {
-  const t = useTranslations("services");
+  const designInRef = useRef<HTMLDivElement>(null);
+  const motionRef = useRef<HTMLDivElement>(null);
+  const summuraiRef = useRef<HTMLDivElement>(null);
+  const systemRef = useRef<HTMLDivElement>(null);
+  const subtitleRef = useRef<HTMLDivElement>(null);
+  const backgroundTypographyRef = useRef<HTMLDivElement>(null);
+  const carouselContainerRef = useRef<HTMLDivElement>(null);
+  const introRef = useRef<HTMLDivElement>(null);
 
-  const services = [
-    {
-      icon: Shield,
-      key: "cyber",
-      href: "/services/cybersecurity",
-      tags: ["SIEM/SOAR", "EDR/XDR", "NCA ECC", "MITRE ATT&CK", "Zero Trust", "VA/PT"],
-    },
-    {
-      icon: Cloud,
-      key: "cloud",
-      href: "/services/cloud",
-      tags: ["Azure", "AWS", "Oracle OCI", "ITSM", "Hybrid IT"],
-    },
-    {
-      icon: Scale,
-      key: "grc",
-      href: "/services/grc",
-      tags: ["NCA ECC", "PDPL", "ISO 27001", "vCISO", "NDMO"],
-    },
-    {
-      icon: RefreshCw,
-      key: "bcm",
-      href: "/services/business-continuity",
-      tags: ["SAMA BCM", "ISO 22301", "BIA", "DR", "RTO/RPO"],
-    },
-    {
-      icon: Bot,
-      key: "ai",
-      href: "/services/ai",
-      tags: ["LangChain", "AutoGPT", "NLP", "Computer Vision", "OCR"],
-    },
-    {
-      icon: Settings,
-      key: "dt",
-      href: "/services/digital-transformation",
-      tags: ["RPA", "Power BI", "Custom Dev", "Data Warehousing"],
-    },
-    {
-      icon: Server,
-      key: "infrastructure",
-      href: "/services/cloud-infrastructure",
-      tags: ["Azure", "AWS", "SITE Cloud", "Oracle OCI", "CSPM", "OT/ICS", "SCADA"],
-    },
-  ];
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // 1. DESIGN IN MOTION Line Slide (Scroll Down: Design In goes Left, Motion goes Right)
+      gsap.to(designInRef.current, {
+        x: '-12vw',
+        scale: 0.95,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: 'body',
+          start: 'top top',
+          end: '50% top',
+          scrub: true,
+        },
+      });
+
+      gsap.to(motionRef.current, {
+        x: '12vw',
+        scale: 0.95,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: 'body',
+          start: 'top top',
+          end: '50% top',
+          scrub: true,
+        },
+      });
+
+      // 2. DESIGN IN MOTION Character Glass Shatter/Fade Out
+      const designChars = document.querySelectorAll('.design-char');
+      designChars.forEach((char) => {
+        const randomX = (Math.random() - 0.5) * 800;
+        const randomY = (Math.random() - 0.5) * 500;
+        const randomZ = -1000 + Math.random() * 1200;
+        const randomRotX = (Math.random() - 0.5) * 720;
+        const randomRotY = (Math.random() - 0.5) * 720;
+        const randomRotZ = (Math.random() - 0.5) * 360;
+        const randomScale = 0.5 + Math.random() * 1.0;
+
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: 'body',
+            start: 'top top',
+            end: '45% top',
+            scrub: true,
+          }
+        });
+
+        tl.to(char, {
+          x: randomX,
+          y: randomY,
+          z: randomZ,
+          rotationX: randomRotX,
+          rotationY: randomRotY,
+          rotationZ: randomRotZ,
+          scale: randomScale,
+          opacity: 0,
+          ease: 'power1.in',
+        });
+      });
+
+      // 3. SUMMURAI SYSTEM Line Slide (Scroll Down: Summurai goes Left, System goes Right)
+      gsap.fromTo(summuraiRef.current,
+        { x: '12vw' },
+        {
+          x: '-12vw',
+          ease: 'none',
+          scrollTrigger: {
+            trigger: 'body',
+            start: '25% top',
+            end: '100% top',
+            scrub: true,
+          },
+        }
+      );
+
+      gsap.fromTo(systemRef.current,
+        { x: '-12vw' },
+        {
+          x: '12vw',
+          ease: 'none',
+          scrollTrigger: {
+            trigger: 'body',
+            start: '25% top',
+            end: '100% top',
+            scrub: true,
+          },
+        }
+      );
+
+      // 4. SUMMURAI SYSTEM Character Assemble, Stay, and Shatter/Fade Out
+      const summuraiChars = document.querySelectorAll('.summurai-char');
+      summuraiChars.forEach((char) => {
+        const randomX = (Math.random() - 0.5) * 800;
+        const randomY = (Math.random() - 0.5) * 500;
+        const randomZ = -1000 + Math.random() * 1200;
+        const randomRotX = (Math.random() - 0.5) * 720;
+        const randomRotY = (Math.random() - 0.5) * 720;
+        const randomRotZ = (Math.random() - 0.5) * 360;
+        const randomScale = 0.5 + Math.random() * 1.0;
+
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: 'body',
+            start: '20% top',
+            end: '100% top',
+            scrub: true,
+          }
+        });
+
+        // Start scattered and assemble to solid text
+        tl.fromTo(char, {
+          x: randomX,
+          y: randomY,
+          z: randomZ,
+          rotationX: randomRotX,
+          rotationY: randomRotY,
+          rotationZ: randomRotZ,
+          scale: randomScale,
+          opacity: 0,
+        }, {
+          x: 0,
+          y: 0,
+          z: 0,
+          rotationX: 0,
+          rotationY: 0,
+          rotationZ: 0,
+          scale: 1,
+          opacity: 0.1,
+          duration: 0.4,
+          ease: 'power1.out',
+        });
+
+        // Stay assembled for a while
+        tl.to(char, {
+          duration: 0.2,
+        });
+
+        // Shatter at the end
+        tl.to(char, {
+          x: randomX * 0.6,
+          y: randomY * 0.6,
+          z: randomZ * 0.6,
+          rotationX: randomRotX * 0.6,
+          rotationY: randomRotY * 0.6,
+          rotationZ: randomRotZ * 0.6,
+          scale: randomScale,
+          opacity: 0,
+          duration: 0.4,
+          ease: 'power1.in',
+        });
+      });
+
+      // Subtle scale for subtitle
+      gsap.to(subtitleRef.current, {
+        scale: 0.95,
+        opacity: 0.6,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: 'body',
+          start: 'top top',
+          end: 'bottom bottom',
+          scrub: true,
+        },
+      });
+
+      // 5. Fade out intro block on scroll
+      gsap.to(introRef.current, {
+        opacity: 0,
+        y: -60,
+        scale: 0.92,
+        ease: 'power1.out',
+        scrollTrigger: {
+          trigger: 'body',
+          start: 'top top',
+          end: '12% top',
+          scrub: true,
+        }
+      });
+    });
+
+    return () => ctx.revert();
+  }, []);
 
   return (
     <>
-      <Navbar />
-      <div className="pt-16">
-        <Breadcrumb
-          items={[
-            { label: "Home", href: "/" },
-            { label: t("breadcrumb") },
-          ]}
-        />
+      {/* Navbar wrapper with z-50 to stay on top of the 3D Canvas */}
+      <div className="relative z-50">
+        <Navbar />
+      </div>
 
-        <div className="bg-background-secondary py-20 px-8">
-          <div className="max-w-7xl mx-auto">
-            <SectionLabel>{t("hero.label")}</SectionLabel>
-            <AnimatedHeading
-              titleText={t("hero.title")}
-              accentText={t("hero.titleAccent")}
-              className="mb-4"
-              Component={SectionTitle}
-            />
-            <ScrollReveal animation="fadeUp" delay={0.2}>
-              <SectionDescription>{t("hero.description")}</SectionDescription>
-            </ScrollReveal>
+      <div className="relative w-full min-h-[300vh] bg-black text-white overflow-x-hidden select-none">
+
+        {/* Background Video */}
+        <div className="fixed inset-0 w-full h-full z-0 overflow-hidden pointer-events-none opacity-100">
+          <video
+            src="https://trionn.com/video/homepage-services-video.mp4"
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="w-full h-full object-cover"
+          />
+        </div>
+
+        {/* Fixed Fullscreen 3D Canvas */}
+        <div ref={carouselContainerRef} className="fixed top-0 left-0 w-screen h-screen z-20 pointer-events-none">
+          <CarouselCanvas />
+        </div>
+
+        {/* Fixed Left Sidebar Panel for Intro Text */}
+        <div
+          ref={introRef}
+          className="fixed left-0 top-0 h-screen w-full md:w-[450px] lg:w-[500px] z-30 px-8 md:px-16 flex flex-col justify-center bg-gradient-to-r from-black via-black/85 to-transparent backdrop-blur-[2px] pointer-events-none"
+        >
+          <div className="flex flex-col gap-5 max-w-sm">
+            <div className="flex items-center gap-3">
+              <span className="text-[10.5px] font-mono font-bold tracking-[0.25em] text-red-500 uppercase">
+                Our Services
+              </span>
+              <div className="w-10 h-[1px] bg-red-500/30" />
+              <span className="text-[9.5px] font-mono tracking-widest text-neutral-400 uppercase">
+                Summurai
+              </span>
+            </div>
+
+            <h1 className="text-3xl md:text-4xl lg:text-[42px] font-extrabold uppercase text-white tracking-tight leading-[1.08]">
+              Seven Pillars.<br />One Operating System.
+            </h1>
+
+            <p className="text-xs md:text-sm text-neutral-300 leading-relaxed mt-2 font-medium">
+              A holistic ecosystem engineered to protect, modernize, and scale your most critical digital assets — fully aligned with Saudi regulatory frameworks.
+            </p>
           </div>
         </div>
 
-        <Section>
-          <div className="space-y-6">
-            {services.map((service) => (
-              <ScrollReveal key={service.key} animation="fadeUp" delay={0.5}>
-                <div
-                  className="bg-card-bg border border-card-border rounded-xl p-8 hover:border-accent/40 transition-all"
+        {/* Massive Semi-transparent Background Typography (With 3D Perspective) */}
+        <div
+          ref={backgroundTypographyRef}
+          className="fixed inset-0 flex flex-col items-center justify-center pointer-events-none z-10 overflow-hidden font-sans font-black uppercase text-white tracking-tighter leading-[0.82] text-center"
+          style={{ perspective: '1200px' }}
+        >
+          {/* SUMMURAI SERVICES block */}
+          <div className="absolute inset-0 flex flex-col items-center justify-center">
+            <div
+              ref={designInRef}
+              className="text-[14vw] flex justify-center gap-[0.02em]"
+              style={{ willChange: 'transform' }}
+            >
+              {"SUMMURAI".split("").map((char, index) => (
+                <span
+                  key={index}
+                  className="inline-block design-char opacity-10 text-white"
+                  style={{ willChange: 'transform' }}
                 >
-                  <div className="flex items-start gap-4 mb-4">
-                    <service.icon className="w-8 h-8 text-text-main flex-shrink-0" />
-                    <div className="flex-1">
-                      <h2 className="text-xl font-bold text-white mb-3">
-                        {t(`${service.key}.breadcrumb`)}
-                      </h2>
-                      <p className="text-sm text-text-secondary mb-4">
-                        {t(`${service.key}.description`)}
-                      </p>
-                      <div className="flex flex-wrap gap-2 mb-4">
-                        {service.tags.map((tag, index) => (
-                          <Tag key={index}>{tag}</Tag>
-                        ))}
-                      </div>
-                      <CardLink href={service.href as Pathnames}>Explore →</CardLink>
-                    </div>
-                  </div>
-                </div>
-              </ScrollReveal>
-            ))}
+                  {char === " " ? "\u00A0" : char}
+                </span>
+              ))}
+            </div>
+            <div
+              ref={motionRef}
+              className="text-[14vw] flex justify-center gap-[0.02em]"
+              style={{ willChange: 'transform' }}
+            >
+              {"SYSTEMS".split("").map((char, index) => (
+                <span
+                  key={index}
+                  className="inline-block design-char opacity-10 text-white"
+                  style={{ willChange: 'transform' }}
+                >
+                  {char === " " ? "\u00A0" : char}
+                </span>
+              ))}
+            </div>
           </div>
-        </Section>
+
+          {/* SUMMURAI SERVICES block (Assembled) */}
+          <div className="absolute inset-0 flex flex-col items-center justify-center">
+            <div
+              ref={summuraiRef}
+              className="text-[14vw] flex justify-center gap-[0.02em]"
+              style={{ willChange: 'transform' }}
+            >
+              {"SUMMURAI".split("").map((char, index) => (
+                <span
+                  key={index}
+                  className="inline-block summurai-char opacity-0 text-white"
+                  style={{ willChange: 'transform' }}
+                >
+                  {char === " " ? "\u00A0" : char}
+                </span>
+              ))}
+            </div>
+            <div
+              ref={systemRef}
+              className="text-[14vw] flex justify-center gap-[0.02em]"
+              style={{ willChange: 'transform' }}
+            >
+              {"SYSTEMS".split("").map((char, index) => (
+                <span
+                  key={index}
+                  className="inline-block summurai-char opacity-0 text-white"
+                  style={{ willChange: 'transform' }}
+                >
+                  {char === " " ? "\u00A0" : char}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <div
+            ref={subtitleRef}
+            className="mt-6 text-xs font-bold tracking-[0.3em] text-neutral-400 opacity-80"
+          >
+          </div>
+        </div>
+
+        {/* Left Scroll helper text */}
+        <div className="fixed left-12 top-1/2 -translate-y-1/2 z-20 flex flex-col items-center gap-4 pointer-events-none">
+          <span className="text-[10px] tracking-[0.2em] font-semibold text-neutral-400 vertical-text uppercase">Scroll</span>
+          <div className="w-[2px] h-16 bg-neutral-800 relative rounded-full overflow-hidden">
+            <div className="absolute top-0 left-0 w-full h-1/3 bg-white rounded-full animate-bounce" />
+          </div>
+        </div>
+
+        {/* Scrollable Spacer Area */}
+        <div className="h-[300vh] w-full" />
+
+        {/* Footer wrapper with relative z-30 to scroll up on top of canvas */}
+        <div className="relative z-30 bg-black border-t border-card-border">
+          <Footer />
+        </div>
       </div>
-      <Footer />
+
+      <style jsx global>{`
+        .vertical-text {
+          writing-mode: vertical-rl;
+          text-orientation: mixed;
+          transform: rotate(180deg);
+        }
+      `}</style>
     </>
   );
 }

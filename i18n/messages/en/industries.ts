@@ -1,6 +1,6 @@
 const industries = {
-  breadcrumb: "Industries",
-  label: "Industries",
+  breadcrumb: "Work",
+  label: "Work",
   title: "We Know ",
   titleAccent: "Your Sector.",
   description: "Saudi enterprise buyers need to see their own sector. Our solutions are tailored to the regulatory and operational realities of your industry.",
