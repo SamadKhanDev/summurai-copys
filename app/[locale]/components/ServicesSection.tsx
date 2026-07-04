@@ -71,7 +71,7 @@ function ServiceCard({
     delay,
 }: {
     serviceKey: string;
-    icon: React.ElementType;
+    icon: React.ComponentType<{ className?: string }>;
     href: string;
     delay: number;
 }) {
