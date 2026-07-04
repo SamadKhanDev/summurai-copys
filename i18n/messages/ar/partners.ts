@@ -1,0 +1,42 @@
+const partners = {
+  breadcrumb: "الشركاء",
+  label: "شركاء التحالف التكنولوجي",
+  title: "أفضل التحالفات ",
+  titleAccent: "التكنولوجية في فئتها.",
+  description: "نحن نشارك أبرز مزودي التكنولوجيا الرائدين في العالم لتقديم حلول شاملة ومتميزة تلبي جميع متطلبات الأمن وتقنية المعلومات لمؤسستك.",
+  list: [
+    { name: "Cisco", description: "البنية التحتية للشبكات والأمن والتعاون" },
+    { name: "Microsoft", description: "حلول السحابة والإنتاجية والهوية" },
+    { name: "IBM", description: "منصات الأمن والتحليلات للمؤسسات" },
+    { name: "Fortinet", description: "جدران الحماية من الجيل التالي والنسيج الأمني" },
+    { name: "VMware", description: "الافتراضية وإدارة المنصات متعددة السحابة" },
+    { name: "Dell", description: "الأجهزة والبنية التحتية للمؤسسات" },
+    { name: "Broadcom", description: "البرمجيات وحلول الأمن للمؤسسات" },
+    { name: "Forcepoint", description: "الأمن المتمحور حول البيانات وحماية تسربها (DLP)" },
+    { name: "Wallix", description: "إدارة الوصول المميز (PAM)" },
+    { name: "One Identity", description: "حوكمة وإدارة الهوية" },
+    { name: "Symantec", description: "أمن نقاط النهاية والمعلومات" },
+    { name: "HPE", description: "الخوادم والتخزين والبنية التحتية السحابية" },
+    { name: "Recorded Future", description: "منصة استخبارات التهديدات" },
+    { name: "McAfee", description: "أمن نقاط النهاية والسحابة" },
+    { name: "Tenable", description: "إدارة الثغرات الأمنية والكشف عن المخاطر" },
+    { name: "SolarWinds", description: "مراقبة وإدارة تقنية المعلومات" },
+    { name: "Sophos", description: "أمن نقاط النهاية والشبكات من الجيل التالي" },
+    { name: "Thales", description: "حماية البيانات وتشفيرها" },
+    { name: "NetApp", description: "إدارة البيانات السحابية الهجينة" },
+    { name: "Dynatrace", description: "منصة مراقبة الأداء و AIOps" },
+    { name: "Trend Micro", description: "الأمن السحابي والهجين" },
+    { name: "Red Hat", description: "حلول برمجيات المؤسسات مفتوحة المصدر" },
+    { name: "Redgate", description: "أدوات عمليات ديف أوبس لقواعد البيانات (DevOps)" },
+    { name: "NetIQ", description: "إدارة الهوية والوصول" },
+    { name: "Evolveum", description: "منصة حوكمة الهوية" },
+  ],
+  callout: {
+    title: "لماذا تشترك مع ساموراي؟",
+    description: "أكثر من 15 عاماً من الخبرة في التنفيذ، وخدمة أكثر من 2,800 مؤسسة، ومعرفة إقليمية عميقة تجعل من ساموراي الشريك المفضل لنشر التكنولوجيا للمؤسسات في المملكة العربية السعودية والخليج.",
+    cta: "كن شريكاً لنا ←",
+  },
+} as const;
+
+export default partners;
+export type PartnersMessages = typeof partners;
