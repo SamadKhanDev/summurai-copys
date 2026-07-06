@@ -1,10 +1,17 @@
 "use client";
 
-import { useRef, useEffect } from "react";
+import { useRef, useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { Trophy, Link2, ShieldCheck, MapPin } from "lucide-react";
 import { SectionLabel, SectionTitle } from "./ui";
 import { AnimatedHeading } from "./animations/textBehavior";
+import RingsCanvas from "./RingsCanvas";
+import { useGSAP } from "@gsap/react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { motion } from "framer-motion";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const ITEMS = [
   { key: "expertise", icon: Trophy },
@@ -15,140 +22,192 @@ const ITEMS = [
 
 export default function WhySamurai() {
   const t = useTranslations("home.whySamurai");
-  const revealRefs = useRef<(HTMLElement | null)[]>([]);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const pinRef = useRef<HTMLDivElement>(null);
+  const [progress, setProgress] = useState(0);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 
+  // Check prefers-reduced-motion
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("opacity-100", "translate-y-0");
-            entry.target.classList.remove("opacity-0", "translate-y-7");
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-    revealRefs.current.forEach((el) => el && observer.observe(el));
-    return () => observer.disconnect();
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setPrefersReducedMotion(mediaQuery.matches);
+    const listener = (e: MediaQueryListEvent) => setPrefersReducedMotion(e.matches);
+    mediaQuery.addEventListener("change", listener);
+    return () => mediaQuery.removeEventListener("change", listener);
   }, []);
 
-  const addRef = (i: number) => (el: HTMLElement | null) => {
-    revealRefs.current[i] = el;
+  // GSAP ScrollTrigger setup
+  useGSAP(() => {
+    if (prefersReducedMotion) return;
+
+    const trigger = ScrollTrigger.create({
+      trigger: containerRef.current,
+      start: "top top",
+      end: "+=300%", // scroll distance
+      pin: pinRef.current,
+      scrub: 1,
+      anticipatePin: 1,
+      onUpdate: (self) => {
+        setProgress(self.progress);
+      },
+    });
+
+    // Delay refresh to ensure preceding elements have settled their heights
+    const timer = setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 800);
+
+    return () => {
+      trigger.kill();
+      clearTimeout(timer);
+    };
+  }, { scope: containerRef, dependencies: [prefersReducedMotion] });
+
+  // Math for N items
+  const N = ITEMS.length;
+  const radius = 39.5; // in vh units
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
   };
 
   return (
-    <section
-      className="relative overflow-hidden py-28 px-8"
-      style={{ background: "#07080D" }}
-    >
-      {/* Faint grid */}
+    <div ref={containerRef} className="relative w-full">
       <div
-        className="absolute inset-0 pointer-events-none"
-      // style={{
-      //   backgroundImage: `
-      //     linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
-      //     linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px)
-      //   `,
-      //   backgroundSize: "48px 48px",
-      // }}
-      />
+        ref={pinRef}
+        className="relative w-full h-screen overflow-hidden text-white z-10"
+        style={{ background: "#050505" }}
+      >
+        {/* 3D background rings */}
+        {!prefersReducedMotion && (
+          <RingsCanvas progress={progress} />
+        )}
 
-      {/* Subtle center glow */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(ellipse 60% 50% at 50% 50%, rgba(225,29,72,0.06), transparent 70%)",
-        }}
-      />
-
-      {/* Top border */}
-      <div
-        className="absolute top-0 left-0 right-0 h-px pointer-events-none"
-        style={{ background: "rgba(255,255,255,0.05)" }}
-      />
-
-      <div className="relative z-10 max-w-7xl mx-auto">
-
-        {/* Label */}
-        <SectionLabel className="mb-4">{t("label")}</SectionLabel>
+        {/* Grid overlay */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff02_1px,transparent_1px),linear-gradient(to_bottom,#ffffff02_1px,transparent_1px)] bg-[size:4rem_4rem] pointer-events-none z-10" />
 
 
-        {/* Title */}
-        <AnimatedHeading
-          titleText={t("title")}
-          accentText={t("titleAccent")}
-          className="mb-4"
-          Component={SectionTitle}
+
+        {/* Top border */}
+        <div
+          className="absolute top-0 left-0 right-0 h-px pointer-events-none z-10"
+          style={{ background: "rgba(255,255,255,0.05)" }}
         />
 
-        {/* Cards — 2×2 grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-          {ITEMS.map(({ key, icon: Icon }, index) => (
-            <div
-              key={key}
-              ref={addRef(2 + index)}
-              className="group relative rounded-2xl p-8 flex gap-6 opacity-0 translate-y-7 transition-all duration-700"
-              style={{
-                transitionDelay: `${200 + index * 80}ms`,
-                background: "rgba(255,255,255,0.02)",
-                border: "1px solid rgba(255,255,255,0.06)",
-              }}
-              onMouseEnter={(e) => {
-                (e.currentTarget as HTMLElement).style.background = "rgba(225,29,72,0.04)";
-                (e.currentTarget as HTMLElement).style.borderColor = "rgba(225,29,72,0.2)";
-              }}
-              onMouseLeave={(e) => {
-                (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.02)";
-                (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.06)";
-              }}
-            >
-              {/* Top shimmer */}
-              <div
-                className="absolute top-0 left-8 right-8 h-px opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                style={{
-                  background:
-                    "linear-gradient(90deg, transparent, rgba(225,29,72,0.55), transparent)",
-                }}
-              />
-
-              {/* Icon column */}
-              <div
-                className="w-11 h-11 rounded-xl flex items-center justify-center shrink-0 mt-0.5 transition-colors duration-300 group-hover:bg-[#E11D48]/15"
-                style={{ background: "rgba(225,29,72,0.08)" }}
-              >
-                <Icon
-                  className="w-5 h-5 transition-colors duration-300 group-hover:text-[#E11D48]"
-                  style={{ color: "rgba(225,29,72,0.65)" }}
-                />
-              </div>
-
-              {/* Text column */}
-              <div className="flex flex-col">
-                <h3
-                  className="font-space-grotesk font-bold text-[1rem] tracking-[-0.01em] text-white mb-2 leading-snug"
-                >
-                  {t(`items.${key}.title`)}
-                </h3>
-                <p
-                  className="text-[0.82rem] leading-relaxed font-light"
-                  style={{ color: "rgba(148,163,184,0.65)" }}
-                >
-                  {t(`items.${key}.description`)}
-                </p>
-              </div>
-            </div>
-          ))}
+        {/* Section Title Header (Fixed at top) */}
+        <div className="absolute top-[28vh] left-0 right-0 z-20 px-8 text-center pointer-events-none">
+          <div className="max-w-7xl mx-auto flex flex-col items-center">
+            <SectionLabel className="mb-4">{t("label")}</SectionLabel>
+            <AnimatedHeading
+              titleText={t("title")}
+              accentText={t("titleAccent")}
+              className="mb-4"
+              Component={SectionTitle}
+            />
+          </div>
         </div>
-      </div>
 
-      <style>{`
-        @keyframes pulse {
-          0%, 100% { opacity: 1; }
-          50% { opacity: 0.4; }
-        }
-      `}</style>
-    </section>
+        {prefersReducedMotion ? (
+          // Fallback static 2x2 grid for reduced motion
+          <div className="relative z-20 max-w-7xl mx-auto px-8 pt-44 h-full flex items-center justify-center">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 w-full">
+              {ITEMS.map(({ key, icon: Icon }) => (
+                <div
+                  key={key}
+                  className="group relative rounded-2xl p-8 flex gap-6 bg-white/[0.02] border border-white/[0.06] hover:bg-[#E11D48]/[0.04] hover:border-[#E11D48]/20 transition-all duration-300"
+                >
+                  <div className="w-11 h-11 rounded-xl flex items-center justify-center shrink-0 mt-0.5 bg-[#E11D48]/10">
+                    <Icon className="w-5 h-5 text-[#E11D48]" />
+                  </div>
+                  <div className="flex flex-col">
+                    <h3 className="font-space-grotesk font-bold text-[1rem] tracking-[-0.01em] text-white mb-2 leading-snug">
+                      {t(`items.${key}.title`)}
+                    </h3>
+                    <p className="text-[0.82rem] leading-relaxed font-light text-slate-400">
+                      {t(`items.${key}.description`)}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        ) : (
+          // Interactive scrolling/rotating layout
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            className="relative z-20 w-full h-full"
+          >
+            {ITEMS.map(({ key, icon: Icon }, i) => {
+              const transitionLimit = 0.98; // All transitions finish by 98% of scroll progress
+              const activeProgress = Math.min(1.0, progress / transitionLimit);
+              const localProgress = activeProgress * (N - 1) - (i - 1);
+              const angle = 180 - localProgress * 90;
+              const rad = (angle * Math.PI) / 180;
+              const x = Math.cos(rad) * radius;
+              const y = Math.sin(rad) * radius;
+
+              // Adjust opacity curve so it peaks when centered and is completely faded out at start/end
+              const opacity = Math.max(0, 1 - Math.abs(angle - 90) / 45);
+
+              return (
+                <motion.div
+                  key={key}
+                  style={{
+                    position: "absolute",
+                    left: "50%",
+                    top: "30vh", // shift center to match RingsCanvas camera & geometry center
+                    transform: `translate(calc(-50% + ${x}vh), calc(-50% + ${y}vh))`,
+                    opacity: opacity,
+                    pointerEvents: opacity < 0.15 ? "none" : "auto",
+                  }}
+                  className="w-full max-w-xl px-6 text-center flex flex-col items-center justify-center transition-all duration-75"
+                >
+                  <div className="relative w-full rounded-2xl border border-white/[0.05] bg-[#0b0f1a]/30 backdrop-blur-md p-8 md:p-10 shadow-2xl text-left overflow-hidden group">
+                    {/* Vertical neon-red glowing bar on the left edge */}
+                    <div className="absolute left-0 top-0 bottom-0 w-[4px] bg-[#E11D48] shadow-[0_0_15px_rgba(225,29,72,0.8)]" />
+
+                    {/* Step indicator tag */}
+                    <span className="text-[9px] font-mono tracking-[0.2em] text-[#E11D48]/80 mb-3 block uppercase font-bold">
+                      PILLAR 0{i + 1}
+                    </span>
+
+                    <h3 className="font-space-grotesk font-bold text-lg md:text-xl tracking-tight text-white mb-3">
+                      {t(`items.${key}.title`)}
+                    </h3>
+
+                    <p className="text-white/60 text-xs md:text-sm font-light leading-relaxed">
+                      {t(`items.${key}.description`)}
+                    </p>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </motion.div>
+        )}
+
+        {/* Subtle indicator for scroll prompt */}
+        {!prefersReducedMotion && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: [0, 0.4, 0], y: [0, 6, 0] }}
+            transition={{ repeat: Infinity, duration: 2.5, delay: 1.5 }}
+            className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 pointer-events-none z-20"
+          >
+            <span className="text-[9px] uppercase tracking-[0.3em] text-zinc-500 font-medium">
+              Scroll to explore
+            </span>
+            <div className="w-[1px] h-6 bg-gradient-to-b from-zinc-500 to-transparent" />
+          </motion.div>
+        )}
+      </div>
+    </div>
   );
 }

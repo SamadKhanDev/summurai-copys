@@ -332,8 +332,8 @@ export default function WorkSection({ title = "WORK" }: WorkSectionProps) {
 
             // Calculate dynamic timings based on the number of cards
             const cardsStart = 0.75;
-            const cardGap = 0.25;
-            const cardDuration = 1.0;
+            const cardGap = 0.45;
+            const cardDuration = 0.8;
             const cardsEnd = cardsStart + (sectors.length - 1) * cardGap + cardDuration;
             const closingStart = cardsEnd + 0.5;
             const totalDuration = closingStart + 1.0;
@@ -607,12 +607,13 @@ export default function WorkSection({ title = "WORK" }: WorkSectionProps) {
 
                         {sectors.map((sector, index) => {
                             const r1 = getSeededRandom(index + 1);
-                            const r2 = getSeededRandom(index + 100);
                             const r3 = getSeededRandom(index + 500);
                             const r4 = getSeededRandom(index + 900);
 
-                            const size = (0.5 + r1 * 0.5).toFixed(4);
-                            const y = ((0.5 + r2 * 0.5) * (index % 2 ? -1 : 1)).toFixed(4);
+                            const size = (0.55 + r1 * 0.45).toFixed(4);
+                            // Distribute vertical heights deterministically to avoid overlaps
+                            const tracks = [-0.8, 0.8, -0.45, 0.45, -0.1, 0.1];
+                            const y = tracks[index].toFixed(4);
                             const rotate = ((r4 - 0.5) * 8).toFixed(4); // seeded rotation between -4 and +4 degrees
                             const randStr = Math.floor(r3 * 1679616).toString(36).padStart(4, "0");
                             const key = randStr + "-" + String(index).padStart(2, "0") + "/" + String(sectors.length).padStart(2, "0");

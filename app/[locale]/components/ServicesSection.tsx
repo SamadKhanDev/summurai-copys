@@ -1,6 +1,5 @@
 "use client";
 
-import { Link } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
 import {
     Shield,
@@ -81,20 +80,18 @@ function ServiceCard({
     return (
         <ScrollReveal delay={delay} animation="scale">
             <div className="h-[290px]">
-                <Link href={href as any} className="block h-full">
-                    <Card hover className="h-full flex flex-col" >
-                        <CardIcon>
-                            <Icon className="w-9 h-9 text-text-main" />
-                        </CardIcon>
-                        <CardTitle>{t(`services.items.${serviceKey}.title`)}</CardTitle>
-                        <CardDescription>
-                            {t(`services.items.${serviceKey}.description`)}
-                        </CardDescription>
-                        <CardLink>
-                            {t(`services.items.${serviceKey}.link`)}
-                        </CardLink>
-                    </Card>
-                </Link>
+                <Card hover className="h-full flex flex-col" >
+                    <CardIcon>
+                        <Icon className="w-9 h-9 text-text-main" />
+                    </CardIcon>
+                    <CardTitle>{t(`services.items.${serviceKey}.title`)}</CardTitle>
+                    <CardDescription>
+                        {t(`services.items.${serviceKey}.description`)}
+                    </CardDescription>
+                    <CardLink href={href as any}>
+                        {t(`services.items.${serviceKey}.link`)}
+                    </CardLink>
+                </Card>
             </div>
         </ScrollReveal>
     );

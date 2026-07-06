@@ -205,7 +205,7 @@ export default function HomePage() {
       <WhySamurai />
 
       {/* Industries Served */}
-      <Section>
+      <Section className="relative z-20 bg-[#05060A]">
         <SectionLabel>{t("industries.label")}</SectionLabel>
         <AnimatedHeading
           titleText={t("industries.title")}
@@ -453,8 +453,7 @@ export default function HomePage() {
 
             return (
               <ScrollReveal key={index} delay={index * 0.05} animation="blur" className="relative overflow-visible">
-                <Link
-                  href={{ pathname: '/industries', hash: industry.key }}
+                <div
                   className={`group relative block w-full h-[260px] rounded-[18px] overflow-hidden cursor-pointer ${industry.borderColor} border transition-all duration-400 ease-out feature-card ${industry.shadow} ${industry.borderGlow}`}
                   style={{
                     background: industry.cardBg,
@@ -494,14 +493,15 @@ export default function HomePage() {
                         ))}
                       </ul>
                     </div>
-                    <span
-                      className="px-5 py-2 rounded-full bg-[var(--accent-color)] text-white text-[10.5px] font-black transition-all duration-300 uppercase tracking-wider shadow-md inline-flex items-center gap-1 cursor-pointer"
+                    <Link
+                      href={{ pathname: '/industries', hash: industry.key }}
+                      className="px-5 py-2 rounded-full bg-[var(--accent-color)] text-white text-[10.5px] font-black transition-all duration-300 uppercase tracking-wider shadow-md inline-flex items-center gap-1"
                     >
                       Learn More
                       <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
-                    </span>
+                    </Link>
                   </div>
-                </Link>
+                </div>
               </ScrollReveal>
             );
           })}
@@ -569,9 +569,9 @@ export default function HomePage() {
       {/* Final CTA */}
       <Section className="text-center relative overflow-hidden">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-accent/5 rounded-full blur-[120px] pointer-events-none" />
-        
+
         {/* Floating cards left side */}
-        <motion.div 
+        <motion.div
           className="absolute left-[2%] xl:left-[6%] top-1/2 -translate-y-1/2 hidden lg:block w-[136px] h-[136px] border border-transparent pointer-events-none select-none"
           initial={{
             borderColor: "rgba(255, 255, 255, 0)",
@@ -678,7 +678,7 @@ export default function HomePage() {
         </motion.div>
 
         {/* Floating cards right side */}
-        <motion.div 
+        <motion.div
           className="absolute right-[2%] xl:right-[6%] top-1/2 -translate-y-1/2 hidden lg:block w-[136px] h-[136px] border border-transparent pointer-events-none select-none"
           initial={{
             borderColor: "rgba(255, 255, 255, 0)",
@@ -794,9 +794,9 @@ export default function HomePage() {
           <p className="text-text-secondary mt-4 mb-10 text-base max-w-2xl mx-auto">
             {t("finalCta.description")}
           </p>
-          <Button 
-            variant="fill" 
-            size="lg" 
+          <Button
+            variant="fill"
+            size="lg"
             onClick={() => setIsModalOpen(true)}
             onMouseEnter={() => setIsCtaHovered(true)}
             onMouseLeave={() => setIsCtaHovered(false)}
