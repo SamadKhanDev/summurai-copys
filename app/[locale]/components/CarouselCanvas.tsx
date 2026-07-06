@@ -44,7 +44,7 @@ export default function CarouselCanvas() {
     title: tServices(`${s.key}.breadcrumb`),
     description: tServices(`${s.key}.description`),
     tags: PILLAR_TAGS[s.key] || [],
-    linkText: "Explore →",
+    linkText: locale === 'ar' ? 'استكشف ←' : 'Explore →',
   }));
 
   return (

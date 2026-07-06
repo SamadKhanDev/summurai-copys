@@ -223,6 +223,9 @@ export default function ServicesPage() {
             playsInline
             className="w-full h-full object-cover"
           />
+          {/* Royal dark red tint and gradient overlays */}
+          <div className="absolute inset-0 bg-[#2d0006]/75 mix-blend-multiply pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#1c0004]/90 via-[#2d0006]/40 to-[#120002]/95 pointer-events-none" />
         </div>
 
         {/* Fixed Fullscreen 3D Canvas */}
@@ -269,7 +272,7 @@ export default function ServicesPage() {
               className="text-[14vw] flex justify-center gap-[0.02em]"
               style={{ willChange: 'transform' }}
             >
-              {"SUMMURAI".split("").map((char, index) => (
+              {"SAMMURAI".split("").map((char, index) => (
                 <span
                   key={index}
                   className="inline-block design-char opacity-10 text-white"

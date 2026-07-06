@@ -175,7 +175,7 @@ export default function WorkSection({ title = "WORK" }: WorkSectionProps) {
 
         const setSize = () => {
             if (!containerRef.current || !sectionRef.current) return;
-            sectionRef.current.style.setProperty("--height", `${sectors.length * 75}lvh`);
+            sectionRef.current.style.setProperty("--height", `${sectors.length * 500}lvh`);
 
             bounding = {
                 width: window.innerWidth,
@@ -331,9 +331,9 @@ export default function WorkSection({ title = "WORK" }: WorkSectionProps) {
             }
 
             // Calculate dynamic timings based on the number of cards
-            const cardsStart = 0.75;
-            const cardGap = 0.45;
-            const cardDuration = 0.8;
+            const cardsStart = 1.0;
+            const cardGap = 2.5;
+            const cardDuration = 5.0;
             const cardsEnd = cardsStart + (sectors.length - 1) * cardGap + cardDuration;
             const closingStart = cardsEnd + 0.5;
             const totalDuration = closingStart + 1.0;
@@ -341,9 +341,9 @@ export default function WorkSection({ title = "WORK" }: WorkSectionProps) {
             tl = gsap.timeline({
                 scrollTrigger: {
                     trigger: sectionRef.current,
-                    start: "top 25%",
-                    end: "bottom 75%",
-                    scrub: 1,
+                    start: "top top",
+                    end: "bottom bottom",
+                    scrub: 1.5,
                 },
                 onUpdate: () => {
                     if (sceneRef.current) {

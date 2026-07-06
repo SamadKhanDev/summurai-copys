@@ -23,6 +23,7 @@ interface CardProps {
   radius: number;
   pitch: number;
   cardDepthsRef: React.MutableRefObject<number[]>;
+  onCardClick: (index: number) => void;
 }
 
 function Card({
@@ -32,7 +33,8 @@ function Card({
   targetGlobalProgress,
   radius,
   pitch,
-  cardDepthsRef
+  cardDepthsRef,
+  onCardClick
 }: CardProps) {
   const meshRef = useRef<THREE.Mesh>(null);
   const cardRef = useRef<HTMLDivElement>(null);
@@ -111,7 +113,15 @@ function Card({
       >
         <div
           ref={cardRef}
-          className="w-[380px] h-[280px] p-6 flex flex-col justify-between text-white bg-white/[0.06] backdrop-blur-md border border-white/20 hover:border-red-500/60 hover:bg-white/[0.09] hover:shadow-[0_0_40px_rgba(239,68,68,0.25)] [&.is-active]:border-red-500/60 [&.is-active]:bg-white/[0.09] [&.is-active]:shadow-[0_0_40px_rgba(239,68,68,0.25)] rounded-2xl transition-all duration-300 group"
+          onClick={(e) => {
+            if ((e.target as HTMLElement).closest('a') || (e.target as HTMLElement).closest('span.cursor-pointer') || (e.target as HTMLElement).closest('a *')) {
+              return;
+            }
+            e.preventDefault();
+            e.stopPropagation();
+            onCardClick(index);
+          }}
+          className="w-[380px] h-[280px] p-6 flex flex-col justify-between text-white bg-white/[0.06] backdrop-blur-md border border-white/20 hover:border-red-500/60 hover:bg-white/[0.09] hover:shadow-[0_0_40px_rgba(239,68,68,0.25)] [&.is-active]:border-red-500/60 [&.is-active]:bg-white/[0.09] [&.is-active]:shadow-[0_0_40px_rgba(239,68,68,0.25)] rounded-2xl cursor-pointer transition-all duration-300 group"
           style={{ willChange: 'opacity' }}
         >
           <div>
@@ -144,10 +154,9 @@ function Card({
             </div>
             <a
               href={localizedUrl}
-              className="text-xs font-bold text-red-500 hover:text-red-400 transition-colors duration-300 inline-flex items-center gap-1.5 group/btn"
+              className="text-xs font-bold text-red-500 hover:text-red-400 transition-colors duration-300 inline-flex items-center gap-1.5"
             >
-              <span>{service.linkText}</span>
-              <span className="transform group-hover/btn:translate-x-1 group-[.is-active]/btn:translate-x-1 transition-transform duration-300">→</span>
+              {service.linkText}
             </a>
           </div>
         </div>
@@ -200,6 +209,16 @@ export default function Carousel({ services, locale }: CarouselProps) {
     };
   }, []);
 
+  const handleCardClick = (index: number) => {
+    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+    if (maxScroll <= 0) return;
+    const targetProgress = (index * 4) / 35;
+    window.scrollTo({
+      top: targetProgress * maxScroll,
+      behavior: 'smooth',
+    });
+  };
+
   const groupRef = useRef<THREE.Group>(null);
 
   useFrame((state, delta) => {
@@ -236,6 +255,7 @@ export default function Carousel({ services, locale }: CarouselProps) {
               radius={radius}
               pitch={pitch}
               cardDepthsRef={cardDepthsRef}
+              onCardClick={handleCardClick}
             />
           );
         })}
