@@ -54,7 +54,7 @@ export const AnimatedHeading: React.FC<AnimatedHeadingProps> = ({
                 variants={typingContainerVariants(typingSpeed)}
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: true, amount: 0.5 }} // amount 0.5 ka matlab jab 50% heading dikhe tab chalay
+                viewport={{ once: true, amount: 0.1 }} // amount 0.1 ka matlab jab 10% heading dikhe tab chalay
             >
                 {items.map((item, index) => (
                     <motion.span 
@@ -76,7 +76,7 @@ export const AnimatedHeading: React.FC<AnimatedHeadingProps> = ({
                 variants={dropInVariants(totalTypingTime)}
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: true, amount: 0.5 }}
+                viewport={{ once: true, amount: 0.1 }}
             >
                 {accentText}
             </motion.span>

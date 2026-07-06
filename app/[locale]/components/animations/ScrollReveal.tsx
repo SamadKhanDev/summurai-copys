@@ -55,7 +55,7 @@ export default function ScrollReveal({
 
   const isInView = useInView(ref, {
     once,
-    margin: "-80px",
+    margin: "-20px",
   });
 
   const variants = animations[animation](distance);
