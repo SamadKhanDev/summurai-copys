@@ -12,6 +12,7 @@ export default function RotatingRingsHero() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [progress, setProgress] = useState(0);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  const progressRef = useRef(0);
 
   // Check prefers-reduced-motion
   useEffect(() => {
@@ -33,6 +34,7 @@ export default function RotatingRingsHero() {
       pin: true, // pin the section
       scrub: 1, // smooth catch-up
       onUpdate: (self: any) => {
+        progressRef.current = self.progress;
         setProgress(self.progress);
       },
     });
@@ -90,7 +92,7 @@ export default function RotatingRingsHero() {
       className="relative w-full h-screen overflow-hidden bg-[#050505] text-white font-sans"
     >
       {/* 3D background rings */}
-      <RingsCanvas progress={prefersReducedMotion ? 0 : progress} />
+      <RingsCanvas progressRef={progressRef} />
 
       {/* Subtle Grid overlay for background texture */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff03_1px,transparent_1px),linear-gradient(to_bottom,#ffffff03_1px,transparent_1px)] bg-[size:4rem_4rem] pointer-events-none z-10" />

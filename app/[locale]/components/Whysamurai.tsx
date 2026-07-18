@@ -26,6 +26,7 @@ export default function WhySamurai() {
   const pinRef = useRef<HTMLDivElement>(null);
   const [progress, setProgress] = useState(0);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  const progressRef = useRef(0);
 
   // Check prefers-reduced-motion
   useEffect(() => {
@@ -51,6 +52,7 @@ export default function WhySamurai() {
       scrub: 1,
       anticipatePin: 1,
       onUpdate: (self) => {
+        progressRef.current = self.progress;
         latestProgress = self.progress;
         if (!ticking) {
           window.requestAnimationFrame(() => {
@@ -95,7 +97,7 @@ export default function WhySamurai() {
       >
         {/* 3D background rings */}
         {!prefersReducedMotion && (
-          <RingsCanvas progress={progress} />
+          <RingsCanvas progressRef={progressRef} />
         )}
 
 

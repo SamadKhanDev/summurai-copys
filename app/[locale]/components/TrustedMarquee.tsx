@@ -28,12 +28,19 @@ export default function TrustedBySection({
     if (!container || logos.length === 0) return;
 
     let active = true;
+    let isIntersecting = false;
+
+    let containerRect = container.getBoundingClientRect();
+    let containerCenter = containerRect.left + containerRect.width / 2;
+
+    const handleResize = () => {
+      containerRect = container.getBoundingClientRect();
+      containerCenter = containerRect.left + containerRect.width / 2;
+    };
+    window.addEventListener("resize", handleResize);
 
     const updateScales = () => {
-      if (!active) return;
-
-      const containerRect = container.getBoundingClientRect();
-      const containerCenter = containerRect.left + containerRect.width / 2;
+      if (!active || !isIntersecting) return;
 
       cardRefs.current.forEach((card) => {
         if (!card) return;
@@ -80,11 +87,21 @@ export default function TrustedBySection({
       requestAnimationFrame(updateScales);
     };
 
-    const animId = requestAnimationFrame(updateScales);
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isIntersecting = entry.isIntersecting;
+        if (isIntersecting && active) {
+          requestAnimationFrame(updateScales);
+        }
+      },
+      { threshold: 0 }
+    );
+    observer.observe(container);
 
     return () => {
       active = false;
-      cancelAnimationFrame(animId);
+      window.removeEventListener("resize", handleResize);
+      observer.disconnect();
     };
   }, [logos]);
 

@@ -1,15 +1,15 @@
 'use client';
 
-import React, { useRef, useMemo } from 'react';
+import React, { useRef, useMemo, memo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Line, Float } from '@react-three/drei';
 import * as THREE from 'three';
 
 interface RingsCanvasProps {
-  progress: number;
+  progressRef: React.RefObject<number>;
 }
 
-function Rings({ progress }: { progress: number }) {
+function Rings({ progressRef }: { progressRef: React.RefObject<number> }) {
   const groupRef = useRef<THREE.Group>(null);
 
   // Generate points for 8 concentric rings split into 2 groups of 4 rings
@@ -84,6 +84,7 @@ function Rings({ progress }: { progress: number }) {
 
   useFrame((state) => {
     const t = state.clock.getElapsedTime();
+    const progress = progressRef.current ?? 0;
 
     // Base slow idle rotation
     const idleRotationZ = t * 0.025;
@@ -119,7 +120,7 @@ function Rings({ progress }: { progress: number }) {
   );
 }
 
-export default function RingsCanvas({ progress }: RingsCanvasProps) {
+const RingsCanvas = memo(function RingsCanvas({ progressRef }: RingsCanvasProps) {
   return (
     <div className="absolute inset-0 w-full h-full z-0 overflow-hidden bg-transparent">
 
@@ -137,10 +138,12 @@ export default function RingsCanvas({ progress }: RingsCanvasProps) {
         >
           {/* Position the center of the semi-circles at Y=3.0 */}
           <group position={[0, 3.0, 0]}>
-            <Rings progress={progress} />
+            <Rings progressRef={progressRef} />
           </group>
         </Float>
       </Canvas>
     </div>
   );
-}
+});
+
+export default RingsCanvas;

@@ -19,7 +19,7 @@ export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
   useEffect(() => {
     // Instantiate Lenis
     const lenis = new Lenis({
-      duration: 1.2,
+      duration: 0.9,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // standard easing
       orientation: 'vertical',
       gestureOrientation: 'vertical',
@@ -31,10 +31,13 @@ export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
     // Connect to ScrollTrigger
     lenis.on('scroll', ScrollTrigger.update);
 
-    // Integrate with GSAP ticker
-    gsap.ticker.add((time) => {
+    // Integrator function for ticker
+    const tick = (time: number) => {
       lenis.raf(time * 1000);
-    });
+    };
+
+    // Integrate with GSAP ticker
+    gsap.ticker.add(tick);
 
     // Disable lag smoothing for GSAP ScrollTrigger sync
     gsap.ticker.lagSmoothing(0);
@@ -42,9 +45,7 @@ export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
     // Cleanup
     return () => {
       lenis.destroy();
-      gsap.ticker.remove((time) => {
-        lenis.raf(time * 1000);
-      });
+      gsap.ticker.remove(tick);
       lenisRef.current = null;
     };
   }, []);
