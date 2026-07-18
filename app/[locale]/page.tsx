@@ -82,7 +82,7 @@ export default function HomePage() {
           </div>
         </div>
       </div> */}
-      <HeroSection />
+      <HeroSection onBookBriefingClick={() => setIsModalOpen(true)} />
 
       {/* Stats Bar */}
       <StatsBar

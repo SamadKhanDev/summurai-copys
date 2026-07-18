@@ -9,7 +9,7 @@ import Script from "next/script";
 
 export const metadata: Metadata = {
   title: "Samurai Systems",
-  description: "Your Trusted Partner inDigital Resilience & Innovation.",
+  description: "Invest in Proven Cybersecurity Solutions.",
 };
 
 type Props = {

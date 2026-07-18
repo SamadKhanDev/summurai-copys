@@ -257,23 +257,10 @@ export default function SevenPillarsSection() {
           />
         )}
 
-        {/* Subtle grid lines & Static Waves */}
+        {/* Waves background */}
         <div className="absolute inset-0 pointer-events-none opacity-40 z-0">
-          <AWaves isStatic={true} />
+          <AWaves />
         </div>
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            backgroundImage:
-              "linear-gradient(var(--grid-color) 1px, transparent 1px), linear-gradient(90deg, var(--grid-color) 1px, transparent 1px)",
-            backgroundSize: "80px 80px",
-            zIndex: 0,
-            pointerEvents: "none",
-            maskImage: "linear-gradient(to bottom, transparent 0%, black 15%)",
-            WebkitMaskImage: "linear-gradient(to bottom, transparent 0%, black 15%)",
-          }}
-        />
 
         {/* ── Main grid layout ── */}
         <div

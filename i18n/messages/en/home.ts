@@ -1,9 +1,9 @@
 const home = {
   hero: {
     tag: "An Affiliate of Neusol · Riyadh, Saudi Arabia",
-    title: "Your Trusted Partner in ",
-    titleAccent: "Digital Resilience & Innovation.",
-    description: "Empowering enterprises to secure, modernize, and automate their IT operations across the Kingdom and beyond.",
+    title: "Invest in ",
+    titleAccent: "Proven Cybersecurity Solutions.",
+    description: "Reduce recovery time by up to 80% with our cloud-based solution that quickly detects, responds to, and recovers from cyberattacks.",
     ctaPrimary: "Book a Briefing",
     ctaSecondary: "Explore Services",
   },
