@@ -128,7 +128,7 @@ function Card({
           }}
           className={`w-[380px] h-[280px] p-6 flex flex-col justify-between rounded-2xl cursor-pointer transition-all duration-300 group backdrop-blur-md border ${
             isLight
-              ? 'text-black bg-white/[0.55] border-black/10 hover:border-red-500/60 hover:bg-white/[0.8] hover:shadow-[0_0_40px_rgba(239,68,68,0.15)] [&.is-active]:border-red-500/60 [&.is-active]:bg-white/[0.8] [&.is-active]:shadow-[0_0_40px_rgba(239,68,68,0.15)]'
+              ? 'text-black bg-white/[0.25] border-black/10 hover:border-red-500/60 hover:bg-white/[0.55] hover:shadow-[0_0_40px_rgba(239,68,68,0.15)] [&.is-active]:border-red-500/60 [&.is-active]:bg-white/[0.55] [&.is-active]:shadow-[0_0_40px_rgba(239,68,68,0.15)]'
               : 'text-white bg-white/[0.06] border-white/20 hover:border-red-500/60 hover:bg-white/[0.09] hover:shadow-[0_0_40px_rgba(239,68,68,0.25)] [&.is-active]:border-red-500/60 [&.is-active]:bg-white/[0.09] [&.is-active]:shadow-[0_0_40px_rgba(239,68,68,0.25)]'
           }`}
           style={{ willChange: 'opacity' }}

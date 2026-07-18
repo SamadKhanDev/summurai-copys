@@ -235,7 +235,7 @@ export default function ServicesPage() {
         <Navbar />
       </div>
 
-      <div className={`relative w-full min-h-[300vh] ${isLight ? 'bg-[#FFF3F4] text-black' : 'bg-black text-white'} overflow-x-hidden select-none`}>
+      <div className={`relative w-full min-h-[300vh] ${isLight ? 'bg-[#F8FAFC] text-black' : 'bg-black text-white'} overflow-x-hidden select-none`}>
 
         {/* Background Video */}
         <div className="fixed inset-0 w-full h-full z-0 overflow-hidden pointer-events-none opacity-100">
@@ -248,7 +248,7 @@ export default function ServicesPage() {
             className="w-full h-full object-cover"
           /> */}
           {/* Always-on blackish-gray/whitish cinematic overlay */}
-          <div className={`absolute inset-0 ${isLight ? 'bg-gradient-to-b from-rose-50/60 via-[#FFF0F2]/40 to-rose-50/70' : 'bg-gradient-to-b from-black/60 via-neutral-900/40 to-black/70'} pointer-events-none`} />
+          <div className={`absolute inset-0 ${isLight ? 'bg-transparent' : 'bg-gradient-to-b from-black/60 via-neutral-900/40 to-black/70'} pointer-events-none`} />
           {/* Royal dark red tint and gradient overlays (Only active in Dark mode) */}
           {!isLight && (
             <>
