@@ -127,6 +127,8 @@ export default function Navbar() {
     window.addEventListener("scroll", updateCenters, { passive: true });
 
     // Magnetic proximity logic using stable cached coordinates
+    let activeMagneticEl: HTMLElement | null = null;
+
     const handleMouseMove = (e: MouseEvent) => {
       const { pageX, pageY } = e;
       const threshold = 70; // Attraction range in pixels
@@ -147,18 +149,21 @@ export default function Navbar() {
         }
       });
 
-      // Apply magnetic translation only to the closest element, reset all others
-      magneticRefs.current.forEach((el) => {
-        if (!el) return;
-
-        if (el === closestEl) {
-          el.style.transform = `translate3d(${closestDeltaX * 0.35}px, ${closestDeltaY * 0.35}px, 0)`;
-          el.style.transition = "transform 0.1s ease-out";
-        } else {
-          el.style.transform = "translate3d(0px, 0px, 0)";
-          el.style.transition = "transform 0.35s cubic-bezier(0.25, 1, 0.5, 1)";
+      // Apply magnetic translation only to the closest element, reset previously active
+      if (closestEl) {
+        const el = closestEl as HTMLElement;
+        if (activeMagneticEl && activeMagneticEl !== el) {
+          activeMagneticEl.style.transform = "translate3d(0px, 0px, 0)";
+          activeMagneticEl.style.transition = "transform 0.35s cubic-bezier(0.25, 1, 0.5, 1)";
         }
-      });
+        el.style.transform = `translate3d(${closestDeltaX * 0.35}px, ${closestDeltaY * 0.35}px, 0)`;
+        el.style.transition = "transform 0.1s ease-out";
+        activeMagneticEl = el;
+      } else if (activeMagneticEl) {
+        activeMagneticEl.style.transform = "translate3d(0px, 0px, 0)";
+        activeMagneticEl.style.transition = "transform 0.35s cubic-bezier(0.25, 1, 0.5, 1)";
+        activeMagneticEl = null;
+      }
     };
 
     window.addEventListener("mousemove", handleMouseMove);

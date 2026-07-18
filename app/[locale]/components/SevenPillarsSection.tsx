@@ -137,23 +137,38 @@ export default function SevenPillarsSection() {
   const [scrollProgress, setScrollProgress] = useState(0); // 0–1 across all cards
 
   useEffect(() => {
+    let ticking = false;
+
     const handleScroll = () => {
-      if (!outerRef.current) return;
-      const rect = outerRef.current.getBoundingClientRect();
-      // How many pixels of the sticky section have scrolled past the top
-      const scrolled = -rect.top;
-      const totalScrollable = rect.height - window.innerHeight;
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          if (!outerRef.current) {
+            ticking = false;
+            return;
+          }
+          const rect = outerRef.current.getBoundingClientRect();
+          // How many pixels of the sticky section have scrolled past the top
+          const scrolled = -rect.top;
+          const totalScrollable = rect.height - window.innerHeight;
 
-      if (totalScrollable <= 0) return;
+          if (totalScrollable <= 0) {
+            ticking = false;
+            return;
+          }
 
-      const clamped = Math.max(0, Math.min(scrolled, totalScrollable));
-      const progress = clamped / totalScrollable;
-      setScrollProgress(progress);
+          const clamped = Math.max(0, Math.min(scrolled, totalScrollable));
+          const progress = clamped / totalScrollable;
+          setScrollProgress(progress);
 
-      // Determine active card index from progress
-      const rawIdx = progress * (PILLARS.length - 1);
-      const idx = Math.round(rawIdx);
-      setActiveIndex(Math.max(0, Math.min(idx, PILLARS.length - 1)));
+          // Determine active card index from progress
+          const rawIdx = progress * (PILLARS.length - 1);
+          const idx = Math.round(rawIdx);
+          setActiveIndex(Math.max(0, Math.min(idx, PILLARS.length - 1)));
+
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });

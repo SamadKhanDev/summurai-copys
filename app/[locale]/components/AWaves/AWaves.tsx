@@ -161,8 +161,8 @@ export default function AWaves({ className = "", isStatic = false }: AWavesProps
     pathsRef.current = [];
     linesRef.current = [];
 
-    const xGap = 10;
-    const yGap = 32;
+    const xGap = 15;
+    const yGap = 45;
 
     const overflowWidth = width + 200;
     const overflowHeight = height + 30;

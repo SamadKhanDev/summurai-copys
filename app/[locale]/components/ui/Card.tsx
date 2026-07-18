@@ -18,7 +18,7 @@ export function Card({
   onClick,
 }: CardProps) {
   const baseStyles =
-    "bg-card-bg border rounded-xl p-7 transition-all duration-300";
+    "bg-card-bg border rounded-xl p-7 transition-all duration-300 backdrop-blur-md [transform:translateZ(0)] [backface-visibility:hidden]";
 
   const hoverStyles = hover
     ? "hover:border-accent/40 hover:-translate-y-1 cursor-pointer"

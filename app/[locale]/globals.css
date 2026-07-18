@@ -46,7 +46,7 @@ html.light {
   --background: #F8FAFC;
   --background-secondary: #F1F5F9;
   --background-tertiary: #E2E8F0;
-  --card-bg: rgba(15, 23, 42, 0.03);
+  --card-bg: rgba(255, 255, 255, 0.4);
   --card-border: rgba(15, 23, 42, 0.08);
   --light-bg: #05060A;
 

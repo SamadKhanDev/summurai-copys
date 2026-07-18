@@ -40,6 +40,9 @@ export default function WhySamurai() {
   useGSAP(() => {
     if (prefersReducedMotion) return;
 
+    let ticking = false;
+    let latestProgress = 0;
+
     const trigger = ScrollTrigger.create({
       trigger: containerRef.current,
       start: "top top",
@@ -48,7 +51,14 @@ export default function WhySamurai() {
       scrub: 1,
       anticipatePin: 1,
       onUpdate: (self) => {
-        setProgress(self.progress);
+        latestProgress = self.progress;
+        if (!ticking) {
+          window.requestAnimationFrame(() => {
+            setProgress(latestProgress);
+            ticking = false;
+          });
+          ticking = true;
+        }
       },
     });
 
