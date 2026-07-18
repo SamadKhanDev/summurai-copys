@@ -25,12 +25,6 @@ export default function CaseStudiesPage() {
     <>
       <Navbar />
       <div className="pt-16">
-        <Breadcrumb
-          items={[
-            { label: "Home", href: "/" },
-            { label: t("breadcrumb") },
-          ]}
-        />
 
         <Section>
           <SectionLabel>{t("label")}</SectionLabel>

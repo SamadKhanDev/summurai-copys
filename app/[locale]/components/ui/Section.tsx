@@ -54,7 +54,7 @@ export function SectionTitle({
 }: SectionTitleProps) {
   return (
     <h2
-      className={`text-4xl md:text-5xl font-extrabold text-white leading-tight ${className}`}
+      className={`text-4xl md:text-5xl font-extrabold text-foreground leading-tight ${className}`}
     >
       {children}
       {accent && <span className="text-text-main">{accent}</span>}

@@ -54,7 +54,7 @@ interface CardTitleProps {
 
 export function CardTitle({ children, className = "" }: CardTitleProps) {
   return (
-    <h3 className={`text-base font-bold text-white mb-3 ${className}`}>
+    <h3 className={`text-base font-bold text-foreground mb-3 ${className}`}>
       {children}
     </h3>
   );
@@ -89,7 +89,7 @@ export function CardLink({
   onClick,
   className = "",
 }: CardLinkProps) {
-  const commonClasses = `inline-flex items-center gap-1 mt-4 text-sm font-semibold text-text-main hover:text-white transition-colors cursor-pointer ${className}`;
+  const commonClasses = `inline-flex items-center gap-1 mt-4 text-sm font-semibold text-text-main hover:text-foreground transition-colors cursor-pointer ${className}`;
 
   if (!href) {
     return (

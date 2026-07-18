@@ -50,7 +50,7 @@ export default function Footer() {
           <text x="22" y="20" fill="#7A0018" fontSize="6" fontFamily="monospace" opacity="0.25">vj</text>
           <text x="2" y="30" fill="#FF1A1A" fontSize="6" fontFamily="monospace" opacity="0.55">wQ</text>
           <text x="18" y="30" fill="#C70039" fontSize="6" fontFamily="monospace" opacity="0.3">v5</text>
-          <text x="10" y="38" fill="#FF1A1A" fontSize="6" fontFamily="monospace" opacity="0.5">Z{}Q</text>
+          <text x="10" y="38" fill="#FF1A1A" fontSize="6" fontFamily="monospace" opacity="0.5">Z{ }Q</text>
         </pattern>
         {/* Mask shape to cut the pattern into a Penguin silhouette */}
         <clipPath id="penguinClip">
@@ -76,9 +76,9 @@ export default function Footer() {
   );
 
   return (
-    <footer className="relative w-full overflow-hidden mt-16 z-10">
+    <footer className="relative w-full overflow-hidden mt-0 z-10">
       {/* Full-width container with premium stone background, and standard clean top border */}
-      <div 
+      <div
         className="relative w-full bg-[#050505] overflow-hidden border-t border-white/5 shadow-2xl"
         style={{
           backgroundImage: `linear-gradient(to bottom, rgba(5, 5, 5, 0.9), rgba(5, 5, 5, 0.99)), url(${withBasePath("/assets/stone-texture.png")})`,
@@ -87,7 +87,7 @@ export default function Footer() {
         }}
       >
         {/* Dense Cyberpunk Dotted Grid Matrix Overlay */}
-        <div 
+        <div
           className="absolute inset-0 pointer-events-none z-0"
           style={{
             backgroundImage: `radial-gradient(rgba(255, 26, 26, 0.025) 1.2px, transparent 1.2px)`,
@@ -106,7 +106,7 @@ export default function Footer() {
 
         {/* Main Content Layout */}
         <div className="relative z-10 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 px-8 py-10 md:py-12">
-          
+
           {/* Left Column: Brand Description & Contact Info */}
           <div className="lg:col-span-4 flex flex-col justify-between space-y-6 z-20">
             <div>
@@ -117,7 +117,7 @@ export default function Footer() {
                   className="h-11 w-auto object-contain filter drop-shadow-[0_0_8px_rgba(255,26,26,0.3)] transition-transform duration-300 group-hover:scale-105"
                 />
               </Link>
-              <p className="text-[13px] text-text-secondary leading-relaxed max-w-sm">
+              <p className="text-[13px] text-slate-300 leading-relaxed max-w-sm">
                 {t("brand.description")}
               </p>
             </div>
@@ -126,7 +126,7 @@ export default function Footer() {
             <div className="space-y-3.5">
               <a
                 href={`mailto:${t("brand.email")}`}
-                className="flex items-center gap-3.5 group text-[13px] text-text-secondary hover:text-white transition-colors duration-200"
+                className="flex items-center gap-3.5 group text-[13px] text-slate-300 hover:text-white transition-colors duration-200"
               >
                 <div className="flex items-center justify-center w-7.5 h-7.5 rounded-lg bg-[#FF1A1A]/5 border border-[#FF1A1A]/20 shadow-[0_0_8px_rgba(255,26,26,0.05)] transition-all duration-300 group-hover:border-[#FF1A1A]/50 group-hover:shadow-[0_0_12px_rgba(255,26,26,0.3)]">
                   <Mail className="w-3.5 h-3.5 text-[#FF1A1A] drop-shadow-[0_0_3px_#FF1A1A]" />
@@ -135,7 +135,7 @@ export default function Footer() {
               </a>
               <a
                 href={`tel:${t("brand.phone")}`}
-                className="flex items-center gap-3.5 group text-[13px] text-text-secondary hover:text-white transition-colors duration-200"
+                className="flex items-center gap-3.5 group text-[13px] text-slate-300 hover:text-white transition-colors duration-200"
               >
                 <div className="flex items-center justify-center w-7.5 h-7.5 rounded-lg bg-[#FF1A1A]/5 border border-[#FF1A1A]/20 shadow-[0_0_8px_rgba(255,26,26,0.05)] transition-all duration-300 group-hover:border-[#FF1A1A]/50 group-hover:shadow-[0_0_12px_rgba(255,26,26,0.3)]">
                   <Phone className="w-3.5 h-3.5 text-[#FF1A1A] drop-shadow-[0_0_3px_#FF1A1A]" />
@@ -144,7 +144,7 @@ export default function Footer() {
               </a>
             </div>
 
-            <p className="text-[12px] text-text-secondary/60 font-medium border-t border-white/5 pt-4">
+            <p className="text-[12px] text-slate-500 font-medium border-t border-white/5 pt-4">
               {t("brand.affiliate")}
             </p>
           </div>
@@ -153,7 +153,7 @@ export default function Footer() {
           <div className="lg:col-span-8 grid grid-cols-3 sm:grid-cols-5 gap-6 sm:gap-2 items-start relative z-20">
             {/* Services Column */}
             <div className="flex flex-col col-span-1">
-              <h4 className="text-xs font-semibold tracking-[0.15em] uppercase text-white mb-4 relative">
+              <h4 className="text-xs font-semibold tracking-[0.15em] uppercase !text-white mb-4 relative" style={{ color: '#ffffff' }}>
                 {t("services.title")}
                 <span className="absolute bottom-[-6px] left-0 w-6 h-[1.5px] bg-[#FF1A1A] shadow-[0_0_5px_#FF1A1A]" />
               </h4>
@@ -162,7 +162,7 @@ export default function Footer() {
                   <li key={link.href}>
                     <Link
                       href={link.href as any}
-                      className="text-[12px] text-text-secondary hover:text-white hover:underline hover:decoration-[#FF1A1A] hover:underline-offset-4 transition-all duration-200 pb-0.5 inline-block"
+                      className="text-[12px] text-slate-300 hover:text-white transition-all duration-200 pb-0.5 inline-block"
                     >
                       {link.label}
                     </Link>
@@ -180,7 +180,7 @@ export default function Footer() {
 
             {/* Company Column */}
             <div className="flex flex-col col-span-1">
-              <h4 className="text-xs font-semibold tracking-[0.15em] uppercase text-white mb-4 relative">
+              <h4 className="text-xs font-semibold tracking-[0.15em] uppercase !text-white mb-4 relative" style={{ color: '#ffffff' }}>
                 {t("company.title")}
                 <span className="absolute bottom-[-6px] left-0 w-6 h-[1.5px] bg-[#FF1A1A] shadow-[0_0_5px_#FF1A1A]" />
               </h4>
@@ -189,7 +189,7 @@ export default function Footer() {
                   <li key={link.href}>
                     <Link
                       href={link.href as any}
-                      className="text-[12px] text-text-secondary hover:text-white hover:underline hover:decoration-[#FF1A1A] hover:underline-offset-4 transition-all duration-200 pb-0.5 inline-block"
+                      className="text-[12px] text-slate-300 hover:text-white transition-all duration-200 pb-0.5 inline-block"
                     >
                       {link.label}
                     </Link>
@@ -207,7 +207,7 @@ export default function Footer() {
 
             {/* Legal Column */}
             <div className="flex flex-col col-span-1">
-              <h4 className="text-xs font-semibold tracking-[0.15em] uppercase text-white mb-4 relative">
+              <h4 className="text-xs font-semibold tracking-[0.15em] uppercase !text-white mb-4 relative" style={{ color: '#ffffff' }}>
                 {t("legal.title")}
                 <span className="absolute bottom-[-6px] left-0 w-6 h-[1.5px] bg-[#FF1A1A] shadow-[0_0_5px_#FF1A1A]" />
               </h4>
@@ -216,7 +216,7 @@ export default function Footer() {
                   <li key={link.href}>
                     <Link
                       href={link.href as any}
-                      className="text-[12px] text-text-secondary hover:text-white hover:underline hover:decoration-[#FF1A1A] hover:underline-offset-4 transition-all duration-200 pb-0.5 inline-block"
+                      className="text-[12px] text-slate-300 hover:text-white transition-all duration-200 pb-0.5 inline-block"
                     >
                       {link.label}
                     </Link>
@@ -225,7 +225,7 @@ export default function Footer() {
                 <li>
                   <button
                     onClick={() => window.dispatchEvent(new Event("open-contact-modal"))}
-                    className="text-[12px] text-text-secondary hover:text-white hover:underline hover:decoration-[#FF1A1A] hover:underline-offset-4 transition-all duration-200 pb-0.5 inline-block cursor-pointer bg-transparent border-none text-left p-0"
+                    className="text-[12px] text-slate-300 hover:text-white transition-all duration-200 pb-0.5 inline-block cursor-pointer bg-transparent border-none text-left p-0"
                   >
                     Contact
                   </button>
@@ -240,7 +240,7 @@ export default function Footer() {
         <div className="relative z-20 max-w-7xl mx-auto px-8 pb-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             {/* Left Copyright Text */}
-            <p className="text-[11px] text-text-secondary font-medium">
+            <p className="text-[11px] text-slate-300 font-medium">
               {t("bottom.copyright")}
             </p>
 
@@ -248,13 +248,13 @@ export default function Footer() {
             <div className="flex items-center gap-6">
               <Link
                 href="/privacy"
-                className="text-[12px] text-text-secondary hover:text-white hover:underline hover:decoration-[#FF1A1A] hover:underline-offset-4 transition-all duration-200"
+                className="text-[12px] text-slate-300 hover:text-white transition-all duration-200"
               >
                 {t("bottom.privacy")}
               </Link>
               <Link
                 href="/terms"
-                className="text-[12px] text-text-secondary hover:text-white hover:underline hover:decoration-[#FF1A1A] hover:underline-offset-4 transition-all duration-200"
+                className="text-[12px] text-slate-300 hover:text-white transition-all duration-200"
               >
                 {t("bottom.terms")}
               </Link>
@@ -262,7 +262,7 @@ export default function Footer() {
                 href="https://linkedin.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[12px] text-text-secondary hover:text-white hover:underline hover:decoration-[#FF1A1A] hover:underline-offset-4 transition-all duration-200"
+                className="text-[12px] text-slate-300 hover:text-white transition-all duration-200"
               >
                 {t("bottom.linkedin")}
               </a>

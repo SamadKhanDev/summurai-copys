@@ -5,6 +5,8 @@ import { Html } from '@react-three/drei';
 import { useFrame, useThree } from '@react-three/fiber';
 import * as THREE from 'three';
 
+import { useTheme } from './ThemeProvider';
+
 interface ServiceItem {
   key: string;
   icon: React.ComponentType<{ className?: string }>;
@@ -36,6 +38,9 @@ function Card({
   cardDepthsRef,
   onCardClick
 }: CardProps) {
+  const { theme } = useTheme();
+  const isLight = theme === 'light';
+
   const meshRef = useRef<THREE.Mesh>(null);
   const cardRef = useRef<HTMLDivElement>(null);
 
@@ -121,22 +126,26 @@ function Card({
             e.stopPropagation();
             onCardClick(index);
           }}
-          className="w-[380px] h-[280px] p-6 flex flex-col justify-between text-white bg-white/[0.06] backdrop-blur-md border border-white/20 hover:border-red-500/60 hover:bg-white/[0.09] hover:shadow-[0_0_40px_rgba(239,68,68,0.25)] [&.is-active]:border-red-500/60 [&.is-active]:bg-white/[0.09] [&.is-active]:shadow-[0_0_40px_rgba(239,68,68,0.25)] rounded-2xl cursor-pointer transition-all duration-300 group"
+          className={`w-[380px] h-[280px] p-6 flex flex-col justify-between rounded-2xl cursor-pointer transition-all duration-300 group backdrop-blur-md border ${
+            isLight
+              ? 'text-black bg-white/[0.55] border-black/10 hover:border-red-500/60 hover:bg-white/[0.8] hover:shadow-[0_0_40px_rgba(239,68,68,0.15)] [&.is-active]:border-red-500/60 [&.is-active]:bg-white/[0.8] [&.is-active]:shadow-[0_0_40px_rgba(239,68,68,0.15)]'
+              : 'text-white bg-white/[0.06] border-white/20 hover:border-red-500/60 hover:bg-white/[0.09] hover:shadow-[0_0_40px_rgba(239,68,68,0.25)] [&.is-active]:border-red-500/60 [&.is-active]:bg-white/[0.09] [&.is-active]:shadow-[0_0_40px_rgba(239,68,68,0.25)]'
+          }`}
           style={{ willChange: 'opacity' }}
         >
           <div>
             <div className="flex items-center justify-between mb-3">
-              <span className="text-[10px] font-mono font-bold tracking-[0.2em] text-white bg-white/5 border border-white/10 group-hover:border-red-500/40 group-hover:text-red-500 group-[.is-active]:border-red-500/40 group-[.is-active]:text-red-500 px-2.5 py-1 rounded-full uppercase transition-colors duration-300">
+              <span className={`text-[10px] font-mono font-bold tracking-[0.2em] px-2.5 py-1 rounded-full uppercase transition-colors duration-300 border group-hover:border-red-500/40 group-hover:!text-red-500 group-[.is-active]:border-red-500/40 group-[.is-active]:!text-red-500 ${isLight ? '!text-neutral-800 bg-neutral-100 border-black/10' : '!text-white bg-white/5 border-white/10'}`}>
                 Pillar {numStr}
               </span>
-              <div className="w-10 h-10 rounded-xl bg-white/[0.08] border border-white/15 flex items-center justify-center text-white group-hover:bg-red-600 group-hover:text-white group-hover:border-red-600 group-hover:shadow-[0_0_15px_rgba(239,68,68,0.4)] group-[.is-active]:bg-red-600 group-[.is-active]:text-white group-[.is-active]:border-red-600 group-[.is-active]:shadow-[0_0_15px_rgba(239,68,68,0.4)] transition-all duration-300">
+              <div className={`w-10 h-10 rounded-xl flex items-center justify-center border transition-all duration-300 group-hover:bg-red-600 group-hover:!text-white group-hover:border-red-600 group-hover:shadow-[0_0_15px_rgba(239,68,68,0.4)] group-[.is-active]:bg-red-600 group-[.is-active]:!text-white group-[.is-active]:border-red-600 group-[.is-active]:shadow-[0_0_15px_rgba(239,68,68,0.4)] ${isLight ? 'bg-neutral-100 border-black/10 !text-black' : 'bg-white/[0.08] border-white/15 !text-white'}`}>
                 <Icon className="w-5 h-5" />
               </div>
             </div>
-            <h3 className="text-base font-extrabold text-white tracking-wide group-hover:text-red-500 group-[.is-active]:text-red-500 transition-colors duration-300">
+            <h3 className={`text-base font-extrabold tracking-wide group-hover:!text-red-500 group-[.is-active]:!text-red-500 transition-colors duration-300 ${isLight ? '!text-black' : '!text-white'}`}>
               {service.title}
             </h3>
-            <p className="text-xs text-gray-300 leading-relaxed mt-2.5 line-clamp-3">
+            <p className={`text-xs leading-relaxed mt-2.5 line-clamp-3 ${isLight ? '!text-neutral-700' : '!text-gray-300'}`}>
               {service.description}
             </p>
           </div>
@@ -146,7 +155,11 @@ function Card({
               {service.tags.slice(0, 3).map((tag) => (
                 <span
                   key={tag}
-                  className="px-2 py-0.5 rounded-md bg-white/[0.04] border border-white/10 text-[9.5px] text-gray-300 font-semibold tracking-wide uppercase group-hover:border-red-500/40 group-hover:text-white group-[.is-active]:border-red-500/40 group-[.is-active]:text-white transition-colors"
+                  className={`px-2 py-0.5 rounded-md text-[9.5px] font-semibold tracking-wide uppercase transition-colors border ${
+                    isLight
+                      ? 'bg-neutral-100 border-black/10 !text-neutral-600 group-hover:bg-red-500 group-hover:border-red-500 group-hover:!text-white group-[.is-active]:bg-red-500 group-[.is-active]:border-red-500 group-[.is-active]:!text-white'
+                      : 'bg-white/[0.04] border-white/10 !text-gray-300 group-hover:border-red-500/40 group-hover:!text-white group-[.is-active]:border-red-500/40 group-[.is-active]:!text-white'
+                  }`}
                 >
                   {tag}
                 </span>
@@ -154,7 +167,7 @@ function Card({
             </div>
             <a
               href={localizedUrl}
-              className="text-xs font-bold text-red-500 hover:text-red-400 transition-colors duration-300 inline-flex items-center gap-1.5"
+              className="text-xs font-bold !text-red-500 hover:!text-red-400 transition-colors duration-300 inline-flex items-center gap-1.5"
             >
               {service.linkText}
             </a>

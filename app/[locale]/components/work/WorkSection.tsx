@@ -82,7 +82,7 @@ function WorkCard({ sector, index, cardsRef, size, y, rotate, id, t }: WorkCardP
                     </div>
 
                     {/* Sector Title */}
-                    <h3 className="text-base sm:text-lg lg:text-xl font-bold text-white tracking-wide group-hover:text-red-500 transition-colors duration-300">
+                    <h3 className="text-base sm:text-lg lg:text-xl font-bold !text-white tracking-wide group-hover:text-red-500 transition-colors duration-300">
                         {title}
                     </h3>
 

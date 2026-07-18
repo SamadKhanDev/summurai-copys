@@ -312,3 +312,10 @@ body {
         transform: none;
     }
 }
+
+Light Theme Background Overrides html.light body,
+html.light .s-work,
+html.light .s-work .s__inner,
+html.light .s-work .s__scene {
+    background-color: #ffffff;
+}

@@ -71,8 +71,8 @@ export default function TrustedBySection({
         card.style.transform = `scale(${nextScale})`;
         
         // Dynamic border and opacity effect (mathematically continuous without threshold jumps)
-        card.style.borderColor = `rgba(255, 255, 255, ${0.35 * nextGlow})`; // Brighter shiny white border
-        card.style.boxShadow = `0 0 12px rgba(255, 255, 255, ${0.15 * nextGlow})`; // Tight edge glow to make the border shine
+        card.style.borderColor = `rgba(var(--marquee-glow-color), ${0.35 * nextGlow})`; // Brighter shiny border
+        card.style.boxShadow = `0 0 12px rgba(var(--marquee-glow-color), ${0.15 * nextGlow})`; // Tight edge glow to make the border shine
         const img = card.querySelector("img");
         if (img) img.style.opacity = `${0.6 + 0.4 * nextGlow}`;
       });
@@ -94,7 +94,7 @@ export default function TrustedBySection({
   return (
     <section
       id={title ? "section-8" : "section-10"}
-      className="bg-[#0a0a0a] py-20 overflow-hidden border-t-[1px] border-[#ffffff14]"
+      className="bg-[var(--marquee-bg)] py-20 overflow-hidden border-t-[1px] border-[var(--marquee-border)]"
     >
       {title && (
         <p className="font-jetbrains-mono text-[11px] tracking-[0.25em] text-[#a8a59c] text-center mb-10 uppercase">
@@ -105,11 +105,11 @@ export default function TrustedBySection({
       <div className="relative overflow-hidden" ref={containerRef}>
         <div
           className="absolute left-0 top-0 h-full w-28 z-10 pointer-events-none"
-          style={{ background: "linear-gradient(to right, #0a0a0a, transparent)" }}
+          style={{ background: "linear-gradient(to right, var(--marquee-bg), transparent)" }}
         />
         <div
           className="absolute right-0 top-0 h-full w-28 z-10 pointer-events-none"
-          style={{ background: "linear-gradient(to left, #0a0a0a, transparent)" }}
+          style={{ background: "linear-gradient(to left, var(--marquee-bg), transparent)" }}
         />
 
         <div
@@ -135,7 +135,7 @@ export default function TrustedBySection({
                 alt="Logo"
                 width={100}
                 height={100}
-                className="max-h-12 w-auto object-contain transition-opacity duration-300 opacity-60"
+                className="partner-logo max-h-12 w-auto object-contain transition-opacity duration-300 opacity-60"
               />
             </span>
           ))}

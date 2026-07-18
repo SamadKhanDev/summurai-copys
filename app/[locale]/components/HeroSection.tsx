@@ -3,6 +3,8 @@
 import { useEffect, useRef } from "react";
 import { useTranslations } from "next-intl";
 import { Button } from "./ui";
+import AWaves from "./AWaves/AWaves";
+import PadlockCanvas from "./PadlockCanvas/PadlockCanvas";
 
 export default function HeroSection({ onBookBriefingClick }: { onBookBriefingClick?: () => void }) {
   const t = useTranslations("home");
@@ -31,40 +33,26 @@ export default function HeroSection({ onBookBriefingClick }: { onBookBriefingCli
   return (
     <>
       <section
-        className="relative min-h-screen flex flex-col items-start justify-center px-8 pt-28 pb-20 overflow-hidden"
-        style={{ background: "#05060A" }}
+        className="relative min-h-screen flex flex-col items-start justify-center px-8 pt-28 pb-20 overflow-hidden bg-background transition-colors duration-300 text-foreground"
       >
-        {/* Radial red glow */}
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background:
-              "radial-gradient(ellipse 80% 60% at 50% 20%, rgba(225,29,72,0.12), transparent 70%)",
-          }}
-        />
+        {/* Right side absolute 3D Padlock */}
+        <div className="absolute right-8 top-[48%] -translate-y-1/2 w-[450px] h-[550px] hidden lg:block z-10">
+          <PadlockCanvas />
+        </div>
 
-        {/* Grid overlay */}
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            backgroundImage: `
-              linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)
-            `,
-            backgroundSize: "48px 48px",
-            maskImage:
-              "radial-gradient(ellipse 70% 60% at 50% 0%, #000 60%, transparent 100%)",
-            WebkitMaskImage:
-              "radial-gradient(ellipse 70% 60% at 50% 0%, #000 60%, transparent 100%)",
-          }}
-        />
+
+
+        {/* Waves effect background */}
+        <div className="absolute inset-0 z-0">
+          <AWaves />
+        </div>
 
         {/* Content */}
         <div className="relative z-10 max-w-7xl mx-auto w-full">
           {/* Tag / Badge */}
           <div
             ref={addRevealRef(0)}
-            className="inline-flex items-center gap-3 px-5 py-2 rounded-full border border-white/[0.08] bg-white/[0.04] mb-8 text-[0.65rem] font-bold tracking-[0.25em] uppercase text-[#94A3B8] opacity-0 translate-y-7 transition-all duration-700 font-['Space_Grotesk',sans-serif]"
+            className="inline-flex items-center gap-3 px-5 py-2 rounded-full border border-card-border bg-card-bg mb-8 text-[0.65rem] font-bold tracking-[0.25em] uppercase text-text-secondary opacity-0 translate-y-7 transition-all duration-700 font-['Space_Grotesk',sans-serif]"
           >
             <span
               className="w-1.5 h-1.5 rounded-full bg-[#E11D48] shrink-0"
@@ -79,16 +67,16 @@ export default function HeroSection({ onBookBriefingClick }: { onBookBriefingCli
           {/* Headline */}
           <h1
             ref={addRevealRef(1)}
-            className="font-['Space_Grotesk',sans-serif] font-extrabold leading-tight tracking-[-0.03em] mb-6 max-w-4xl text-white opacity-0 translate-y-7 transition-all duration-700 delay-100 text-[85px] md:text-6xl lg:text-7xl"
+            className="font-['Space_Grotesk',sans-serif] font-extrabold leading-tight tracking-[-0.03em] mb-6 max-w-4xl text-foreground opacity-0 translate-y-7 transition-all duration-700 delay-100 text-[85px] md:text-6xl lg:text-7xl"
           >
             {t("hero.title")}
-            <span className="text-text-main font-light italic">{t("hero.titleAccent")}</span>
+            <span className="text-red-500 font-light italic">{t("hero.titleAccent")}</span>
           </h1>
 
           {/* Description */}
           <p
             ref={addRevealRef(2)}
-            className="text-lg leading-relaxed text-[rgba(148,163,184,0.75)] max-w-2xl mb-10 opacity-0 translate-y-7 transition-all duration-700 delay-200 font-light"
+            className="text-lg leading-relaxed text-text-secondary max-w-2xl mb-10 opacity-0 translate-y-7 transition-all duration-700 delay-200 font-light"
           >
             {t("hero.description")}
           </p>

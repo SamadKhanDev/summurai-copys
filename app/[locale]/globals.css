@@ -29,6 +29,45 @@
   /* Custom Gradients */
   --gradient-accent: linear-gradient(135deg, #E11D48 0%, #BE123C 100%);
   --gradient-rose-sky: linear-gradient(90deg, #E11D48, #38BDF8);
+
+  /* Marquee Partner Logos Theme Variables */
+  --marquee-bg: #0a0a0a;
+  --marquee-border: rgba(255, 255, 255, 0.08);
+  --marquee-text: #6d6b64;
+  --marquee-glow-color: 255, 255, 255;
+
+  /* Wave line colors */
+  --wave-stroke: rgba(255, 255, 255, 0.2);
+  --grid-color: rgba(255, 255, 255, 0.025);
+}
+
+html.light {
+  /* Core Backgrounds */
+  --background: #F8FAFC;
+  --background-secondary: #F1F5F9;
+  --background-tertiary: #E2E8F0;
+  --card-bg: rgba(15, 23, 42, 0.03);
+  --card-border: rgba(15, 23, 42, 0.08);
+  --light-bg: #05060A;
+
+  /* Borders & Dividers */
+  --border: rgba(15, 23, 42, 0.08);
+
+  /* Typography */
+  --foreground: #0F172A;
+  --text-primary: #0F172A;
+  --text-secondary: rgba(71, 85, 105, 0.85);
+  --text-muted: rgba(100, 116, 139, 0.6);
+
+  /* Marquee Partner Logos Theme Variables */
+  --marquee-bg: #F1F5F9;
+  --marquee-border: rgba(15, 23, 42, 0.08);
+  --marquee-text: #64748b;
+  --marquee-glow-color: 15, 23, 42;
+
+  /* Wave line colors */
+  --wave-stroke: rgba(15, 23, 42, 0.65);
+  --grid-color: rgba(15, 23, 42, 0.05);
 }
 
 /* ==========================================================================
@@ -170,8 +209,8 @@ h6 .text-\[\#E11D48\] {
 /* Global input placeholder styling */
 input::placeholder,
 textarea::placeholder {
-  color: color-mix(in oklab, var(--color-white) 20%, transparent) !important;
-  font-weight: 100 !important;
+  color: var(--text-muted) !important;
+  font-weight: 300 !important;
 }
 
 /* for trusted marquee section */
@@ -183,4 +222,69 @@ textarea::placeholder {
   to {
     transform: translateX(-50%);
   }
+}
+
+/* Partner Logo Styles for Marquee */
+.partner-logo {
+  filter: brightness(0) invert(1) opacity(0.6);
+  transition: filter 0.3s ease, opacity 0.3s ease;
+}
+
+html.light .partner-logo {
+  filter: brightness(0) opacity(0.6);
+}
+
+/* Light mode overrides for inputs and hardcoded white text elements */
+html.light input,
+html.light select,
+html.light textarea {
+  color: var(--foreground) !important;
+}
+
+html.light .text-white:not(button,
+  a,
+  .bg-gradient-accent *,
+  .bg-accent *,
+  [class*="bg-gradient"] *,
+  [class*="bg-accent"] *,
+  [class*="bg-red"] *,
+  .dark-section,
+  .dark-section *) {
+  color: var(--foreground) !important;
+}
+
+/* Ensure text inside dark-section remains light-colored in light mode */
+html.light .dark-section .text-text-secondary {
+  color: rgba(148, 163, 184, 0.7) !important;
+}
+
+html.light .dark-section .text-text-muted {
+  color: rgba(148, 163, 184, 0.5) !important;
+}
+
+/* Testimonial Section (Client Voice) Light Theme Overrides */
+html.light [id="testimonial-section"] {
+  background: var(--background-secondary) !important;
+}
+
+html.light [id="testimonial-section"] article {
+  background: var(--card-bg) !important;
+  border: 1px solid var(--card-border) !important;
+}
+
+html.light [id="testimonial-section"] blockquote,
+html.light [id="testimonial-section"] span:not([class*="text-[#FF1A1A]"]) {
+  color: var(--foreground) !important;
+}
+
+html.light [id="testimonial-section"] .text-white {
+  color: var(--foreground) !important;
+}
+
+html.light [id="testimonial-section"]>div[style*="rgba(255,255,255,0.05)"] {
+  background: var(--border) !important;
+}
+
+html.light [id="testimonial-section"] div[style*="radial-gradient"] {
+  background: none !important;
 }

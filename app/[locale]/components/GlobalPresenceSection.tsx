@@ -28,7 +28,7 @@ function FootprintMap() {
           cy="250"
           r={r}
           fill="none"
-          stroke="rgba(255,255,255,0.05)"
+          stroke="var(--border)"
           strokeWidth="1"
         />
       ))}
@@ -62,7 +62,7 @@ function FootprintMap() {
         <text
           x="252"
           y="262"
-          fill="rgba(255,255,255,0.6)"
+          fill="var(--text-secondary)"
           fontFamily="JetBrains Mono"
           fontSize="10"
         >
@@ -77,7 +77,7 @@ function FootprintMap() {
         <text
           x="332"
           y="222"
-          fill="rgba(255,255,255,0.6)"
+          fill="var(--text-secondary)"
           fontFamily="JetBrains Mono"
           fontSize="10"
         >
@@ -92,7 +92,7 @@ function FootprintMap() {
         <text
           x="172"
           y="192"
-          fill="rgba(255,255,255,0.6)"
+          fill="var(--text-secondary)"
           fontFamily="JetBrains Mono"
           fontSize="10"
         >
@@ -107,7 +107,7 @@ function FootprintMap() {
         <text
           x="302"
           y="187"
-          fill="rgba(255,255,255,0.6)"
+          fill="var(--text-secondary)"
           fontFamily="JetBrains Mono"
           fontSize="10"
         >
@@ -122,7 +122,7 @@ function FootprintMap() {
         <text
           x="317"
           y="247"
-          fill="rgba(255,255,255,0.6)"
+          fill="var(--text-secondary)"
           fontFamily="JetBrains Mono"
           fontSize="10"
         >
@@ -137,18 +137,8 @@ export default function GlobalPresenceSection() {
   const t = useTranslations("home.globalPresence");
   const offices = t.raw("offices") as Office[];
 
-  // const { ref, isInView } = useInViewTrigger();
-
-
-  //   const { displayed: typedText, showCursor } = useTypingEffect(
-  //   fullTitle,
-  //   50,
-  //   isInView,
-  //   500, // delay before hiding cursor
-  // );
-
   return (
-    <section className="bg-[#0a0a0a] text-white px-8 md:px-16 py-36 border-t-[1px] border-[#ffffff14]">
+    <section className="bg-background text-foreground px-8 md:px-16 py-36 border-t-[1px] border-border/10">
       <div className="max-w-screen-xl mx-auto">
         {/* Eyebrow */}
         <div className="flex items-center gap-3 mb-10">
@@ -165,7 +155,7 @@ export default function GlobalPresenceSection() {
             className="mb-4"
             Component={SectionTitle}
           />
-          <p className="text-[#a8a59c] text-[17px] leading-relaxed self-end max-w-md">
+          <p className="text-text-secondary text-[17px] leading-relaxed self-end max-w-md">
             {t("description")}
           </p>
         </div>
@@ -174,22 +164,22 @@ export default function GlobalPresenceSection() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
           {/* Map card */}
           <ScrollReveal animation="fadeUp" delay={0.5}>
-          <div className="rounded-xl border border-white/10 bg-[#111] p-4 aspect-square">
+          <div className="rounded-xl border border-card-border bg-background-secondary p-4 aspect-square">
             <FootprintMap />
           </div>
           </ScrollReveal>
           {/* Office list */}
-          <div className="flex flex-col divide-y divide-white/10 self-center">
+          <div className="flex flex-col divide-y divide-card-border self-center">
             {offices.map((o) => (
               <ScrollReveal key={o.num} animation="fadeUp" delay={0.5}>
               <div className="flex items-start gap-6 py-5">
-                <span className="font-jetbrains-mono text-[11px] text-white/25 pt-1 w-5 shrink-0">
+                <span className="font-jetbrains-mono text-[11px] text-text-muted pt-1 w-5 shrink-0">
                   {o.num}
                 </span>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2">
                     <p
-                      className={`font-space-grotesk text-xl font-bold ${o.hq ? "text-red-500" : "text-white"}`}
+                      className={`font-space-grotesk text-xl font-bold ${o.hq ? "text-red-500" : "text-foreground"}`}
                     >
                       {o.name}
                     </p>
@@ -199,11 +189,11 @@ export default function GlobalPresenceSection() {
                       </span>
                     )}
                   </div>
-                  <p className="font-jetbrains-mono text-[11px] text-white/30 mt-0.5">
+                  <p className="font-jetbrains-mono text-[11px] text-text-secondary mt-0.5">
                     {o.country}
                   </p>
                 </div>
-                <p className="font-jetbrains-mono text-[11px] text-white/30 self-center shrink-0">
+                <p className="font-jetbrains-mono text-[11px] text-text-secondary self-center shrink-0">
                   {o.role}
                 </p>
               </div>

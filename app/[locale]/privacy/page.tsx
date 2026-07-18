@@ -23,12 +23,6 @@ export default function PrivacyPage() {
     <>
       <Navbar />
       <div className="pt-16">
-        <Breadcrumb
-          items={[
-            { label: "Home", href: "/" },
-            { label: "Privacy Policy" },
-          ]}
-        />
 
         <Section>
           <SectionLabel>{t("meta.label")}</SectionLabel>

@@ -36,13 +36,6 @@ export default function CloudInfrastructurePage() {
     <>
       <Navbar />
       <div className="pt-16">
-        <Breadcrumb
-          items={[
-            { label: "Home", href: "/" },
-            { label: "Services", href: "/services" },
-            { label: t("breadcrumb") },
-          ]}
-        />
 
         <Section>
           <SectionLabel>{t("label")}</SectionLabel>
@@ -91,7 +84,7 @@ export default function CloudInfrastructurePage() {
               </ScrollReveal>
             ))}
           </div>
-          
+
           <ScrollReveal delay={0.5}>
             <div className="mt-12 text-center">
               <Button variant="fill" size="lg" onClick={() => setIsModalOpen(true)}>

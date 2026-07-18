@@ -81,16 +81,12 @@ export default function WhySamurai() {
     <div ref={containerRef} className="relative w-full">
       <div
         ref={pinRef}
-        className="relative w-full h-screen overflow-hidden text-white z-10"
-        style={{ background: "#050505" }}
+        className="relative w-full h-screen overflow-hidden text-foreground bg-background z-10"
       >
         {/* 3D background rings */}
         {!prefersReducedMotion && (
           <RingsCanvas progress={progress} />
         )}
-
-        {/* Grid overlay */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff02_1px,transparent_1px),linear-gradient(to_bottom,#ffffff02_1px,transparent_1px)] bg-[size:4rem_4rem] pointer-events-none z-10" />
 
 
 
@@ -120,16 +116,16 @@ export default function WhySamurai() {
               {ITEMS.map(({ key, icon: Icon }) => (
                 <div
                   key={key}
-                  className="group relative rounded-2xl p-8 flex gap-6 bg-white/[0.02] border border-white/[0.06] hover:bg-[#E11D48]/[0.04] hover:border-[#E11D48]/20 transition-all duration-300"
+                  className="group relative rounded-2xl p-8 flex gap-6 bg-card-bg border border-card-border hover:bg-[#E11D48]/[0.04] hover:border-[#E11D48]/20 transition-all duration-300"
                 >
                   <div className="w-11 h-11 rounded-xl flex items-center justify-center shrink-0 mt-0.5 bg-[#E11D48]/10">
                     <Icon className="w-5 h-5 text-[#E11D48]" />
                   </div>
                   <div className="flex flex-col">
-                    <h3 className="font-space-grotesk font-bold text-[1rem] tracking-[-0.01em] text-white mb-2 leading-snug">
+                    <h3 className="font-space-grotesk font-bold text-[1rem] tracking-[-0.01em] text-foreground mb-2 leading-snug">
                       {t(`items.${key}.title`)}
                     </h3>
-                    <p className="text-[0.82rem] leading-relaxed font-light text-slate-400">
+                    <p className="text-[0.82rem] leading-relaxed font-light text-text-secondary">
                       {t(`items.${key}.description`)}
                     </p>
                   </div>
@@ -170,7 +166,7 @@ export default function WhySamurai() {
                   }}
                   className="w-full max-w-xl px-6 text-center flex flex-col items-center justify-center transition-all duration-75"
                 >
-                  <div className="relative w-full rounded-2xl border border-white/[0.05] bg-[#0b0f1a]/30 backdrop-blur-md p-8 md:p-10 shadow-2xl text-left overflow-hidden group">
+                  <div className="relative w-full rounded-2xl border border-card-border bg-card-bg backdrop-blur-md p-8 md:p-10 shadow-2xl text-left overflow-hidden group">
                     {/* Vertical neon-red glowing bar on the left edge */}
                     <div className="absolute left-0 top-0 bottom-0 w-[4px] bg-[#E11D48] shadow-[0_0_15px_rgba(225,29,72,0.8)]" />
 
@@ -179,11 +175,11 @@ export default function WhySamurai() {
                       PILLAR 0{i + 1}
                     </span>
 
-                    <h3 className="font-space-grotesk font-bold text-lg md:text-xl tracking-tight text-white mb-3">
+                    <h3 className="font-space-grotesk font-bold text-lg md:text-xl tracking-tight text-foreground mb-3">
                       {t(`items.${key}.title`)}
                     </h3>
 
-                    <p className="text-white/60 text-xs md:text-sm font-light leading-relaxed">
+                    <p className="text-text-secondary text-xs md:text-sm font-light leading-relaxed">
                       {t(`items.${key}.description`)}
                     </p>
                   </div>

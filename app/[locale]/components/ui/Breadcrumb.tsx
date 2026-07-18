@@ -9,7 +9,7 @@ interface BreadcrumbProps {
 export function Breadcrumb({ items, className = "" }: BreadcrumbProps) {
   return (
     <nav
-      className={`text-xs text-text-secondary px-8 py-4 max-w-7xl mx-auto ${className}`}
+      className={`bg-black border-b border-white/5 text-xs text-white/50 px-8 py-3 ${className}`}
       aria-label="Breadcrumb"
     >
       <ol className="flex items-center gap-2">
@@ -19,12 +19,12 @@ export function Breadcrumb({ items, className = "" }: BreadcrumbProps) {
             {item.href ? (
               <Link
                 href={item.href as any}
-                className="hover:text-text-main transition-colors"
+                className="hover:text-white transition-colors"
               >
                 {item.label}
               </Link>
             ) : (
-              <span className="text-text-main">{item.label}</span>
+              <span className="text-red-500 font-semibold">{item.label}</span>
             )}
           </li>
         ))}

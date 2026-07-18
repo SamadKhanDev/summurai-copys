@@ -27,6 +27,7 @@ export default function TestimonialSection() {
 
   return (
     <section
+      id="testimonial-section"
       className="relative overflow-hidden py-28 px-8"
       style={{ background: "#07080D" }}
     >

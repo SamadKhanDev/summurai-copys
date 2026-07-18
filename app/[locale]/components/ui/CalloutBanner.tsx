@@ -22,7 +22,7 @@ export function CalloutBanner({
     <div
       className={`bg-gradient-to-br from-accent/8 to-accent/3 border border-accent/25 rounded-xl p-12 text-center ${className}`}
     >
-      <h2 className="text-3xl font-extrabold text-white mb-3">{title}</h2>
+      <h2 className="text-3xl font-extrabold text-foreground mb-3">{title}</h2>
       {description && (
         <p className="text-text-secondary mb-7 max-w-2xl mx-auto">{description}</p>
       )}

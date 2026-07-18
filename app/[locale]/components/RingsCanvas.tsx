@@ -108,7 +108,7 @@ function Rings({ progress }: { progress: number }) {
         <group key={idx}>
           <Line
             points={ring.points}
-            color="#ffffff"
+            color="#E11D48"
             lineWidth={ring.width}
             transparent
             opacity={ring.opacity}
@@ -121,7 +121,7 @@ function Rings({ progress }: { progress: number }) {
 
 export default function RingsCanvas({ progress }: RingsCanvasProps) {
   return (
-    <div className="absolute inset-0 w-full h-full z-0 overflow-hidden bg-[#050505]">
+    <div className="absolute inset-0 w-full h-full z-0 overflow-hidden bg-transparent">
 
       <Canvas
         camera={{ position: [0, 0, 8], fov: 38 }}

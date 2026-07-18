@@ -15,6 +15,8 @@ import {
   ArrowRight,
 } from "lucide-react";
 import { withBasePath } from "@/lib/basePath";
+import { useTheme } from "./ThemeProvider";
+import AWaves from "./AWaves/AWaves";
 
 interface PillarItem {
   key: string;
@@ -124,6 +126,8 @@ const CARD_STEP = 135;
 
 export default function SevenPillarsSection() {
   const t = useTranslations("home");
+  const { theme } = useTheme();
+  const isLight = theme === "light";
 
   // Outer scroll wrapper — tracks how far we've scrolled inside this section
   const outerRef = useRef<HTMLDivElement>(null);
@@ -200,50 +204,59 @@ export default function SevenPillarsSection() {
           height: "100vh",
           width: "100%",
           overflow: "hidden",
-          background: "#05060A",
+          background: "var(--background)",
         }}
       >
         {/* ── Fixed Background Layer ── */}
         {/* Deep gradient */}
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            background:
-              "radial-gradient(ellipse 80% 60% at 60% 50%, rgba(220,38,38,0.08) 0%, transparent 70%), #05060A",
-            zIndex: 0,
-          }}
-        />
+        {!isLight && (
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              background:
+                "radial-gradient(ellipse 80% 60% at 60% 50%, rgba(220,38,38,0.08) 0%, transparent 70%), var(--background)",
+              zIndex: 0,
+            }}
+          />
+        )}
 
         {/* Animated ambient glow that shifts with active card (Pure Red Theme) */}
-        <div
-          style={{
-            position: "absolute",
-            left: "55%",
-            top: "50%",
-            transform: "translate(-50%, -50%)",
-            width: 700,
-            height: 700,
-            borderRadius: "50%",
-            background: "radial-gradient(circle, #DC2626 0%, transparent 70%)",
-            opacity: 0.09,
-            filter: "blur(120px)",
-            transition: "opacity 0.6s ease",
-            zIndex: 0,
-            pointerEvents: "none",
-          }}
-        />
+        {!isLight && (
+          <div
+            style={{
+              position: "absolute",
+              left: "55%",
+              top: "50%",
+              transform: "translate(-50%, -50%)",
+              width: 700,
+              height: 700,
+              borderRadius: "50%",
+              background: "radial-gradient(circle, #DC2626 0%, transparent 70%)",
+              opacity: 0.09,
+              filter: "blur(120px)",
+              transition: "opacity 0.6s ease",
+              zIndex: 0,
+              pointerEvents: "none",
+            }}
+          />
+        )}
 
-        {/* Subtle grid lines */}
+        {/* Subtle grid lines & Static Waves */}
+        <div className="absolute inset-0 pointer-events-none opacity-40 z-0">
+          <AWaves isStatic={true} />
+        </div>
         <div
           style={{
             position: "absolute",
             inset: 0,
             backgroundImage:
-              "linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px)",
+              "linear-gradient(var(--grid-color) 1px, transparent 1px), linear-gradient(90deg, var(--grid-color) 1px, transparent 1px)",
             backgroundSize: "80px 80px",
             zIndex: 0,
             pointerEvents: "none",
+            maskImage: "linear-gradient(to bottom, transparent 0%, black 15%)",
+            WebkitMaskImage: "linear-gradient(to bottom, transparent 0%, black 15%)",
           }}
         />
 
@@ -287,12 +300,12 @@ export default function SevenPillarsSection() {
               >
                 Pillar {activePillar.num} / 07
               </span>
-              <div style={{ height: 1, width: 48, background: "rgba(255,255,255,0.2)" }} />
+              <div style={{ height: 1, width: 48, background: "var(--border)" }} />
               <span
                 style={{
                   fontSize: 11,
                   fontFamily: "monospace",
-                  color: "rgba(255,255,255,0.4)",
+                  color: "var(--text-secondary)",
                   letterSpacing: "0.2em",
                   textTransform: "uppercase",
                 }}
@@ -307,7 +320,7 @@ export default function SevenPillarsSection() {
                 width: "100%",
                 maxWidth: 400,
                 height: 2,
-                background: "rgba(255,255,255,0.08)",
+                background: "var(--border)",
                 borderRadius: 2,
                 overflow: "hidden",
               }}
@@ -334,7 +347,7 @@ export default function SevenPillarsSection() {
                 style={{
                   fontSize: "clamp(2rem, 3.5vw, 3.2rem)",
                   fontWeight: 900,
-                  color: "#ffffff",
+                  color: "var(--foreground)",
                   lineHeight: 1.1,
                   textTransform: "uppercase",
                   letterSpacing: "-0.02em",
@@ -345,7 +358,7 @@ export default function SevenPillarsSection() {
               </h2>
               <p
                 style={{
-                  color: "rgba(255,255,255,0.65)",
+                  color: "var(--text-secondary)",
                   fontSize: "1.05rem",
                   lineHeight: 1.7,
                   maxWidth: 520,
@@ -374,10 +387,10 @@ export default function SevenPillarsSection() {
                     fontFamily: "monospace",
                     fontWeight: 700,
                     padding: "4px 12px",
-                    background: "rgba(255,255,255,0.04)",
-                    border: "1px solid rgba(255,255,255,0.1)",
+                    background: "var(--card-bg)",
+                    border: "1px solid var(--card-border)",
                     borderRadius: 999,
-                    color: "rgba(255,255,255,0.8)",
+                    color: "var(--text-secondary)",
                     letterSpacing: "0.05em",
                     transition: "all 0.3s ease",
                   }}
@@ -435,7 +448,7 @@ export default function SevenPillarsSection() {
                 left: 0,
                 right: 0,
                 height: 120,
-                background: "linear-gradient(to bottom, #05060A 0%, transparent 100%)",
+                background: "linear-gradient(to bottom, var(--background) 0%, transparent 100%)",
                 zIndex: 20,
                 pointerEvents: "none",
               }}
@@ -447,7 +460,7 @@ export default function SevenPillarsSection() {
                 left: 0,
                 right: 0,
                 height: 120,
-                background: "linear-gradient(to top, #05060A 0%, transparent 100%)",
+                background: "linear-gradient(to top, var(--background) 0%, transparent 100%)",
                 zIndex: 20,
                 pointerEvents: "none",
               }}
@@ -529,8 +542,9 @@ export default function SevenPillarsSection() {
                         position: "absolute",
                         inset: -2,
                         borderRadius: 18,
-                        border: `3px solid ${isActive ? "rgba(220, 38, 38, 0.75)" : "rgba(255, 255, 255, 0.08)"}`,
-                        boxShadow: closeness > 0
+                        border: `3px solid ${isActive ? "rgba(220, 38, 38, 0.75)" : (isLight ? "transparent" : "var(--border)")
+                          }`,
+                        boxShadow: closeness > 0 && !isLight
                           ? `0 0 25px rgba(220, 38, 38, ${0.3 * closeness})`
                           : "none",
                         transition: "border-color 0.4s ease, box-shadow 0.4s ease",
@@ -547,8 +561,10 @@ export default function SevenPillarsSection() {
                         height: "100%",
                         borderRadius: 16,
                         overflow: "hidden",
-                        background: "#090B11",
-                        boxShadow: "0 20px 60px rgba(0,0,0,0.5)",
+                        background: "var(--background-secondary)",
+                        boxShadow: isLight
+                          ? "0 10px 30px rgba(0,0,0,0.06)"
+                          : "0 20px 60px rgba(0,0,0,0.5)",
                         display: "flex",
                         flexDirection: "column",
                       }}
@@ -559,7 +575,7 @@ export default function SevenPillarsSection() {
                           position: "relative",
                           width: "100%",
                           height: "60%",
-                          background: "#0B0D13",
+                          background: "var(--background-tertiary)",
                         }}
                       >
                         <Image
@@ -594,7 +610,7 @@ export default function SevenPillarsSection() {
                             height: 40,
                             pointerEvents: "none",
                             zIndex: 10,
-                            fill: pillar.isWhiteBg ? "#ffffff" : "#090B11",
+                            fill: "var(--background-secondary)",
                           }}
                           preserveAspectRatio="none"
                         >
@@ -612,8 +628,8 @@ export default function SevenPillarsSection() {
                           flexDirection: "column",
                           justifyContent: "flex-start",
                           position: "relative",
-                          backgroundColor: pillar.isWhiteBg ? "#ffffff" : "#090B11",
-                          color: pillar.isWhiteBg ? "#000000" : "#ffffff",
+                          backgroundColor: "var(--background-secondary)",
+                          color: "var(--foreground)",
                         }}
                       >
                         <span

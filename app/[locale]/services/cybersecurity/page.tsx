@@ -51,13 +51,6 @@ export default function CybersecurityPage() {
     <>
       <Navbar />
       <div className="pt-16">
-        <Breadcrumb
-          items={[
-            { label: "Home", href: "/" },
-            { label: "Services", href: "/services" },
-            { label: t("breadcrumb") },
-          ]}
-        />
 
         <Section>
           <SectionLabel>{t("label")}</SectionLabel>
