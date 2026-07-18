@@ -106,7 +106,7 @@ export default function Navbar() {
 
     const updateCenters = () => {
       elementCenters = magneticRefs.current
-        .filter(Boolean)
+        .filter((el): el is HTMLElement => !!el)
         .map((el) => {
           const prevTransform = el.style.transform;
           el.style.transform = "none";
