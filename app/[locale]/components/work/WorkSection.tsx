@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import Lenis from "lenis";
+import { useLenis } from "../useLenis";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useTranslations } from "next-intl";
@@ -62,6 +62,7 @@ function WorkCard({ sector, index, cardsRef, size, y, rotate, id, t }: WorkCardP
 
     return (
         <div
+            id={sector.key}
             ref={(el) => {
                 wrapRef.current = el;
                 if (el) cardsRef.current[index] = el;
@@ -114,6 +115,7 @@ interface WorkSectionProps {
 
 export default function WorkSection({ title = "WORK" }: WorkSectionProps) {
     const t = useTranslations("industries");
+    const lenis = useLenis();
     const sectionRef = useRef<HTMLElement | null>(null);
     const containerRef = useRef<HTMLDivElement | null>(null);
     const titleRef = useRef<HTMLSpanElement | null>(null);
@@ -143,19 +145,7 @@ export default function WorkSection({ title = "WORK" }: WorkSectionProps) {
     const dynamicFontSize = titleLength > 4 ? `min(15.75rem, ${Math.floor(100 / titleLength)}lvh)` : "min(15.75rem, 25lvh)";
 
     useEffect(() => {
-        // 1. Initialize Lenis for smooth scroll
-        const lenis = new Lenis({
-            duration: 1.2,
-            lerp: 0.08,
-            smoothWheel: true,
-        });
-
-        let animationFrameId: number;
-        function raf(time: number) {
-            lenis.raf(time);
-            animationFrameId = requestAnimationFrame(raf);
-        }
-        animationFrameId = requestAnimationFrame(raf);
+        if (!lenis) return;
 
         // 2. Setup Dimensions and Layout Calculations
         let points: any[] = [];
@@ -554,18 +544,62 @@ export default function WorkSection({ title = "WORK" }: WorkSectionProps) {
             }, 150);
         };
 
+        const handleHashChange = () => {
+            const hash = window.location.hash.replace("#", "");
+            if (!hash) return;
+
+            const index = sectors.findIndex((s) => s.key === hash);
+            if (index === -1) return;
+
+            setTimeout(() => {
+                const triggers = ScrollTrigger.getAll();
+                const trigger = triggers.find((t) => t.trigger === sectionRef.current);
+                if (!trigger) return;
+
+                const cardsStart = 1.0;
+                const cardGap = 2.5;
+                const cardDuration = 5.0;
+                const cardsEnd = cardsStart + (sectors.length - 1) * cardGap + cardDuration;
+                const closingStart = cardsEnd + 0.5;
+                const totalDuration = closingStart + 1.0;
+
+                const targetProgress = (cardsStart + index * cardGap + cardDuration * 0.5) / totalDuration;
+                const scrollPos = trigger.start + targetProgress * (trigger.end - trigger.start);
+
+                lenis.scrollTo(scrollPos, {
+                    duration: 1.5,
+                    force: true,
+                });
+            }, 500);
+        };
+
+        window.addEventListener("hashchange", handleHashChange);
         window.addEventListener("resize", handleResize);
 
+        // Run on load
+        if (window.location.hash) {
+            setTimeout(handleHashChange, 1000);
+        }
+
+        // Poll hash changes because Next.js client-side router transitions do not always fire 'hashchange'
+        let lastHash = window.location.hash;
+        const hashInterval = setInterval(() => {
+            if (window.location.hash !== lastHash) {
+                lastHash = window.location.hash;
+                handleHashChange();
+            }
+        }, 300);
+
         return () => {
-            lenis.destroy();
-            cancelAnimationFrame(animationFrameId);
             gsap.ticker.remove(tick);
+            clearInterval(hashInterval);
+            window.removeEventListener("hashchange", handleHashChange);
             window.removeEventListener("resize", handleResize);
             clearTimeout(resizeTimer);
             if (tl) tl.kill();
             ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
         };
-    }, [sectors.length]);
+    }, [lenis, sectors.length]);
 
     return (
         <section id="work" className="s-work" ref={sectionRef} style={{ "--font-size": dynamicFontSize } as React.CSSProperties}>

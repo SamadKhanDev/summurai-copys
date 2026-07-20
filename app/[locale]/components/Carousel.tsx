@@ -4,8 +4,10 @@ import React, { useRef, useEffect } from 'react';
 import { Html } from '@react-three/drei';
 import { useFrame, useThree } from '@react-three/fiber';
 import * as THREE from 'three';
+import { Link } from '@/i18n/navigation';
 
 import { useTheme } from './ThemeProvider';
+import { withBasePath } from '@/lib/basePath';
 
 interface ServiceItem {
   key: string;
@@ -105,7 +107,7 @@ function Card({
 
   const numStr = (index + 1).toString().padStart(2, '0');
   const Icon = service.icon;
-  const localizedUrl = `/${locale}${service.href}`;
+  const localizedUrl = withBasePath(`/${locale}${service.href}`);
 
   return (
     <mesh ref={meshRef}>

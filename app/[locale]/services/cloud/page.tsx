@@ -16,7 +16,7 @@ import {
   CardDescription,
   Button,
 } from "../../components/ui";
-import { Cloud, Building2, Wrench, BarChart3 } from "lucide-react";
+import { ShieldAlert, Server, FileCheck, ShieldCheck } from "lucide-react";
 import { AnimatedHeading } from "../../components/animations/textBehavior";
 import ScrollReveal from "../../components/animations/ScrollReveal";
 
@@ -25,10 +25,10 @@ export default function CloudPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const items = [
-    { icon: Cloud, key: "management" },
-    { icon: Building2, key: "outsourcing" },
-    { icon: Wrench, key: "patch" },
-    { icon: BarChart3, key: "optimization" },
+    { icon: ShieldAlert, key: "risk" },
+    { icon: Server, key: "asset" },
+    { icon: FileCheck, key: "compliance" },
+    { icon: ShieldCheck, key: "protection" },
   ];
 
   return (
@@ -78,7 +78,7 @@ export default function CloudPage() {
       <ChatWizardModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        defaultService="Cloud & IT Operations"
+        defaultService="OT Security Solutions"
       />
     </>
   );

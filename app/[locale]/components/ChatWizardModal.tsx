@@ -9,6 +9,7 @@ interface ChatModalProps {
     onClose: () => void;
     defaultService?: string; // Pre-selection tracker context prop
     mode?: "default" | "contact";
+    noBackdrop?: boolean;
 }
 
 interface Message {
@@ -18,7 +19,7 @@ interface Message {
     isCustomForm?: boolean;
 }
 
-export default function ChatWizardModal({ isOpen, onClose, defaultService, mode = "default" }: ChatModalProps) {
+export default function ChatWizardModal({ isOpen, onClose, defaultService, mode = "default", noBackdrop = false }: ChatModalProps) {
     const [shouldRender, setShouldRender] = useState(false);
     const [animateClass, setAnimateClass] = useState(false);
     const [step, setStep] = useState<number>(1);
@@ -45,12 +46,13 @@ export default function ChatWizardModal({ isOpen, onClose, defaultService, mode 
     });
 
     const SERVICE_OPTIONS = [
-        "Cybersecurity & SOC",
-        "Cloud & IT Operations",
-        "GRC & Compliance", // From image_dabaff.png
-        "Digital Transformation", // From image_dabaff.png
-        "Business Continuity", // From image_dabaff.png
-        "AI & Automation", // From image_dabaff.png
+        "Incident Response",
+        "OT Security",
+        "GRC & Compliance",
+        "Digital Transformation",
+        "Training & Awareness",
+        "Business Continuity",
+        "Technical Consulting",
         "Other"
     ];
 
@@ -307,7 +309,7 @@ export default function ChatWizardModal({ isOpen, onClose, defaultService, mode 
     };
 
     return (
-        <div className={`fixed inset-0 z-[9999] flex items-center justify-center p-4 transition-all duration-300 ease-out ${animateClass ? "bg-black/85 backdrop-blur-md opacity-100" : "bg-black/0 backdrop-blur-none opacity-0"}`}>
+        <div className={`fixed inset-0 z-[9999] flex items-center justify-center p-4 transition-all duration-300 ease-out ${noBackdrop ? (animateClass ? "bg-transparent backdrop-blur-none opacity-100" : "bg-transparent backdrop-blur-none opacity-0") : (animateClass ? "bg-black/85 backdrop-blur-md opacity-100" : "bg-black/0 backdrop-blur-none opacity-0")}`}>
             <div className={`w-full max-w-[920px] bg-[#0E0F12] border border-white/5 rounded-[2.5rem] p-10 relative flex flex-col justify-between h-[640px] shadow-2xl overflow-hidden transition-all duration-300 ease-out ${animateClass ? "opacity-100 scale-100 translate-y-0" : "opacity-0 scale-95 translate-y-4"}`}>
 
                 {/* Background Favicon Icon */}

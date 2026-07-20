@@ -40,25 +40,33 @@ const solutions = {
   pam: {
     breadcrumb: "PAM (Wallix)",
     label: "Solutions / PAM",
-    title: "Privileged Access Management ",
+    title: "Secure Privileged Access ",
     titleAccent: "with Wallix",
-    description: "Comprehensive Privileged Access Management — protecting your most sensitive accounts, systems, and data from insider threats and external attacks.",
+    description: "Enterprise-grade control over privileged identities — securing your critical accounts, infrastructure, and sensitive data against both internal risks and advanced external threats.",
     items: {
       integration: {
         title: "Wallix Integration",
-        description: "Deep integration with Wallix PAM — industry-leading privileged session management, password vaulting, and access controls deployed in your environment.",
+        description: "Seamless deployment of Wallix PAM within your environment — bringing world-class privileged session governance, secure credential vaulting, and fine-grained access policies out of the box.",
       },
       coverage: {
         title: "IT & OT Coverage",
-        description: "Unified PAM coverage across IT and OT environments — protecting both enterprise systems and operational technology from privileged misuse.",
+        description: "End-to-end privileged access visibility across both traditional IT infrastructure and industrial operational technology — eliminating blind spots that attackers exploit.",
       },
       insider: {
         title: "Insider Threat Protection",
-        description: "Session recording, behavioral analytics, and real-time alerts that detect and respond to suspicious privileged activity before damage occurs.",
+        description: "Continuous session recording, user behavior analysis, and instant alerting that identify and contain abnormal privileged activity before any harm is done.",
       },
       deployment: {
         title: "Flexible Deployment",
-        description: "On-premise, cloud, or hybrid deployment options — with full support for regulated and sovereign environments requiring data residency.",
+        description: "Choose the model that fits your architecture — on-premises, cloud-hosted, or hybrid — with dedicated support for sovereign and regulated environments with strict data locality requirements.",
+      },
+      audit: {
+        title: "Audit & Compliance Readiness",
+        description: "Build a complete, tamper-proof record of every privileged session to confidently meet regulatory obligations across NCA, SAMA, ISO, and other compliance frameworks.",
+      },
+      access: {
+        title: "Granular Access Control",
+        description: "Apply least-privilege principles through just-in-time access grants, passwordless connections, and precise command-level restrictions — minimizing your attack surface at every layer.",
       },
     },
     cta: "Request PAM Assessment →",

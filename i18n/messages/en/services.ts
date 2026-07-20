@@ -7,124 +7,116 @@ const services = {
     description: "A holistic ecosystem engineered to protect, modernize, and scale your most critical digital assets — fully aligned with Saudi regulatory frameworks.",
   },
   cyber: {
-    breadcrumb: "Cybersecurity & Managed SOC",
-    label: "Services / Cybersecurity",
-    title: "Cybersecurity & ",
-    titleAccent: "Managed SOC",
-    description: "End-to-end protection for the enterprise — proactive, integrated cybersecurity operations that safeguard data, infrastructure, and people.",
+    breadcrumb: "Incident Response & Forensics",
+    label: "Services / Incident Response",
+    title: "Incident Response & ",
+    titleAccent: "Forensics",
+    description: "Expert support for cyber incident response and investigation.",
     items: {
-      soc: {
-        title: "Managed SOC (24×7)",
-        description: "Continuous monitoring, detection & incident response. Threat hunting, alert triage, and vulnerability prioritization aligned with MITRE ATT&CK and NCA ECC frameworks.",
-        tags: ["SIEM", "SOAR", "EDR/XDR", "24×7"],
+      forensics: {
+        title: "Cyber Forensics",
+        description: "Investigate cyber incidents to understand what happened, identify the source of the attack, collect digital evidence, and help prevent similar incidents in the future.",
       },
-      infraProtection: {
-        title: "Infrastructure Protection",
-        description: "Next-gen Firewalls, IDS/IPS, WAF, DLP, and Endpoint Security. IAM, PAM, MFA, and Zero Trust Architecture. CSPM and configuration hardening.",
-        tags: ["NGFW", "Zero Trust", "PAM/IAM", "CSPM"],
+      response: {
+        title: "Incident Response",
+        description: "Respond quickly to cyberattacks by containing threats, reducing damage, recovering affected systems, and restoring normal business operations as soon as possible.",
       },
-      dfir: {
-        title: "DFIR & Threat Intelligence",
-        description: "Real-time threat visibility and correlation. Digital forensics, incident investigation, and malware analysis. Rapid containment and NCA-compliant reporting.",
-        tags: ["DFIR", "Forensics", "Threat Intel"],
+      investigation: {
+        title: "Threat Investigation",
+        description: "Monitor and investigate suspicious activities, identify potential attackers, understand how they operate, and improve your organization's overall security.",
       },
-      vapt: {
-        title: "VA/PT & Red Teaming",
-        description: "Comprehensive network, web, and application testing. Red team & adversary simulation aligned with NCA and MITRE frameworks. Continuous vulnerability management.",
-        tags: ["Red Team", "VAPT", "Pen Testing"],
+      recovery: {
+        title: "Recovery and Prevention",
+        description: "Recover from security incidents, restore critical systems, fix vulnerabilities, and implement stronger security measures to reduce the risk of future attacks.",
       },
-      cloudOt: {
-        title: "Cloud & OT Security",
-        description: "DevSecOps integration, API & SaaS security testing. Cloud-native protection (CSPM, CWPP, CASB). OT/ICS & SCADA network monitoring, segmentation, and anomaly detection.",
-        tags: ["DevSecOps", "OT/ICS", "SCADA", "CASB"],
+      malware: {
+        title: "Malware Analysis",
+        description: "Detect, analyze, and remove malware from your systems. Understand how malicious software affects your environment and take steps to prevent future infections.",
       },
     },
-    cta: "Request Security Assessment →",
+    cta: "Request Incident Support →",
   },
   cloud: {
-    breadcrumb: "Cloud & IT Operations",
-    label: "Services / Cloud & IT",
-    title: "Cloud & ",
-    titleAccent: "IT Operations",
-    description: "Enterprise-grade IT operations management with 24×7 monitoring, proactive maintenance, and SLA-driven service delivery ensuring uninterrupted business continuity.",
+    breadcrumb: "OT Security Solutions",
+    label: "Services / OT Security",
+    title: "OT Security ",
+    titleAccent: "Solutions",
+    description: "Protect your OT systems with solutions that improve network visibility, reduce security risks, and keep your operations, people, and business secure.",
     items: {
-      management: {
-        title: "Cloud Management",
-        description: "Unified management across Azure, AWS, Oracle OCI, and SITE Cloud — with security, cost transparency, and automated scaling.",
+      risk: {
+        title: "Risk Assessment",
+        description: "Identify possible security risks and weaknesses in your systems before they become serious problems. This helps protect your business and reduce potential threats.",
       },
-      outsourcing: {
-        title: "IT Outsourcing",
-        description: "Flexible models — on-site, hybrid, or fully managed. ITSM-based operations and full-stack monitoring with L1–L3 support escalation.",
+      asset: {
+        title: "OT Security and Asset Management",
+        description: "Protect your Operational Technology (OT) systems by finding vulnerabilities, keeping an updated inventory of devices and software, and improving system design and security settings.",
       },
-      patch: {
-        title: "Patch & Configuration",
-        description: "Patch management, Office 365/Azure administration, and hardware baseline deployments. Keep your environment current and hardened.",
+      compliance: {
+        title: "Compliance and Security Management",
+        description: "Meet industry regulations and security standards with expert guidance. Strengthen your security policies and ensure your business stays compliant and protected.",
       },
-      optimization: {
-        title: "Capacity & Cost Optimization",
-        description: "Cloud cost optimization, capacity planning, and performance tuning across multi-cloud environments to maximize ROI.",
+      protection: {
+        title: "Cybersecurity Protection",
+        description: "Keep your business safe from cyber threats with advanced security solutions, including malware protection, cloud security, network security, threat detection, and regular security testing.",
       },
     },
-    cta: "Talk to Our Infrastructure Team →",
+    cta: "Talk to Our OT Security Team →",
   },
   grc: {
     breadcrumb: "GRC & Compliance",
     label: "Services / GRC",
     title: "GRC & ",
     titleAccent: "Compliance",
-    description: "Strong governance is the foundation of resilient digital operations. We align your cybersecurity and data protection programs with NCA ECC, PDPL, and international frameworks.",
+    description: "A strong GRC strategy helps businesses manage risks, follow laws and regulations, and achieve long-term growth. It improves daily operations, builds trust with stakeholders, and keeps compliance simple and cost-effective.",
     items: {
-      regulatory: {
-        title: "Regulatory Alignment",
-        description: "NCA ECC, PDPL, NDMO, and ISO 27001/22301/27701 alignment. We translate complex mandates into actionable programs.",
-        tags: ["NCA ECC", "PDPL", "NDMO"],
+      nca: {
+        title: "NCA Cybersecurity Compliance Services",
+        description: "We help organizations achieve compliance with the National Cybersecurity Authority (NCA) Cybersecurity Framework by implementing security controls, strengthening governance, and protecting critical systems, data, and infrastructure.",
       },
-      policy: {
-        title: "Policy Development",
-        description: "Comprehensive policy and procedure development tailored to your organizational context and regulatory environment.",
+      sama: {
+        title: "SAMA Cybersecurity & BCM Implementation",
+        description: "Our experts assist organizations in adopting the SAMA Cybersecurity and Business Continuity Management (BCM) Frameworks to improve cyber resilience, safeguard critical assets, and comply with SAMA regulations.",
       },
-      vciso: {
-        title: "vCISO Advisory",
-        description: "Virtual CISO and governance advisory services — executive-level security leadership without the full-time overhead.",
+      aramco: {
+        title: "Saudi Aramco Cybersecurity Compliance",
+        description: "Our experts provide implementation, assessment, and audit services for the Saudi Aramco Cybersecurity Standard (SACS-002), helping organizations strengthen security and meet third-party compliance requirements",
       },
-      audit: {
-        title: "Gap Assessments & Audit Readiness",
-        description: "Compliance gap assessments, remediation roadmaps, and full audit readiness support for internal and external reviewers.",
+      risk: {
+        title: "Cybersecurity Risk Assessment",
+        description: "Our cybersecurity risk assessment services identify potential threats, evaluate vulnerabilities, and recommend practical solutions to reduce risk and improve your organization's security posture.",
+      },
+      iso: {
+        title: "Implementing ISO Standards",
+        description: "Implementing ISO standards can seem overwhelming and stressful for organizations of any size. A company's preparation for ISO implementation depends on several factors, including",
       },
     },
     cta: "Book a Compliance Review →",
   },
   infrastructure: {
-    breadcrumb: "Cloud & Infrastructure",
-    label: "Services / Cloud & Infrastructure",
-    title: "Cloud & ",
-    titleAccent: "Infrastructure",
-    description:
-      "Unified management across data centers and multi-cloud platforms with security, cost transparency, and automated scaling. Network, server, and endpoint administration with patch and configuration control.",
+    breadcrumb: "Technical Consulting Services",
+    label: "Services / Technical Consulting",
+    title: "Technical Consulting ",
+    titleAccent: "Services",
+    description: "Align your technology with your business goals through expert consulting. Samurai helps businesses improve efficiency, strengthen cybersecurity, adopt new technologies, and achieve sustainable growth with cost-effective and practical solutions.",
     items: {
-      multicloud: {
-        title: "Multi-Cloud Platform Management",
-        description:
-          "Centralized operations across Azure, AWS, SITE Cloud, and Oracle OCI — with cost transparency, automated scaling, and unified governance across all environments.",
-        tags: ["Azure", "AWS", "SITE Cloud", "Oracle OCI"],
+      securityOps: {
+        title: "Security Operations Consulting",
+        description: "Get expert guidance to strengthen your security operations and stay protected against evolving cyber threats.",
       },
-      cspm: {
-        title: "Cloud Security Posture Management",
-        description:
-          "Continuous misconfiguration detection, compliance benchmarking, and automated remediation across your cloud estate — enforcing Zero Trust principles at scale.",
+      securityPlanning: {
+        title: "Security Planning and Procedures",
+        description: "Develop clear security policies, processes, and best practices to keep your systems secure and well-managed.",
       },
-      ot: {
-        title: "OT/ICS & SCADA Monitoring",
-        description:
-          "Specialized monitoring and protection for operational technology environments — including industrial control systems and SCADA networks — aligned with NCA OT controls.",
+      techPlanning: {
+        title: "Technology Planning and Support",
+        description: "Receive expert advice on choosing the right technologies and creating a clear roadmap for successful implementation.",
       },
-      operations: {
-        title: "Network & Endpoint Operations",
-        description:
-          "Full-lifecycle network, server, and endpoint administration with automated patch management, configuration control, and 24×7 health monitoring across on-premise and cloud workloads.",
+      assessment: {
+        title: "IT and Security Assessment",
+        description: "Review your IT systems and cybersecurity setup to identify weaknesses, improve performance, and strengthen overall security.",
       },
     },
-    cta: "Book an Infrastructure Review →",
+    cta: "Book a Consulting Session →",
   },
   bcm: {
     breadcrumb: "Business Continuity",
@@ -167,61 +159,61 @@ const services = {
     cta: "Get BCM Assessment →",
   },
   ai: {
-    breadcrumb: "AI & Automation",
-    label: "Services / AI & Automation",
+    breadcrumb: "Training & Awareness",
+    label: "Services / Training & Awareness",
     title: "From Vision to ",
-    titleAccent: "Intelligent Enterprise",
-    description: "We help organizations operationalize AI responsibly, transforming data into decisions, automating critical processes, and enhancing efficiency across the enterprise — with full governance and compliance alignment.",
+    titleAccent: "Security Awareness",
+    description: "Help your employees recognize cyber threats, avoid security risks, and follow safe online practices with flexible cybersecurity training that strengthens your organization's security.",
     items: {
-      strategy: {
-        title: "AI Strategy & Consulting",
-        description: "Develop AI roadmaps aligned with enterprise goals, compliance frameworks, and ethical governance standards.",
+      techAwareness: {
+        title: "Technology Awareness Training",
+        description: "Build your team's knowledge of technology and cybersecurity with practical training that improves awareness and promotes safe digital practices.",
       },
-      analytics: {
-        title: "Predictive Analytics & ML",
-        description: "Advanced models for demand forecasting, anomaly detection, and performance optimization across business processes.",
+      isoTraining: {
+        title: "ISO 27001 Training",
+        description: "Learn the principles of ISO 27001 and develop the skills needed to manage and improve information security systems.",
       },
-      conversational: {
-        title: "Conversational AI & NLP",
-        description: "Build multilingual chatbots and virtual assistants that improve customer engagement and automate support workflows.",
+      certifications: {
+        title: "Professional Cybersecurity Certifications",
+        description: "Prepare for industry-recognized certifications such as CISSP, SSCP, and CISM with expert-led training to strengthen your cybersecurity skills and advance your career.",
       },
-      vision: {
-        title: "Computer Vision & OCR",
-        description: "Automate visual inspection, data extraction, and identity validation using AI and OCR models at scale.",
+      lms1: {
+        title: "Learning Management System (LMS)",
+        description: "Manage and deliver online training with an easy-to-use learning platform that helps employees develop their skills.",
       },
-      agents: {
-        title: "AI Agents & Automation",
-        description: "Integrate AI agents (LangChain, AutoGPT) for decision support, threat detection, and workflow orchestration.",
+      securityAwareness: {
+        title: "Security Awareness Programs",
+        description: "Train employees to recognize cyber threats, avoid phishing attacks, and follow safe online practices to protect your organization.",
       },
-      infrastructure: {
-        title: "AI Infrastructure",
-        description: "On-premise AI deployment and AI service enablement for sovereign, regulated environments requiring data residency.",
+      lms2: {
+        title: "Learning Management System (LMS)",
+        description: "Manage and deliver online training with an easy-to-use learning platform that helps employees develop their skills.",
       },
     },
-    cta: "Schedule AI Consultation →",
+    cta: "Explore Training Programs →",
   },
   dt: {
     breadcrumb: "Digital Transformation",
     label: "Services / Digital Transformation",
-    title: "Digital Transformation & ",
-    titleAccent: "Analytics",
-    description: "Modernizing legacy applications and core business platforms for cloud readiness. Streamlining workflows using RPA, API integration, and unified data warehouses.",
+    title: "Digital Transformation That ",
+    titleAccent: "Drives Success",
+    description: "Focused on enabling businesses to transform digitally, streamline operations, and foster innovation.",
     items: {
-      modernization: {
-        title: "Enterprise Application Modernization",
-        description: "Migrate, re-architect, and modernize legacy systems for cloud readiness and improved business agility.",
+      strategy: {
+        title: "IT Strategy and Planning",
+        description: "Build a strong IT foundation through strategic budgeting, system assessments, security planning, and technology roadmaps aligned with your long-term business goals.",
       },
-      rpa: {
-        title: "RPA & Process Automation",
-        description: "Streamline workflows using Robotic Process Automation and API integration to eliminate manual bottlenecks.",
+      iot: {
+        title: "IoT Solutions and Integration",
+        description: "End-to-end IoT services include smart device setup, custom software development, seamless system integration, and real-time insights to improve business performance.",
       },
-      custom: {
-        title: "Custom Software Development",
-        description: "Bespoke enterprise applications built to your specifications, integrated with your existing technology stack.",
+      experience: {
+        title: "Digital Experience and Smart Solutions",
+        description: "Enhance customer experiences with intuitive UI/UX design, mobile applications, AI chatbots, and AR/VR solutions that support digital transformation.",
       },
       analytics: {
-        title: "Power BI & Data Analytics",
-        description: "Unified data warehouses, Power BI dashboards, and analytics platforms that turn data into executive-ready insights.",
+        title: "Data Analytics and Business Intelligence",
+        description: "Turn business data into actionable insights with analytics, business intelligence, and big data solutions for smarter decisions and improved performance.",
       },
     },
     cta: "Start Your Transformation →",

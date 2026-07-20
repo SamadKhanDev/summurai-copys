@@ -125,18 +125,8 @@ export default function HomePage() {
       <Section className="py-10">
         <SectionLabel>{t("compliance.label")}</SectionLabel>
         <div className="flex flex-wrap gap-3 mt-4">
-          {[
-            "NCA ECC",
-            "PDPL",
-            "NDMO",
-            "SAMA BCM",
-            "ISO 27001",
-            "ISO 22301",
-            "ISO 27701",
-            "MITRE ATT&CK",
-            "Zero Trust",
-          ].map((badge, index) => (
-            <Badge key={index} active={index < 6}>
+          {(t.raw("compliance.badges") as string[]).map((badge, index) => (
+            <Badge key={index} active={index < 7}>
               {badge}
             </Badge>
           ))}

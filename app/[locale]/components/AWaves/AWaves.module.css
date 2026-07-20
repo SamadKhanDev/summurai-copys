@@ -49,3 +49,7 @@
   stroke-width: 0.2px;
   transition: stroke 0.3s ease;
 }
+
+.noDot::before {
+  display: none !important;
+}

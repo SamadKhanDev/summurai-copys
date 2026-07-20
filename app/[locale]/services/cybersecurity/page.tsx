@@ -14,10 +14,9 @@ import {
   Card,
   CardTitle,
   CardDescription,
-  Tag,
   Button,
 } from "../../components/ui";
-import { Monitor, Flame, Microscope, Target, CloudIcon } from "lucide-react";
+import { Search, ShieldAlert, Target, ShieldCheck, Bug } from "lucide-react";
 import { AnimatedHeading } from "../../components/animations/textBehavior";
 
 export default function CybersecurityPage() {
@@ -26,24 +25,24 @@ export default function CybersecurityPage() {
 
   const items = [
     {
-      icon: Monitor,
-      key: "soc",
+      icon: Search,
+      key: "forensics",
     },
     {
-      icon: Flame,
-      key: "infraProtection",
-    },
-    {
-      icon: Microscope,
-      key: "dfir",
+      icon: ShieldAlert,
+      key: "response",
     },
     {
       icon: Target,
-      key: "vapt",
+      key: "investigation",
     },
     {
-      icon: CloudIcon,
-      key: "cloudOt",
+      icon: ShieldCheck,
+      key: "recovery",
+    },
+    {
+      icon: Bug,
+      key: "malware",
     },
   ];
 
@@ -70,14 +69,7 @@ export default function CybersecurityPage() {
                 <CardDescription>
                   {t(`items.${item.key}.description`)}
                 </CardDescription>
-                {t.raw(`items.${item.key}.tags`) && (
-                  <div className="flex flex-wrap gap-2 mt-4">
-                    {(t.raw(`items.${item.key}.tags`) as string[]).map((tag: string, index: number) => (
-                      <Tag key={index}>{tag}</Tag>
-                    ))}
-                  </div>
-                )}
-              </Card>
+                </Card>
             ))}
           </div>
 
@@ -94,7 +86,7 @@ export default function CybersecurityPage() {
       <ChatWizardModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        defaultService="Cybersecurity & SOC"
+        defaultService="Incident Response & Forensics"
       />
     </>
   );

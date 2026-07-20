@@ -1,4 +1,5 @@
 "use client";
+// Force recompile
 
 import { useState } from "react";
 import { useTranslations } from "next-intl";
@@ -16,7 +17,7 @@ import {
   CardDescription,
   Button,
 } from "../../components/ui";
-import { Brain, BarChart3, MessageSquare, Eye, Zap, Server } from "lucide-react";
+import { Lightbulb, FileCheck, Award, Laptop, ShieldAlert, MonitorPlay } from "lucide-react";
 import { AnimatedHeading } from "../../components/animations/textBehavior";
 import ScrollReveal from "../../components/animations/ScrollReveal";
 
@@ -25,12 +26,12 @@ export default function AIPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const items = [
-    { icon: Brain, key: "strategy" },
-    { icon: BarChart3, key: "analytics" },
-    { icon: MessageSquare, key: "conversational" },
-    { icon: Eye, key: "vision" },
-    { icon: Zap, key: "agents" },
-    { icon: Server, key: "infrastructure" },
+    { icon: Lightbulb, key: "techAwareness" },
+    { icon: FileCheck, key: "isoTraining" },
+    { icon: Award, key: "certifications" },
+    { icon: Laptop, key: "lms1" },
+    { icon: ShieldAlert, key: "securityAwareness" },
+    { icon: MonitorPlay, key: "lms2" },
   ];
 
   return (
@@ -53,8 +54,8 @@ export default function AIPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
             {items.map((item) => (
-              <ScrollReveal delay={0.5}>
-                <Card key={item.key} hover>
+              <ScrollReveal key={item.key} delay={0.5}>
+                <Card hover>
                   <item.icon className="w-9 h-9 text-text-main mb-4" />
                   <CardTitle>{t(`items.${item.key}.title`)}</CardTitle>
                   <CardDescription>
@@ -82,7 +83,7 @@ export default function AIPage() {
       <ChatWizardModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        defaultService="AI & Automation" // Passing current context reference directly
+        defaultService="Training & Awareness" // Passing current context reference directly
       />
     </>
   );

@@ -8,14 +8,17 @@ import { withBasePath } from "@/lib/basePath";
 export default function Footer() {
   const t = useTranslations("footer");
 
+  const tNavbar = useTranslations("navbar.dropdowns.services");
+
   // Nav columns configurations mapping to translation keys
   const servicesLinks = [
-    { href: "/services/cybersecurity", label: t("services.cyber") },
-    { href: "/services/cloud", label: t("services.cloud") },
-    { href: "/services/grc", label: t("services.grc") },
-    { href: "/services/ai", label: t("services.ai") },
-    { href: "/services/business-continuity", label: t("services.bcm") },
-    { href: "/services/digital-transformation", label: t("services.dt") },
+    { href: "/services/cybersecurity", label: tNavbar("cyber") },
+    { href: "/services/cloud", label: tNavbar("cloud") },
+    { href: "/services/grc", label: tNavbar("grc") },
+    { href: "/services/digital-transformation", label: tNavbar("dt") },
+    { href: "/services/ai", label: tNavbar("ai") },
+    { href: "/services/business-continuity", label: tNavbar("bcm") },
+    { href: "/services/cloud-infrastructure", label: tNavbar("infras") },
   ];
 
   const companyLinks = [

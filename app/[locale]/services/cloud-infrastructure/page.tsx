@@ -17,7 +17,7 @@ import {
   Tag,
   Button,
 } from "../../components/ui";
-import { Cloud, ShieldCheck, Network, Settings2 } from "lucide-react";
+import { Shield, ClipboardList, Lightbulb, Search } from "lucide-react";
 import { AnimatedHeading } from "../../components/animations/textBehavior";
 import ScrollReveal from "../../components/animations/ScrollReveal";
 
@@ -26,10 +26,10 @@ export default function CloudInfrastructurePage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const items = [
-    { icon: Cloud, key: "multicloud" },
-    { icon: ShieldCheck, key: "cspm" },
-    { icon: Network, key: "ot" },
-    { icon: Settings2, key: "operations" },
+    { icon: Shield, key: "securityOps" },
+    { icon: ClipboardList, key: "securityPlanning" },
+    { icon: Lightbulb, key: "techPlanning" },
+    { icon: Search, key: "assessment" },
   ];
 
   return (
@@ -59,27 +59,6 @@ export default function CloudInfrastructurePage() {
                   <CardDescription>
                     {t(`items.${item.key}.description`)}
                   </CardDescription>
-                  {item.key === "multicloud" && (
-                    <div className="flex flex-wrap gap-2 mt-4">
-                      {["Azure", "AWS", "SITE Cloud", "Oracle OCI"].map((tag, index) => (
-                        <Tag key={index}>{tag}</Tag>
-                      ))}
-                    </div>
-                  )}
-                  {item.key === "cspm" && (
-                    <div className="flex flex-wrap gap-2 mt-4">
-                      {["CSPM", "Zero Trust", "Posture Management"].map((tag, index) => (
-                        <Tag key={index}>{tag}</Tag>
-                      ))}
-                    </div>
-                  )}
-                  {item.key === "ot" && (
-                    <div className="flex flex-wrap gap-2 mt-4">
-                      {["OT/ICS", "SCADA", "NCA OT"].map((tag, index) => (
-                        <Tag key={index}>{tag}</Tag>
-                      ))}
-                    </div>
-                  )}
                 </Card>
               </ScrollReveal>
             ))}
@@ -99,7 +78,7 @@ export default function CloudInfrastructurePage() {
       <ChatWizardModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        defaultService="Cloud & Infrastructure"
+        defaultService="Technical Consulting Services"
       />
     </>
   );

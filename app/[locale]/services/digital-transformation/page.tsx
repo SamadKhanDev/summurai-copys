@@ -16,7 +16,7 @@ import {
   CardDescription,
   Button,
 } from "../../components/ui";
-import { Building, Bot, Code, LineChart } from "lucide-react";
+import { Briefcase, Cpu, Smartphone, LineChart } from "lucide-react";
 import { AnimatedHeading } from "../../components/animations/textBehavior";
 import ScrollReveal from "../../components/animations/ScrollReveal";
 
@@ -25,9 +25,9 @@ export default function DigitalTransformationPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const items = [
-    { icon: Building, key: "modernization" },
-    { icon: Bot, key: "rpa" },
-    { icon: Code, key: "custom" },
+    { icon: Briefcase, key: "strategy" },
+    { icon: Cpu, key: "iot" },
+    { icon: Smartphone, key: "experience" },
     { icon: LineChart, key: "analytics" },
   ];
 

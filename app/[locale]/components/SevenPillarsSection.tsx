@@ -259,7 +259,7 @@ export default function SevenPillarsSection() {
 
         {/* Waves background */}
         <div className="absolute inset-0 pointer-events-none opacity-40 z-0">
-          <AWaves />
+          <AWaves isStatic={true} straight={true} />
         </div>
 
         {/* ── Main grid layout ── */}

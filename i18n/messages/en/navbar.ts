@@ -15,13 +15,13 @@ const navbar = {
   dropdowns: {
     services: {
       all: "All Services",
-      cyber: "Cybersecurity & SOC",
-      cloud: "Cloud & IT Operations",
+      cyber: "Incident Response",
+      cloud: "OT Security",
       grc: "GRC & Compliance",
       dt: "Digital Transformation",
       bcm: "Business Continuity",
-      ai: "AI & Automation",
-      infras: "Cloud & Infrastructure",
+      ai: "Training & Awareness",
+      infras: "Technical Consulting",
     },
     solutions: {
       all: "All Solutions",

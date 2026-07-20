@@ -36,10 +36,9 @@ export default function HeroSection({ onBookBriefingClick }: { onBookBriefingCli
         className="relative min-h-screen flex flex-col items-start justify-center px-8 pt-28 pb-20 overflow-hidden bg-background transition-colors duration-300 text-foreground"
       >
         {/* Right side absolute 3D Padlock */}
-        <div className="absolute right-8 top-[48%] -translate-y-1/2 w-[450px] h-[550px] hidden lg:block z-10">
+        <div className="absolute right-8 top-[58%] -translate-y-1/2 w-[360px] h-[440px] hidden lg:block z-20">
           <PadlockCanvas />
         </div>
-
 
 
         {/* Waves effect background */}
@@ -104,6 +103,11 @@ export default function HeroSection({ onBookBriefingClick }: { onBookBriefingCli
         @keyframes pulse {
           0%, 100% { opacity: 1; }
           50% { opacity: 0.4; }
+        }
+        @keyframes lockFloat {
+          0%, 100% { transform: translateY(-50%) translateY(0px) rotate(0deg); }
+          25% { transform: translateY(-50%) translateY(-14px) rotate(0.8deg); }
+          75% { transform: translateY(-50%) translateY(8px) rotate(-0.5deg); }
         }
       `}</style>
     </>

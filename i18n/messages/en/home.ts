@@ -2,8 +2,8 @@ const home = {
   hero: {
     tag: "An Affiliate of Neusol · Riyadh, Saudi Arabia",
     title: "Invest in ",
-    titleAccent: "Proven Cybersecurity Solutions.",
-    description: "Reduce recovery time by up to 80% with our cloud-based solution that quickly detects, responds to, and recovers from cyberattacks.",
+    titleAccent: "Where Challenges Meet Innovation",
+    description: "Samurai Systems is a team of skilled solution architects, developers, and consultants with one clear goal in mind \"to deliver the best, nothing less\"",
     ctaPrimary: "Book a Briefing",
     ctaSecondary: "Explore Services",
   },
@@ -29,49 +29,60 @@ const home = {
   services: {
     label: "What We Do",
     title: "Seven Pillars. ",
-    titleAccent: "One Operating System.",
-    description: "A holistic ecosystem engineered to protect, modernize, and scale your most critical digital assets — fully aligned with Saudi regulatory frameworks.",
+    titleAccent: "One Strong Defense.",
+    description: "A unified cybersecurity framework designed to protect your critical assets, strengthen resilience, and ensure compliance with Saudi regulatory standards.",
     items: {
       cyber: {
-        title: "Cybersecurity & Managed SOC",
-        description: "24×7 monitoring, SIEM/SOAR/EDR/XDR, MITRE ATT&CK & NCA ECC alignment. End-to-end cyber protection.",
+        title: "Incident Response",
+        description: "Rapidly detect, contain, and investigate cyber breaches. Our certified experts provide 24/7 emergency response and post-incident recovery support.",
         link: "Learn More →",
       },
       cloud: {
-        title: "Cloud & IT Operations",
-        description: "Azure, AWS, Oracle OCI management with on-site, hybrid, or fully managed outsourcing models.",
+        title: "OT Security",
+        description: "Secure operational technology (OT), industrial control systems (ICS), and SCADA environments against evolving cyber risks while simplifying compliance.",
         link: "Learn More →",
       },
       grc: {
         title: "GRC & Compliance",
-        description: "NCA ECC, PDPL, NDMO, ISO 27001/22301/27701 alignment, vCISO advisory, and audit readiness.",
-        link: "Learn More →",
-      },
-      ai: {
-        title: "AI & Automation",
-        description: "AI strategy, ML, conversational AI, computer vision, OCR, and AI agents for regulated enterprises.",
-        link: "Learn More →",
-      },
-      bcm: {
-        title: "Business Continuity Management",
-        description: "SAMA BCM end-to-end, ISO 22301 readiness, BIA, DR environments, and NCA-compliant testing.",
+        description: "Establish robust Governance, Risk, and Compliance frameworks aligned with national and international standards like NCA, SAMA, and ISO to ensure continuous security alignment.",
         link: "Learn More →",
       },
       dt: {
-        title: "Digital Transformation & Analytics",
-        description: "Enterprise modernization, RPA, custom development, and Power BI dashboards & data warehousing.",
+        title: "Digital Transformation",
+        description: "Enable businesses to transform digitally, streamline operations, and foster innovation. We help you build a strong IT foundation aligned with your long-term goals.",
+        link: "Learn More →",
+      },
+      ai: {
+        title: "Training & Awareness",
+        description: "Empower your workforce and mitigate human risk. We deliver engaging security awareness training, ISO certification courses, and centralized learning solutions.",
+        link: "Learn More →",
+      },
+      bcm: {
+        title: "Business Continuity",
+        description: "Proactively manage risks and ensure your critical operations never stop. We help you develop resilient frameworks, disaster recovery plans, and crisis management strategies.",
         link: "Learn More →",
       },
       infrastructure: {
-        title: "Cloud & Infrastructure",
-        description: "Unified multi-cloud management, CSPM, OT/ICS & SCADA monitoring with automated scaling across Azure, AWS, SITE Cloud, and Oracle OCI.",
+        title: "Technical Consulting",
+        description: "Align IT and cybersecurity strategies with business goals. We help design secure operations, build clear technology roadmaps, and conduct technical security assessments.",
         link: "Learn More →",
       },
     },
   },
   compliance: {
     label: "Regulatory Alignment",
-    badges: ["NCA ECC", "PDPL", "NDMO", "SAMA BCM", "ISO 27001", "ISO 22301", "ISO 27701", "MITRE ATT&CK", "Zero Trust"],
+    badges: [
+      "NCA ECC",
+      "NCA CSCC",
+      "NCA OTCC",
+      "SAMA CSF",
+      "Aramco SACS-002",
+      "KSA PDPL",
+      "NDMO",
+      "ISO 27001",
+      "ISO 22301",
+      "IEC 62443"
+    ],
   },
   vapt: {
     title: "Identify vulnerabilities before adversaries do.",
@@ -84,20 +95,20 @@ const home = {
     titleAccent: "Enterprise.",
     items: {
       expertise: {
-        title: "Enterprise-Grade Expertise",
-        description: "Over 15 years delivering complex, mission-critical IT and security solutions to 2,800+ organizations across 5 countries.",
+        title: "Trusted & Agile",
+        description: "We build lasting client relationships through integrity, transparency, and responsive service. Our agile approach enables us to adapt quickly to evolving business needs.",
       },
       delivery: {
-        title: "End-to-End Delivery",
-        description: "From strategy and architecture to implementation and managed operations — we own the full journey with one unified team.",
+        title: "Dedicated Support",
+        description: "Our experts provide proactive technical assistance and continuous guidance. We're committed to ensuring your systems operate securely and efficiently.",
       },
       security: {
-        title: "Security-First Approach",
-        description: "Security is embedded across every engagement, not bolted on. Every solution we deliver is designed with a zero-trust posture.",
+        title: "Global Reach",
+        description: "With a presence across multiple countries, we deliver world-class IT solutions backed by local expertise and personalized service.",
       },
       compliance: {
-        title: "Regional Compliance Alignment",
-        description: "Deep expertise in NCA ECC, PDPL, NDMO, SAMA BCM — we speak the regulator's language and help you stay ahead of mandates.",
+        title: "On-Time Delivery",
+        description: "We plan and execute every project with precision, ensuring timely delivery without compromising quality, performance, or reliability.",
       },
     },
   },
@@ -135,7 +146,7 @@ const home = {
   globalPresence: {
     eyebrow: "FOOTPRINT",
     title1: "Five countries.",
-    title2: "One accountable partner.",
+    title2: "One Secure Partner.",
     description:
       "Engineers in your time zone. SOC analysts in your jurisdiction. Contracts that recognize your regulator. Founded 2010 · independent · privately held.",
     offices: [

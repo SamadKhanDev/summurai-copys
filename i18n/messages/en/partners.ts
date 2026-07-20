@@ -2,8 +2,8 @@ const partners = {
   breadcrumb: "Partners",
   label: "Technology Alliance Partners",
   title: "Best-in-Class ",
-  titleAccent: "Technology Alliances.",
-  description: "We partner with the world's leading technology vendors to deliver comprehensive, best-of-breed solutions that address every dimension of your enterprise IT and security needs.",
+  titleAccent: "Strategic Alliances.",
+  description: "By collaborating with global technology leaders, we provide unified, top-tier solutions engineered to secure and optimize your enterprise's IT and security landscape.",
   list: [
     { name: "Cisco", description: "Networking, security, and collaboration infrastructure", logo: "cisco.66185032.svg" },
     { name: "Microsoft", description: "Cloud, productivity, and identity solutions", logo: "microsoft.73bad900.svg" },
@@ -32,8 +32,8 @@ const partners = {
     // { name: "Evolveum", description: "Identity governance platform" },
   ],
   callout: {
-    title: "Why Partner with Samurai?",
-    description: "15+ years of implementation expertise, 2,800+ organizations served, and deep regional knowledge make Samurai the partner of choice for enterprise technology deployment across Saudi Arabia and the Gulf.",
+    title: "Why Choose Samurai?",
+    description: "With over 15 years of implementation expertise, 2,800+ successful deployments, and deep regional experience, Samurai Systems is the trusted technology partner for enterprises across Saudi Arabia and the Gulf.",
     cta: "Become a Partner →",
   },
 } as const;

@@ -26,10 +26,11 @@ export default function GRCPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const items = [
-    { icon: FileCheck, key: "regulatory" },
-    { icon: FileText, key: "policy" },
-    { icon: UserCheck, key: "vciso" },
-    { icon: Search, key: "audit" },
+    { icon: FileCheck, key: "nca" },
+    { icon: FileText, key: "sama" },
+    { icon: UserCheck, key: "aramco" },
+    { icon: Search, key: "risk" },
+    { icon: FileCheck, key: "iso" },
   ];
 
   return (
@@ -59,13 +60,6 @@ export default function GRCPage() {
                   <CardDescription>
                     {t(`items.${item.key}.description`)}
                   </CardDescription>
-                  {item.key === "regulatory" && (
-                    <div className="flex flex-wrap gap-2 mt-4">
-                      {["NCA ECC", "PDPL", "NDMO"].map((tag, index) => (
-                        <Tag key={index}>{tag}</Tag>
-                      ))}
-                    </div>
-                  )}
                 </Card>
               </ScrollReveal>
             ))}

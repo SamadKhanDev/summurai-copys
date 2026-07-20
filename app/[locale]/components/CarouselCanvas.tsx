@@ -17,11 +17,11 @@ import {
 const PILLAR_TAGS: Record<string, string[]> = {
   cyber: ["SIEM/SOAR", "EDR/XDR", "NCA ECC", "MITRE ATT&CK", "Zero Trust", "VA/PT"],
   cloud: ["Azure", "AWS", "Oracle OCI", "ITSM", "Hybrid IT"],
-  grc: ["NCA ECC", "PDPL", "ISO 27001", "vCISO", "NDMO"],
-  bcm: ["SAMA BCM", "ISO 22301", "BIA", "DR", "RTO/RPO"],
+  grc: ["OT/ICS", "SCADA", "NCA OTCC", "Penetration Testing", "IEC 62443"],
+  bcm: ["SOCaaS", "MDR", "24/7 Monitoring", "Incident Response", "VAPT"],
   ai: ["LangChain", "AutoGPT", "NLP", "Computer Vision"],
-  dt: ["Agile", "DevOps", "Consulting", "Enterprise Analytics"],
-  infrastructure: ["Bare Metal", "Hypervisors", "Data Centers", "Virtualization"],
+  dt: ["SOC Advisory", "Process Development", "IT Strategy", "Technical Assessments"],
+  infrastructure: ["Cyber Awareness", "ISO 27001 Training", "LMS Solutions", "Human Risk"],
 };
 
 export default function CarouselCanvas() {
@@ -33,9 +33,9 @@ export default function CarouselCanvas() {
     { key: 'cyber', icon: Shield, href: '/services/cybersecurity' },
     { key: 'cloud', icon: Cloud, href: '/services/cloud' },
     { key: 'grc', icon: Scale, href: '/services/grc' },
+    { key: 'dt', icon: Settings, href: '/services/digital-transformation' },
     { key: 'ai', icon: Bot, href: '/services/ai' },
     { key: 'bcm', icon: RefreshCw, href: '/services/business-continuity' },
-    { key: 'dt', icon: Settings, href: '/services/digital-transformation' },
     { key: 'infrastructure', icon: Server, href: '/services/cloud-infrastructure' },
   ];
 

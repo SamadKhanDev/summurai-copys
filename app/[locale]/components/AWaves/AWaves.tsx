@@ -13,6 +13,8 @@ import styles from "./AWaves.module.css";
 type AWavesProps = {
   className?: string;
   isStatic?: boolean;
+  straight?: boolean;
+  interactive?: boolean;
 };
 
 type Bounding = {
@@ -50,7 +52,12 @@ type Point = {
   };
 };
 
-export default function AWaves({ className = "", isStatic = false }: AWavesProps) {
+export default function AWaves({
+  className = "",
+  isStatic = false,
+  straight = false,
+  interactive = true,
+}: AWavesProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const svgRef = useRef<SVGSVGElement>(null);
 
@@ -237,14 +244,19 @@ export default function AWaves({ className = "", isStatic = false }: AWavesProps
 
     linesRef.current.forEach((points) => {
       points.forEach((point) => {
-        const movement =
-          noise.perlin2(
-            (point.x + time * 0.0125) * 0.002,
-            (point.y + time * 0.005) * 0.0015
-          ) * 12;
+        if (straight) {
+          point.wave.x = 0;
+          point.wave.y = 0;
+        } else {
+          const movement =
+            noise.perlin2(
+              (point.x + time * 0.0125) * 0.002,
+              (point.y + time * 0.005) * 0.0015
+            ) * 12;
 
-        point.wave.x = Math.cos(movement) * 32;
-        point.wave.y = Math.sin(movement) * 16;
+          point.wave.x = Math.cos(movement) * 32;
+          point.wave.y = Math.sin(movement) * 16;
+        }
 
         if (!isInteractiveRef.current) return;
 
@@ -415,7 +427,7 @@ export default function AWaves({ className = "", isStatic = false }: AWavesProps
     container.addEventListener("introend", handleIntroEnd);
 
     // Remove this line when interaction should start only after introend.
-    isInteractiveRef.current = true;
+    isInteractiveRef.current = interactive && !isStatic;
 
     return () => {
       stopAnimation();
@@ -442,7 +454,7 @@ export default function AWaves({ className = "", isStatic = false }: AWavesProps
   return (
     <div
       ref={containerRef}
-      className={`${styles.waves} ${className}`}
+      className={`${styles.waves} ${!interactive ? styles.noDot : ""} ${className}`}
       onTouchMove={handleTouchMove}
     >
       <svg

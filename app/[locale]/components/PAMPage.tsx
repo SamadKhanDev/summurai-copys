@@ -78,7 +78,7 @@ export default function PAMPage() {
       <ChatWizardModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        defaultService="Cloud & Infrastructure"
+        defaultService="Cloud Infrastructure"
       />
     </>
   );

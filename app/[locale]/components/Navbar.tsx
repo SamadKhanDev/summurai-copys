@@ -17,6 +17,7 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isCurtainOpen, setIsCurtainOpen] = useState(false);
   const { theme, toggleTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
@@ -216,6 +217,279 @@ export default function Navbar() {
     };
   }, [mounted]);
 
+  // Sync the curtain state when the modal state changes from outside triggers
+  useEffect(() => {
+    const ribbon = document.querySelector('.forkit') as HTMLElement;
+    if (!ribbon) return;
+
+    if (isModalOpen) {
+      ribbon.dispatchEvent(new CustomEvent('open-curtain'));
+    } else {
+      ribbon.dispatchEvent(new CustomEvent('close-curtain'));
+    }
+  }, [isModalOpen]);
+
+  // Forkit.js ribbon physics loop
+  useEffect(() => {
+    if (!mounted) return;
+
+    const ribbon = document.querySelector('.forkit') as HTMLElement;
+    const curtain = document.querySelector('.forkit-curtain') as HTMLElement;
+    if (!ribbon || !curtain) return;
+
+    const closeButton = curtain.querySelector('.close-button') as HTMLElement;
+
+    const STATE_CLOSED = 0;
+    const STATE_DETACHED = 1;
+    const STATE_OPENED = 2;
+
+    const TAG_HEIGHT = 40;
+    const TAG_WIDTH = 120;
+    const MAX_STRAIN = 40;
+    const DRAG_THRESHOLD = 0.36;
+
+    let state = STATE_CLOSED;
+    const closedText = ribbon.getAttribute('data-text') || '';
+    const detachedText = ribbon.getAttribute('data-text-detached') || closedText;
+
+    // Build the sub-elements required
+    ribbon.innerHTML = '<span class="string"></span><span class="tag">' + closedText + '</span>';
+    const ribbonString = ribbon.querySelector('.string') as HTMLElement;
+    const ribbonTag = ribbon.querySelector('.tag') as HTMLElement;
+
+    const friction = 1.04;
+    const gravity = 1.5;
+
+    const closedX = 0;
+    const closedY = 0;
+    const openedX = 0;
+    const openedY = 50;
+
+    let velocity = 0;
+    let rotation = 0;
+
+    let curtainTargetY = 0;
+    let curtainCurrentY = 0;
+
+    let dragging = false;
+    let dragTime = 0;
+    let dragY = 0;
+
+    class Point {
+      x: number;
+      y: number;
+      constructor(x = 0, y = 0) {
+        this.x = x;
+        this.y = y;
+      }
+    }
+
+    const anchorA = new Point(closedX, closedY);
+    const anchorB = new Point(closedX, closedY);
+    const mouse = new Point();
+
+    function distanceBetween(x1: number, y1: number, x2: number, y2: number) {
+      const dx = x1 - x2;
+      const dy = y1 - y2;
+      return Math.sqrt(dx * dx + dy * dy);
+    }
+
+    function onMouseDown(event: MouseEvent) {
+      if (state === STATE_DETACHED) {
+        event.preventDefault();
+        dragY = event.clientY;
+        dragTime = Date.now();
+        dragging = true;
+      }
+    }
+
+    function onMouseMove(event: MouseEvent) {
+      mouse.x = event.clientX;
+      mouse.y = event.clientY;
+    }
+
+    function onMouseUp() {
+      if (state !== STATE_OPENED) {
+        state = STATE_CLOSED;
+        dragging = false;
+      }
+    }
+
+    function onTouchStart(event: TouchEvent) {
+      if (state === STATE_DETACHED) {
+        event.preventDefault();
+        const touch = event.touches[0];
+        dragY = touch.clientY;
+        dragTime = Date.now();
+        dragging = true;
+      }
+    }
+
+    function onTouchMove(event: TouchEvent) {
+      const touch = event.touches[0];
+      mouse.x = touch.clientX;
+      mouse.y = touch.clientY;
+    }
+
+    function onTouchEnd() {
+      if (state !== STATE_OPENED) {
+        state = STATE_CLOSED;
+        dragging = false;
+      }
+    }
+
+    function onRibbonClick(event: MouseEvent) {
+      event.preventDefault();
+      if (state === STATE_OPENED) {
+        close();
+      } else if (Date.now() - dragTime < 300) {
+        open();
+      }
+    }
+
+    function onCloseClick(event: MouseEvent) {
+      event.preventDefault();
+      close();
+    }
+
+    function open() {
+      dragging = false;
+      state = STATE_OPENED;
+      curtain.classList.add('opened');
+      setIsCurtainOpen(true);
+      setIsModalOpen(true);
+    }
+
+    function close() {
+      dragging = false;
+      state = STATE_CLOSED;
+      ribbonTag.innerHTML = closedText;
+      curtain.classList.remove('opened');
+      ribbon.classList.remove('detached');
+      setIsCurtainOpen(false);
+      setIsModalOpen(false);
+    }
+
+    if (closeButton) {
+      closeButton.addEventListener('click', onCloseClick);
+    }
+
+    const handleOpenCurtain = () => open();
+    const handleCloseCurtain = () => close();
+    ribbon.addEventListener('open-curtain', handleOpenCurtain);
+    ribbon.addEventListener('close-curtain', handleCloseCurtain);
+
+    ribbon.addEventListener('click', onRibbonClick);
+    document.addEventListener('mousemove', onMouseMove);
+    document.addEventListener('mousedown', onMouseDown);
+    document.addEventListener('mouseup', onMouseUp);
+    document.addEventListener('touchstart', onTouchStart, { passive: false });
+    document.addEventListener('touchmove', onTouchMove, { passive: false });
+    document.addEventListener('touchend', onTouchEnd);
+
+    let animationFrameId: number;
+
+    function animate() {
+      update();
+      render();
+      animationFrameId = requestAnimationFrame(animate);
+    }
+
+    function update() {
+      const rect = ribbon.getBoundingClientRect();
+      const ribbonCenterX = rect.left + rect.width / 2;
+      const ribbonCenterY = rect.top;
+
+      const distance = distanceBetween(mouse.x, mouse.y, ribbonCenterX, ribbonCenterY);
+
+      if (state === STATE_OPENED) {
+        curtainTargetY = Math.min(curtainTargetY + (window.innerHeight - curtainTargetY) * 0.2, window.innerHeight);
+      } else {
+        if (distance < 120) {
+          state = STATE_DETACHED;
+          ribbonTag.innerHTML = detachedText;
+          ribbon.classList.add('detached');
+        } else if (!dragging && state === STATE_DETACHED && distance > 200) {
+          state = STATE_CLOSED;
+          ribbonTag.innerHTML = closedText;
+          ribbon.classList.remove('detached');
+        }
+
+        if (dragging) {
+          curtainTargetY = Math.max(mouse.y - dragY, 0);
+          if (curtainTargetY > window.innerHeight * DRAG_THRESHOLD) {
+            open();
+          }
+        } else {
+          curtainTargetY *= 0.8;
+        }
+      }
+
+      curtainCurrentY += (curtainTargetY - curtainCurrentY) * 0.3;
+
+      if (dragging || state === STATE_DETACHED) {
+        velocity /= friction;
+        velocity += gravity;
+
+        const offsetX = Math.max(((mouse.x - ribbonCenterX) - closedX) * 0.2, -MAX_STRAIN);
+
+        anchorB.x += ((closedX + offsetX) - anchorB.x) * 0.1;
+        anchorB.y += velocity;
+
+        const strain = distanceBetween(anchorA.x, anchorA.y, anchorB.x, anchorB.y);
+        if (strain > MAX_STRAIN) {
+          velocity -= Math.abs(strain) / (MAX_STRAIN * 1.25);
+        }
+
+        const dy = Math.max(mouse.y - rect.top - anchorB.y, 0);
+        const dx = mouse.x - (rect.left + anchorB.x);
+        const angle = Math.min(130, Math.max(50, Math.atan2(dy, dx) * 180 / Math.PI));
+
+        rotation += (angle - rotation) * 0.1;
+      } else if (state === STATE_OPENED) {
+        anchorB.x += (openedX - anchorB.x) * 0.2;
+        anchorB.y += (openedY - anchorB.y) * 0.2;
+        rotation += (90 - rotation) * 0.02;
+      } else {
+        anchorB.x += (anchorA.x - anchorB.x) * 0.2;
+        anchorB.y += (anchorA.y - anchorB.y) * 0.2;
+        rotation += (0 - rotation) * 0.2;
+      }
+    }
+
+    function render() {
+      curtain.style.top = -100 + Math.min((curtainCurrentY / window.innerHeight) * 100, 100) + '%';
+
+      ribbon.style.transform = `translate(0px, ${curtainCurrentY}px) rotate(0deg)`;
+      ribbonTag.style.transform = `translate(${anchorB.x}px, ${anchorB.y}px) rotate(${rotation}deg)`;
+
+      const dy = anchorB.y - anchorA.y;
+      const dx = anchorB.x - anchorA.x;
+      const angle = Math.atan2(dy, dx) * 180 / Math.PI;
+
+      ribbonString.style.height = anchorB.y + 'px';
+      ribbonString.style.transform = `translate(${anchorA.x}px, 0px) rotate(${angle - 90}deg)`;
+    }
+
+    animate();
+
+    return () => {
+      cancelAnimationFrame(animationFrameId);
+      if (closeButton) {
+        closeButton.removeEventListener('click', onCloseClick);
+      }
+      ribbon.removeEventListener('open-curtain', handleOpenCurtain);
+      ribbon.removeEventListener('close-curtain', handleCloseCurtain);
+      ribbon.removeEventListener('click', onRibbonClick);
+      document.removeEventListener('mousemove', onMouseMove);
+      document.removeEventListener('mousedown', onMouseDown);
+      document.removeEventListener('mouseup', onMouseUp);
+      document.removeEventListener('touchstart', onTouchStart);
+      document.removeEventListener('touchmove', onTouchMove);
+      document.removeEventListener('touchend', onTouchEnd);
+    };
+  }, [mounted]);
+
   const toggleLanguage = () => {
     const newLocale = locale === "en" ? "ar" : "en";
     router.replace(pathname, { locale: newLocale });
@@ -274,6 +548,68 @@ export default function Navbar() {
           backdrop-filter: invert(1) hue-rotate(180deg) brightness(1.1);
         }
         .nav-scope.visible { opacity: 1; }
+
+        /* Forkit integration styles */
+        .forkit {
+          position: relative;
+          display: inline-flex;
+          align-items: center;
+          text-decoration: none;
+          z-index: 50;
+        }
+        .forkit .string {
+          display: block;
+          width: 1.5px;
+          height: 0px;
+          position: absolute;
+          top: 0px;
+          left: 50%;
+          background: rgba(239, 68, 68, 0.85);
+          box-shadow: 0 0 4px rgba(239, 68, 68, 0.6);
+          transform-origin: 50% 0%;
+          pointer-events: none;
+        }
+        .forkit .tag {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          padding: 0.6rem 1.25rem;
+          background: rgba(0, 0, 0, 0.9);
+          backdrop-filter: blur(12px);
+          border: 2px solid rgba(239, 68, 68, 0.6);
+          color: white;
+          font-size: 11px;
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: 0.08em;
+          border-radius: 8px;
+          cursor: pointer;
+          white-space: nowrap;
+          pointer-events: auto;
+          transform-origin: 50% 0%;
+          transition: border-color 0.2s, background-color 0.2s;
+        }
+        .forkit:hover .tag,
+        .forkit.detached .tag {
+          border-color: rgb(239, 68, 68);
+          background: rgba(0, 0, 0, 0.9) !important;
+        }
+
+        .forkit-curtain {
+          position: fixed;
+          width: 100%;
+          height: 100%;
+          top: -100%;
+          left: 0;
+          z-index: 998;
+          background: transparent;
+          backdrop-filter: none;
+          transition: top 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+          pointer-events: none;
+        }
+        .forkit-curtain.opened {
+          pointer-events: auto;
+        }
       `}</style>
       {/* Sniper scope element */}
       <div ref={scopeRef} className="nav-scope" aria-hidden="true" />
@@ -333,8 +669,8 @@ export default function Navbar() {
                 <Link href="/services/cloud" className={dropdownLink}>{t("dropdowns.services.cloud")}</Link>
                 <Link href="/services/grc" className={dropdownLink}>{t("dropdowns.services.grc")}</Link>
                 <Link href="/services/digital-transformation" className={dropdownLink}>{t("dropdowns.services.dt")}</Link>
-                <Link href="/services/business-continuity" className={dropdownLink}>{t("dropdowns.services.bcm")}</Link>
                 <Link href="/services/ai" className={dropdownLink}>{t("dropdowns.services.ai")}</Link>
+                <Link href="/services/business-continuity" className={dropdownLink}>{t("dropdowns.services.bcm")}</Link>
                 <Link href="/services/cloud-infrastructure" className={dropdownLink}>{t("dropdowns.services.infras")}</Link>
               </div>
             </div>
@@ -427,15 +763,17 @@ export default function Navbar() {
             )}
 
             <div className="w-px h-5 bg-border/20 mx-1" />
-            <button
-              onClick={() => setIsModalOpen(true)}
+            <a
+              href="#"
+              data-text={t("cta.contact")}
+              data-text-detached={t("cta.contact")}
               ref={(el) => {
-                magneticRefs.current[9] = el;
+                magneticRefs.current[9] = el as any;
               }}
-              className="inline-flex items-center px-5 py-2.5 bg-transparent border-2 border-red-500/60 hover:border-red-500 !text-white text-[11px] font-bold tracking-wider uppercase rounded-lg hover:bg-red-500/10 transition-all cursor-pointer"
+              className="forkit cursor-pointer"
             >
               {t("cta.contact")}
-            </button>
+            </a>
           </div>
 
           {/* Mobile Menu Button */}
@@ -527,11 +865,14 @@ export default function Navbar() {
           </div>
         )}
       </nav>
-      <ChatWizardModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        mode="contact"
-      />
+      <div className="forkit-curtain flex items-center justify-center">
+        <ChatWizardModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          mode="contact"
+          noBackdrop={false}
+        />
+      </div>
     </>
   );
 }

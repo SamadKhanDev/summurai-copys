@@ -2,12 +2,12 @@ const about = {
   breadcrumb: "About",
   label: "About Samurai Systems",
   title: "We Build ",
-  titleAccent: "Long-Term Partnerships.",
-  description: "Founded in Dubai in 2010 by industry experts, Samurai Systems has expanded to five countries, delivering customer-focused IT solutions. We provide not only high-quality enterprise solutions but also ensure seamless integration with back-office systems and mobile interfaces in a unified stack.",
+  titleAccent: "Excellence Through Collaboration",
+  description: "Founded in Dubai in 2010, Samurai Systems delivers customer-focused IT and cybersecurity solutions across five countries. We provide enterprise technology, seamless system integration, and comprehensive cybersecurity services—including consulting, implementation, monitoring, and support—to protect your infrastructure, data, and people with trusted expertise.",
   mission: {
-    label: "OUR MISSION",
-    title: "Deliver excellence, nothing less.",
-    description: "Our team of solution architects, developers, and consultants share a single mission: to empower organizations to thrive in a fast-evolving digital world — from securing critical infrastructure to modernizing IT operations.",
+    label: "Our Mission",
+    title: "Secure, Innovate, Grow.",
+    description: "To protect businesses with innovative cybersecurity solutions, expert guidance, and proactive support, ensuring secure, resilient, and future-ready digital operations.",
   },
   stats: {
     founded: { value: "2010", label: "Year Founded" },
@@ -61,21 +61,21 @@ const about = {
   values: {
     label: "Mission & Values",
     items: {
-      excellence: {
-        title: "Excellence",
-        description: "We deliver excellence, nothing less. Every engagement, every deliverable, every client interaction is held to the highest standard.",
-      },
-      partnership: {
-        title: "Partnership",
-        description: "We build long-term relationships, not transactional engagements. Your success is our success, and we measure ourselves by your outcomes.",
+      trust: {
+        title: "Trust",
+        description: "We build lasting relationships through honesty, transparency, and reliability. Trust is the foundation of every client partnership and every solution we deliver.",
       },
       security: {
-        title: "Security-First",
-        description: "Security is embedded in everything we do — not an afterthought. We build resilience from the ground up in every solution we deliver.",
+        title: "Security",
+        description: "Protecting your business is our highest priority. We deliver robust cybersecurity solutions that safeguard your data, systems, and digital infrastructure against evolving threats.",
       },
-      expertise: {
-        title: "Regional Expertise",
-        description: "Deep roots in the Kingdom, global reach across five countries. We combine local regulatory knowledge with world-class technology expertise.",
+      collaboration: {
+        title: "Collaboration",
+        description: "We believe the best results come from working together. By partnering closely with our clients and technology partners, we create tailored solutions that drive shared success.",
+      },
+      innovation: {
+        title: "Innovation",
+        description: "We continuously embrace emerging technologies and forward-thinking strategies to deliver smarter, more efficient, and future-ready IT solutions that help businesses grow with confidence.",
       },
     },
   },

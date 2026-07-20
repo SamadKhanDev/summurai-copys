@@ -14,7 +14,7 @@ import {
   CardDescription,
   Badge,
 } from "../components/ui";
-import { Target, Handshake, Shield, Globe as GlobeIcon } from "lucide-react";
+import { Target, Handshake, Shield, Globe as GlobeIcon, Lightbulb } from "lucide-react";
 import { AnimatedHeading } from "../components/animations/textBehavior";
 import ScrollReveal from "../components/animations/ScrollReveal";
 
@@ -41,10 +41,10 @@ export default function AboutPage() {
           {/* Mission Callout */}
           <ScrollReveal delay={0.5}>
             <div className="bg-gradient-to-br from-accent/8 to-accent/3 border border-accent/25 rounded-xl p-10 mt-10 text-left">
-              <div className="text-xs font-bold tracking-[0.14em] text-text-main uppercase mb-3">
+              <div className="text-xs font-bold tracking-[0.14em] text-accent uppercase mb-3">
                 {t("mission.label")}
               </div>
-              <h2 className="text-3xl font-extrabold text-white mb-4">
+              <h2 className="text-3xl font-extrabold text-accent mb-4">
                 {t("mission.title")}
               </h2>
               <p className="text-text-secondary leading-relaxed">
@@ -142,10 +142,10 @@ export default function AboutPage() {
           <ScrollReveal delay={0.5}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
             {[
-              { key: "excellence", icon: Target },
-              { key: "partnership", icon: Handshake },
+              { key: "trust", icon: Handshake },
               { key: "security", icon: Shield },
-              { key: "expertise", icon: GlobeIcon },
+              { key: "collaboration", icon: Target },
+              { key: "innovation", icon: Lightbulb },
             ].map((value) => (
               <Card key={value.key}>
                 <value.icon className="w-9 h-9 text-text-main mb-4" />
