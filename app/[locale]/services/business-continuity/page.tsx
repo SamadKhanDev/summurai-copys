@@ -73,9 +73,8 @@ export default function BusinessContinuityPage() {
           <div className="mt-12 space-y-0">
 
             {steps.map((step, index) => (
-              <ScrollReveal delay={0.5}>
-                <div
-                  key={step.number}
+              <ScrollReveal key={step.number} delay={0.5}>
+                <Card hover
                   className={`flex gap-6 py-6 ${index < steps.length - 1 ? "border-b border-card-border" : ""
                     }`}
                 >

@@ -51,8 +51,8 @@ export default function DigitalTransformationPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
             {items.map((item) => (
-              <ScrollReveal delay={0.5}>
-                <Card key={item.key} hover>
+              <ScrollReveal key={item.key} delay={0.5}>
+                <Card hover>
                   <item.icon className="w-9 h-9 text-text-main mb-4" />
                   <CardTitle>{t(`items.${item.key}.title`)}</CardTitle>
                   <CardDescription>

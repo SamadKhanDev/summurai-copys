@@ -122,10 +122,9 @@ export default function Navbar() {
         });
     };
 
-    // Calculate centers on mount, scroll, and resize
+    // Calculate centers on mount and resize
     setTimeout(updateCenters, 100);
     window.addEventListener("resize", updateCenters);
-    window.addEventListener("scroll", updateCenters, { passive: true });
 
     // Magnetic proximity logic using stable cached coordinates
     let activeMagneticEl: HTMLElement | null = null;
@@ -174,7 +173,6 @@ export default function Navbar() {
       window.removeEventListener("open-contact-modal", handleOpenModal);
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("resize", updateCenters);
-      window.removeEventListener("scroll", updateCenters);
     };
   }, []);
 
