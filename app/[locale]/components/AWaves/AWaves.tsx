@@ -169,8 +169,8 @@ export default function AWaves({
     pathsRef.current = [];
     linesRef.current = [];
 
-    const xGap = 40; // Increased from 15 to 40 to significantly reduce point calculation CPU load
-    const yGap = 90; // Increased from 45 to 90 to significantly reduce point calculation CPU load
+    const xGap = 15;
+    const yGap = 45;
 
     const overflowWidth = width + 200;
     const overflowHeight = height + 30;
@@ -322,13 +322,6 @@ export default function AWaves({
       if (startTimeRef.current === null) {
         startTimeRef.current = timestamp;
       }
-
-      // Throttle to ~24 FPS to drastically save CPU
-      if (timestamp - lastDrawTimeRef.current < 41) {
-        animationFrameRef.current = requestAnimationFrame(tick);
-        return;
-      }
-      lastDrawTimeRef.current = timestamp;
 
       const time = timestamp - startTimeRef.current;
       const mouse = mouseRef.current;
